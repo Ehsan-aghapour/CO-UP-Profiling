@@ -1,0 +1,23 @@
+List of devices attached
+4UB7RRTHY8	device
+
+disconnected everything
+adbd is already running as root
+remount succeeded
+/home/ehsan/UvA/ARMCL/Rock-Pi/ComputeLibrary_64_Yolov3/utils/DVFS/governor_pandoon.ko: 1 file pushed, 0 skipped. 1087.6 MB/s (260080 bytes in 0.000s)
+Module is already inserted, removing and reinserting...
+start=1, end=1
+file /data/local/ARM-CO-UP/graphs/MobileV1_1_1.rknn exist on board
+start=3, end=3
+file /data/local/ARM-CO-UP/graphs/MobileV1_3_3.rknn exist on board
+start=5, end=5
+file /data/local/ARM-CO-UP/graphs/MobileV1_5_5.rknn exist on board
+start=7, end=7
+file /data/local/ARM-CO-UP/graphs/MobileV1_7_7.rknn exist on board
+start=9, end=9
+file /data/local/ARM-CO-UP/graphs/MobileV1_9_9.rknn exist on board
+start=11, end=11
+file /data/local/ARM-CO-UP/graphs/MobileV1_11_11.rknn exist on board
+start=13, end=13
+file /data/local/ARM-CO-UP/graphs/MobileV1_13_13.rknn exist on board
+

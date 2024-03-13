@@ -4,7 +4,7 @@ List of devices attached
 disconnected everything
 adbd is already running as root
 remount succeeded
-/home/ehsan/UvA/ARMCL/Rock-Pi/ComputeLibrary_64_Yolov3/utils/DVFS/governor_pandoon.ko: 1 file pushed, 0 skipped. 366.7 MB/s (260080 bytes in 0.001s)
+/home/ehsan/UvA/ARMCL/Rock-Pi/ARM-COUP/utils/DVFS/governor_pandoon.ko: 1 file pushed, 0 skipped. 1680.1 MB/s (260080 bytes in 0.000s)
 start=0, end=0
 file /data/local/ARM-CO-UP/graphs/MobileV1_0_0.rknn exist on board
 start=2, end=2

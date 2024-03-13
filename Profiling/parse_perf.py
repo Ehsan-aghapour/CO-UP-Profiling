@@ -16,8 +16,9 @@ def Parse(timefile,graph,order,frqss):
     parts={} 
     starting_layer={}
     ending_layer={}
+    #Adding Graph0 target 1 PE: B Host PE: B num threads: 1 Layers: 0-7
     for l in lines:    
-        pattern = r'Adding Graph(\d+)\s+target \d+ PE: [A-Z]\s+Host PE: [A-Z]\s+Layers: (\d+)-(\d+)'
+        pattern = r'Adding Graph(\d+)\s+target \d+ PE: [A-Z]\s+Host PE: [A-Z]\s+num threads: \d+ Layers: (\d+)-(\d+)'
         matches = re.findall(pattern, l)
         # Iterate through the matches and extract the start and end layers
         for match in matches:
@@ -71,8 +72,10 @@ def Parse(timefile,graph,order,frqss):
         matches = re.findall(pattern, l)
 
         if matches:
-            graph_number, input_value, task_value, send_value, out_value, process_value = matches[0]    
-            #print(graph_number,input_value,starting_layer[graph_number])
+            graph_number, input_value, task_value, send_value, out_value, process_value = matches[0]  
+            
+            #print(graph_number,input_value,starting_layer)
+            #input("ddd")
             #input()
             in_layer=starting_layer[graph_number]
             out_layer=ending_layer[graph_number]
@@ -167,6 +170,7 @@ def Parse_Transfer_Layers(timefile,graph="alex",order="BGBGBGBG"):
     ending_layer={}
     for l in lines:         
         pattern = r'Adding Graph(\d+)\s+target \d+ PE: [A-Z]\s+Host PE: [A-Z]\s+Layers: (\d+)-(\d+)'
+        pattern = r'Adding Graph(\d+)\s+target \d+ PE: [A-Z]\s+Host PE: [A-Z]\s+num threads: \d+ Layers: (\d+)-(\d+)'
         matches = re.findall(pattern, l)
         # Iterate through the matches and extract the start and end layers
         if matches:
@@ -218,7 +222,7 @@ def Parse_NPU(timefile,graph,order,frqss):
     starting_layer={}
     ending_layer={}
     for l in lines:    
-        pattern = r'Adding Graph(\d+)\s+target \d+ PE: [A-Z]\s+Host PE: [A-Z]\s+Layers: (\d+)-(\d+)'
+        pattern = r'Adding Graph(\d+)\s+target \d+ PE: [A-Z]\s+Host PE: [A-Z]\s+num threads: \d+ Layers: (\d+)-(\d+)'
         matches = re.findall(pattern, l)
         # Iterate through the matches and extract the start and end layers
         for match in matches:
@@ -248,16 +252,16 @@ def Parse_NPU(timefile,graph,order,frqss):
                                            "Layer":layer,"Metric":"in","Time":Ins[layer]}
                 '''time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":freq[0],"Freq_Host":Host_freq, 
                                            "Layer":layer,"Metric":"task_total","Time":T_Layer[layer]}'''
-                time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":freq[0],"Freq_Host":Host_freq, 
+                time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":freq[0],"Freq_Host":Host_freq,
                                            "Layer":layer,"Metric":"task","Time":NPU_run_time_profile[layer]}
+                
                 time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":freq[0],"Freq_Host":Host_freq, 
                                            "Layer":layer,"Metric":"out","Time":Outs[layer]}
                 time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":freq[0],"Freq_Host":Host_freq, 
                                            "Layer":layer,"Metric":"NPU_load","Time":NPU_input_time[layer]}
                 time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":freq[0],"Freq_Host":Host_freq, 
                                            "Layer":layer,"Metric":"NPU_run_get","Time":NPU_run_time[layer]}
-                time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":freq[0],"Freq_Host":Host_freq, 
-                                           "Layer":layer,"Metric":"task","Time":NPU_run_time_profile[layer]}
+                
                 time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":freq[0],"Freq_Host":Host_freq, 
                                            "Layer":layer,"Metric":"NPU_fill_tensor","Time":NPU_output_time[layer]}
                     
@@ -286,8 +290,10 @@ def Parse_NPU(timefile,graph,order,frqss):
             
         pattern = r'Graph(\d+)\s+Input:\s+([\d.]+)\s+Task:\s+([\d.]+)\s+send:\s+([\d.]+)\s+Out:\s+([\d.]+)\s+Process:\s+([\d.]+)'
         matches = re.findall(pattern, l)
-
+    
         if matches:
+            #print(starting_layer)
+            #input()
             graph_number, input_value, task_value, send_value, out_value, process_value = matches[0]    
             #print(graph_number,input_value,starting_layer[graph_number])
             #input()
@@ -330,19 +336,23 @@ def Parse_NPU(timefile,graph,order,frqss):
 def Parse_total(timefile,graph,order,frqss):
     with open(timefile,errors='ignore') as ff:
         lines=ff.readlines()
-    freq_indx=0
+    freq_indx=0   
     freqs=frqss[0]
     input_time=-1
     output_time=-1
     parts=[]
-    df_time = pd.DataFrame(columns=['graph', 'order', 'freq', 'input_time', 'task_time','output_time', 'total_time'])
+    df_time = pd.DataFrame(columns=['graph', 'order', 'freq', 'input_time', 'task_time','output_time', 'total_time','pipelinetime'])
     for l in lines:        
         if "Profiling these DVFS settings finised" in l:
             print(f'Input_time:{input_time}')
             s=sum(parts)
             print(f'parts:{parts}, sum:{s}')            
-            
-            df_time.loc[len(df_time)]={'graph':graph, 'order':order, 'freq': tuple(freqs), 'input_time':input_time, 'task_time':s-input_time,'output_time':output_time, 'total_time':s}
+            f=freqs
+            if type(freqs)==str and freqs[0]=='{':
+                f=freqs
+            else:
+                f=tuple(freqs)
+            df_time.loc[len(df_time)]={'graph':graph, 'order':order, 'freq': f, 'input_time':input_time, 'task_time':s-input_time,'output_time':output_time, 'total_time':s, 'pipelinetime':max(parts)}
             input_time=-1
             output_time=-1
             parts=[]
@@ -369,5 +379,69 @@ def Parse_total(timefile,graph,order,frqss):
             
     if df_time.shape[0] != len(frqss):
         print(f'Parse performance error: number of runs {df_time.shape[0]} is not equals to number of freqs {len(frqss)}')
-        input()
+        #input()
+        #return -1
     return df_time
+
+
+# -
+
+def Parse_total_pipeline(timefile,graph,order,frqss):
+    with open(timefile,errors='ignore') as ff:
+        lines=ff.readlines()
+    freq_index=0   
+    freqs=frqss[0]
+    input_time=-1
+    output_time=-1
+    parts=[]
+    df_time = pd.DataFrame(columns=['graph', 'order', 'freq', 'pipeline_time', 'FPS','Latency'])
+    
+    while freq_index < len(frqss):
+        freqs=frqss[freq_index]
+        t0=0
+        t1=0
+        t2=0
+        tn=0
+        f=0
+        in0=0
+        #L=0
+        for l in lines:      
+            if "Running Graph with Frequency:" in l:
+                f=l.split(':')[-1].strip()
+            #if "FPS:" in l:
+                #ProfResultult[f]['FPS']=l.split(':')[-1]
+            if "Latency:" in l:
+                if f !='end' :
+                    L=float(l.split(':')[-1].strip())
+                    FPS=1000/max(t0,t1,t2,tn)
+                    print(f'results for freq:{freqs} = {f}\n')
+                    if type(freqs)==str and freqs[0]=='{':
+                        freqs=freqs
+                    else:
+                        freqs=tuple(freqs)
+                    df_time.loc[len(df_time)]={'graph':graph, 'order':order, 'freq': freqs, 'pipeline_time':1000/FPS, 'FPS':FPS, 'Latency':L}
+                    t0=t1=t2=tn=0
+                    freq_index+=1
+                
+            if "input0_time:" in l:
+                in0=float(l.split(':')[-1].strip())
+            if "total0_time:" in l:
+                t0=float(l.split(':')[-1].strip())
+            if "total1_time:" in l:
+                t1=float(l.split(':')[-1].strip())
+            if "total2_time:" in l:
+                t2=float(l.split(':')[-1].strip())
+            if "NPU subgraph: 0 --> Cost:" in l:
+                tn=float(l.split(':')[-1].strip())
+        
+        
+    #display(df_time)
+    #return (L,FPS)
+    return df_time
+
+
+# +
+#Parse_total_pipeline(timefile="temp_whole.txt",graph="Alex",order='LLLLBBBB',frqss=[ '{{2-3-4}}' ])
+# -
+
+

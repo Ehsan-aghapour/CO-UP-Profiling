@@ -1,7 +1,7 @@
 4 Input images are read from /data/local/ARM-CO-UP/assets//ppm_images_224/
 [UtilsPipeline.h] image directory is: /data/local/ARM-CO-UP/assets//ppm_images_224//
-Threads : 1
-Small Cores Threads : 1
+Threads : 2
+Small Cores Threads : 4
 Target : Neon
 Data type : F32
 Data layout : NHWC
@@ -23,17 +23,18 @@ GPU host is: B
 NPU host is: B
 Number of totla cores is : 6
 Number of little cores is : 4
+Number of big cores is : 2
 Print task names : 0
 Run network for 10 times.
 Layer timing: 0
 
-Adding Graph0 target 1 PE: L Host PE: L Layers: 0-13
+Adding Graph0 target 1 PE: L Host PE: L num threads: 4 Layers: 0-13
 pandoon
 pandoon
 pandoon
 Pandoon opened at 3
-Threads : 1
-Small Cores Threads : 1
+Threads : 2
+Small Cores Threads : 4
 Target : Neon
 Data type : F32
 Data layout : NHWC
@@ -55,6 +56,7 @@ GPU host is: B
 NPU host is: B
 Number of totla cores is : 6
 Number of little cores is : 4
+Number of big cores is : 2
 Print task names : 0
 Run network for 10 times.
 Layer timing: 0
@@ -177,6 +179,22 @@ Start finalizing Graphs
 *******************
 
 Graph id: 0 Target is: Neon
+NEDevicebackend num_threads: 4
+Worker Thread:: worder thread created with core_pin: -1
+Worker Thread:: worder thread created with core_pin: -1
+
+
+
+************************
+set thread with affinity; cluster 0
+_num_threads is: 4
+set affinity of main thread to core 0
+Worker Thread:: worder thread created with core_pin: 1
+Worker Thread:: worder thread created with core_pin: 2
+Worker Thread:: worder thread created with core_pin: 3
+
+*******************************
+
 Graph (0) Task 0: Conv2d_0
 Graph (0) Task 1: Conv2d_0/BatchNorm
 Graph (0) Task 2: Conv2d_0/Relu6
@@ -276,15 +294,15 @@ setting ending for layer: Conv2d_8_pointwise/Relu6
 setting ending for layer: Conv2d_9_pointwise/Relu6
 setting ending for layer: Conv2d_10_pointwise/Relu6
 setting ending for layer: Conv2d_11_pointwise/Relu6
-setting ending for layer: Conv2d_12_pointwise/Relu6
+setting ending for layer: Conv2d_12_pointwise/Relu6setup finished
+
+Please Enter the desired Frequency setttings: 
+
 setting ending for layer: Softmax
 Finish finalizing graph 0
 
 
 
-setup finished
-
-Please Enter the desired Frequency setttings: 
 0 Running Graph with 0-0-0-0-0-0-0-0-0-0-0-0-0-0 LW DVFS
 governor 0 task:Conv2d_0/Relu6 freqs:0,0,0
 governor 1 task:Conv2d_10_pointwise/Relu6 freqs:0,0,0
@@ -589,124 +607,124 @@ Reading image: /data/local/ARM-CO-UP/assets//ppm_images_224//gold_fish.ppm
 0.0000 - [id = 7]
 0.0000 - [id = 8]
 0.0000 - [id = 46]
-0	Layer Name: Conv2d_0 	 Layer time: 13.4673 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 32x112x112
-1	Layer Name: Conv2d_0/BatchNorm 	 Layer time: 9.2270 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
-2	Layer Name: Conv2d_0/Relu6 	 Layer time: 3.6615 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
-Layer Number: 0 	 time: 26.3558
+0	Layer Name: Conv2d_0 	 Layer time: 11.7838 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 32x112x112
+1	Layer Name: Conv2d_0/BatchNorm 	 Layer time: 9.6273 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
+2	Layer Name: Conv2d_0/Relu6 	 Layer time: 3.9736 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
+Layer Number: 0 	 time: 25.3847
 ----------------------------
-3	Layer Name: Conv2d_1_depthwise/depthwise 	 Layer time: 6.6252 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 32x112x112
-4	Layer Name: Conv2d_1_depthwise/BatchNorm 	 Layer time: 9.2561 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
-5	Layer Name: Conv2d_1_depthwise/Relu6 	 Layer time: 3.6610 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
-6	Layer Name: Conv2d_1_pointwise/Conv2D 	 Layer time: 19.7445 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 64x112x112
-7	Layer Name: Conv2d_1_pointwise/BatchNorm 	 Layer time: 17.4851 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
-8	Layer Name: Conv2d_1_pointwise/Relu6 	 Layer time: 6.3714 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
-Layer Number: 1 	 time: 63.1433
+3	Layer Name: Conv2d_1_depthwise/depthwise 	 Layer time: 12.3110 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 32x112x112
+4	Layer Name: Conv2d_1_depthwise/BatchNorm 	 Layer time: 8.8334 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
+5	Layer Name: Conv2d_1_depthwise/Relu6 	 Layer time: 2.3901 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
+6	Layer Name: Conv2d_1_pointwise/Conv2D 	 Layer time: 12.7765 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 64x112x112
+7	Layer Name: Conv2d_1_pointwise/BatchNorm 	 Layer time: 13.7397 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
+8	Layer Name: Conv2d_1_pointwise/Relu6 	 Layer time: 4.3164 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
+Layer Number: 1 	 time: 54.3671
 ----------------------------
-9	Layer Name: Conv2d_2_depthwise/depthwise 	 Layer time: 6.7170 	 number of inputs: 3 	 input shape: 64x112x112 	 output shape: 64x56x56
-10	Layer Name: Conv2d_2_depthwise/BatchNorm 	 Layer time: 4.5094 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
-11	Layer Name: Conv2d_2_depthwise/Relu6 	 Layer time: 1.6667 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
-12	Layer Name: Conv2d_2_pointwise/Conv2D 	 Layer time: 16.9014 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 128x56x56
-13	Layer Name: Conv2d_2_pointwise/BatchNorm 	 Layer time: 8.6094 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-14	Layer Name: Conv2d_2_pointwise/Relu6 	 Layer time: 3.0354 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-Layer Number: 2 	 time: 41.4394
+9	Layer Name: Conv2d_2_depthwise/depthwise 	 Layer time: 3.9921 	 number of inputs: 3 	 input shape: 64x112x112 	 output shape: 64x56x56
+10	Layer Name: Conv2d_2_depthwise/BatchNorm 	 Layer time: 2.7850 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
+11	Layer Name: Conv2d_2_depthwise/Relu6 	 Layer time: 1.0798 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
+12	Layer Name: Conv2d_2_pointwise/Conv2D 	 Layer time: 8.4028 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 128x56x56
+13	Layer Name: Conv2d_2_pointwise/BatchNorm 	 Layer time: 4.6928 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+14	Layer Name: Conv2d_2_pointwise/Relu6 	 Layer time: 2.0582 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+Layer Number: 2 	 time: 23.0107
 ----------------------------
-15	Layer Name: Conv2d_3_depthwise/depthwise 	 Layer time: 6.8032 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
-16	Layer Name: Conv2d_3_depthwise/BatchNorm 	 Layer time: 8.6562 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-17	Layer Name: Conv2d_3_depthwise/Relu6 	 Layer time: 3.0503 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-18	Layer Name: Conv2d_3_pointwise/Conv2D 	 Layer time: 33.3021 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
-19	Layer Name: Conv2d_3_pointwise/BatchNorm 	 Layer time: 8.6156 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-20	Layer Name: Conv2d_3_pointwise/Relu6 	 Layer time: 3.0242 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-Layer Number: 3 	 time: 63.4517
+15	Layer Name: Conv2d_3_depthwise/depthwise 	 Layer time: 4.2508 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
+16	Layer Name: Conv2d_3_depthwise/BatchNorm 	 Layer time: 4.7937 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+17	Layer Name: Conv2d_3_depthwise/Relu6 	 Layer time: 2.0248 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+18	Layer Name: Conv2d_3_pointwise/Conv2D 	 Layer time: 14.1937 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
+19	Layer Name: Conv2d_3_pointwise/BatchNorm 	 Layer time: 5.0086 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+20	Layer Name: Conv2d_3_pointwise/Relu6 	 Layer time: 2.0114 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+Layer Number: 3 	 time: 32.2829
 ----------------------------
-21	Layer Name: Conv2d_4_depthwise/depthwise 	 Layer time: 4.8475 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x28x28
-22	Layer Name: Conv2d_4_depthwise/BatchNorm 	 Layer time: 2.2567 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
-23	Layer Name: Conv2d_4_depthwise/Relu6 	 Layer time: 0.7979 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
-24	Layer Name: Conv2d_4_pointwise/Conv2D 	 Layer time: 16.6832 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 256x28x28
-25	Layer Name: Conv2d_4_pointwise/BatchNorm 	 Layer time: 4.3490 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-26	Layer Name: Conv2d_4_pointwise/Relu6 	 Layer time: 1.4802 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-Layer Number: 4 	 time: 30.4144
+21	Layer Name: Conv2d_4_depthwise/depthwise 	 Layer time: 3.0013 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x28x28
+22	Layer Name: Conv2d_4_depthwise/BatchNorm 	 Layer time: 1.4102 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+23	Layer Name: Conv2d_4_depthwise/Relu6 	 Layer time: 0.7096 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+24	Layer Name: Conv2d_4_pointwise/Conv2D 	 Layer time: 7.1345 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 256x28x28
+25	Layer Name: Conv2d_4_pointwise/BatchNorm 	 Layer time: 2.5017 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+26	Layer Name: Conv2d_4_pointwise/Relu6 	 Layer time: 1.3602 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 4 	 time: 16.1175
 ----------------------------
-27	Layer Name: Conv2d_5_depthwise/depthwise 	 Layer time: 4.2258 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
-28	Layer Name: Conv2d_5_depthwise/BatchNorm 	 Layer time: 4.3585 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-29	Layer Name: Conv2d_5_depthwise/Relu6 	 Layer time: 1.4774 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-30	Layer Name: Conv2d_5_pointwise/Conv2D 	 Layer time: 38.3934 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
-31	Layer Name: Conv2d_5_pointwise/BatchNorm 	 Layer time: 4.3151 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-32	Layer Name: Conv2d_5_pointwise/Relu6 	 Layer time: 1.4825 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-Layer Number: 5 	 time: 54.2527
+27	Layer Name: Conv2d_5_depthwise/depthwise 	 Layer time: 2.8644 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
+28	Layer Name: Conv2d_5_depthwise/BatchNorm 	 Layer time: 2.6539 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+29	Layer Name: Conv2d_5_depthwise/Relu6 	 Layer time: 1.1052 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+30	Layer Name: Conv2d_5_pointwise/Conv2D 	 Layer time: 13.1715 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
+31	Layer Name: Conv2d_5_pointwise/BatchNorm 	 Layer time: 2.6090 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+32	Layer Name: Conv2d_5_pointwise/Relu6 	 Layer time: 1.0662 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 5 	 time: 23.4702
 ----------------------------
-33	Layer Name: Conv2d_6_depthwise/depthwise 	 Layer time: 3.0822 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x14x14
-34	Layer Name: Conv2d_6_depthwise/BatchNorm 	 Layer time: 1.1539 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
-35	Layer Name: Conv2d_6_depthwise/Relu6 	 Layer time: 0.5114 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
-36	Layer Name: Conv2d_6_pointwise/Conv2D 	 Layer time: 10.8006 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 512x14x14
-37	Layer Name: Conv2d_6_pointwise/BatchNorm 	 Layer time: 2.2712 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-38	Layer Name: Conv2d_6_pointwise/Relu6 	 Layer time: 0.7447 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 6 	 time: 18.5640
+33	Layer Name: Conv2d_6_depthwise/depthwise 	 Layer time: 1.9136 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x14x14
+34	Layer Name: Conv2d_6_depthwise/BatchNorm 	 Layer time: 1.0298 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+35	Layer Name: Conv2d_6_depthwise/Relu6 	 Layer time: 0.5655 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+36	Layer Name: Conv2d_6_pointwise/Conv2D 	 Layer time: 6.9844 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 512x14x14
+37	Layer Name: Conv2d_6_pointwise/BatchNorm 	 Layer time: 1.5223 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+38	Layer Name: Conv2d_6_pointwise/Relu6 	 Layer time: 0.8658 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 6 	 time: 12.8815
 ----------------------------
-39	Layer Name: Conv2d_7_depthwise/depthwise 	 Layer time: 2.7863 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-40	Layer Name: Conv2d_7_depthwise/BatchNorm 	 Layer time: 2.2276 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-41	Layer Name: Conv2d_7_depthwise/Relu6 	 Layer time: 0.7428 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-42	Layer Name: Conv2d_7_pointwise/Conv2D 	 Layer time: 21.4430 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-43	Layer Name: Conv2d_7_pointwise/BatchNorm 	 Layer time: 2.2379 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-44	Layer Name: Conv2d_7_pointwise/Relu6 	 Layer time: 0.7566 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 7 	 time: 30.1943
+39	Layer Name: Conv2d_7_depthwise/depthwise 	 Layer time: 2.1678 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+40	Layer Name: Conv2d_7_depthwise/BatchNorm 	 Layer time: 1.4810 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+41	Layer Name: Conv2d_7_depthwise/Relu6 	 Layer time: 0.9207 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+42	Layer Name: Conv2d_7_pointwise/Conv2D 	 Layer time: 13.8162 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+43	Layer Name: Conv2d_7_pointwise/BatchNorm 	 Layer time: 1.5397 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+44	Layer Name: Conv2d_7_pointwise/Relu6 	 Layer time: 0.7744 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 7 	 time: 20.6999
 ----------------------------
-45	Layer Name: Conv2d_8_depthwise/depthwise 	 Layer time: 2.7990 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-46	Layer Name: Conv2d_8_depthwise/BatchNorm 	 Layer time: 2.2348 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-47	Layer Name: Conv2d_8_depthwise/Relu6 	 Layer time: 0.7303 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-48	Layer Name: Conv2d_8_pointwise/Conv2D 	 Layer time: 21.5206 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-49	Layer Name: Conv2d_8_pointwise/BatchNorm 	 Layer time: 2.2540 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-50	Layer Name: Conv2d_8_pointwise/Relu6 	 Layer time: 0.7602 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 8 	 time: 30.2989
+45	Layer Name: Conv2d_8_depthwise/depthwise 	 Layer time: 2.1053 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+46	Layer Name: Conv2d_8_depthwise/BatchNorm 	 Layer time: 1.5608 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+47	Layer Name: Conv2d_8_depthwise/Relu6 	 Layer time: 0.6919 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+48	Layer Name: Conv2d_8_pointwise/Conv2D 	 Layer time: 13.9209 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+49	Layer Name: Conv2d_8_pointwise/BatchNorm 	 Layer time: 1.5706 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+50	Layer Name: Conv2d_8_pointwise/Relu6 	 Layer time: 0.6446 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 8 	 time: 20.4941
 ----------------------------
-51	Layer Name: Conv2d_9_depthwise/depthwise 	 Layer time: 2.8066 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-52	Layer Name: Conv2d_9_depthwise/BatchNorm 	 Layer time: 2.2154 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-53	Layer Name: Conv2d_9_depthwise/Relu6 	 Layer time: 0.7499 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-54	Layer Name: Conv2d_9_pointwise/Conv2D 	 Layer time: 21.4261 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-55	Layer Name: Conv2d_9_pointwise/BatchNorm 	 Layer time: 2.2663 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-56	Layer Name: Conv2d_9_pointwise/Relu6 	 Layer time: 0.7360 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 9 	 time: 30.2002
+51	Layer Name: Conv2d_9_depthwise/depthwise 	 Layer time: 1.9855 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+52	Layer Name: Conv2d_9_depthwise/BatchNorm 	 Layer time: 1.6990 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+53	Layer Name: Conv2d_9_depthwise/Relu6 	 Layer time: 0.6762 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+54	Layer Name: Conv2d_9_pointwise/Conv2D 	 Layer time: 13.8611 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+55	Layer Name: Conv2d_9_pointwise/BatchNorm 	 Layer time: 1.6431 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+56	Layer Name: Conv2d_9_pointwise/Relu6 	 Layer time: 0.6886 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 9 	 time: 20.5534
 ----------------------------
-57	Layer Name: Conv2d_10_depthwise/depthwise 	 Layer time: 2.7841 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-58	Layer Name: Conv2d_10_depthwise/BatchNorm 	 Layer time: 2.2270 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-59	Layer Name: Conv2d_10_depthwise/Relu6 	 Layer time: 0.7482 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-60	Layer Name: Conv2d_10_pointwise/Conv2D 	 Layer time: 21.4765 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-61	Layer Name: Conv2d_10_pointwise/BatchNorm 	 Layer time: 2.2373 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-62	Layer Name: Conv2d_10_pointwise/Relu6 	 Layer time: 0.7541 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 10 	 time: 30.2272
+57	Layer Name: Conv2d_10_depthwise/depthwise 	 Layer time: 1.9568 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+58	Layer Name: Conv2d_10_depthwise/BatchNorm 	 Layer time: 1.6927 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+59	Layer Name: Conv2d_10_depthwise/Relu6 	 Layer time: 0.7596 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+60	Layer Name: Conv2d_10_pointwise/Conv2D 	 Layer time: 13.9372 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+61	Layer Name: Conv2d_10_pointwise/BatchNorm 	 Layer time: 1.5838 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+62	Layer Name: Conv2d_10_pointwise/Relu6 	 Layer time: 0.7574 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 10 	 time: 20.6875
 ----------------------------
-63	Layer Name: Conv2d_11_depthwise/depthwise 	 Layer time: 2.7844 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-64	Layer Name: Conv2d_11_depthwise/BatchNorm 	 Layer time: 2.2296 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-65	Layer Name: Conv2d_11_depthwise/Relu6 	 Layer time: 0.7304 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-66	Layer Name: Conv2d_11_pointwise/Conv2D 	 Layer time: 21.5879 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-67	Layer Name: Conv2d_11_pointwise/BatchNorm 	 Layer time: 2.2504 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-68	Layer Name: Conv2d_11_pointwise/Relu6 	 Layer time: 0.7537 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 11 	 time: 30.3363
+63	Layer Name: Conv2d_11_depthwise/depthwise 	 Layer time: 2.0426 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+64	Layer Name: Conv2d_11_depthwise/BatchNorm 	 Layer time: 1.5440 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+65	Layer Name: Conv2d_11_depthwise/Relu6 	 Layer time: 0.7866 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+66	Layer Name: Conv2d_11_pointwise/Conv2D 	 Layer time: 13.9641 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+67	Layer Name: Conv2d_11_pointwise/BatchNorm 	 Layer time: 1.5220 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+68	Layer Name: Conv2d_11_pointwise/Relu6 	 Layer time: 0.8421 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 11 	 time: 20.7014
 ----------------------------
-69	Layer Name: Conv2d_12_depthwise/depthwise 	 Layer time: 2.1001 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x7x7
-70	Layer Name: Conv2d_12_depthwise/BatchNorm 	 Layer time: 0.5573 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
-71	Layer Name: Conv2d_12_depthwise/Relu6 	 Layer time: 0.3690 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
-72	Layer Name: Conv2d_12_pointwise/Conv2D 	 Layer time: 19.0514 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 1024x7x7
-73	Layer Name: Conv2d_12_pointwise/BatchNorm 	 Layer time: 1.0391 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-74	Layer Name: Conv2d_12_pointwise/Relu6 	 Layer time: 0.5807 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-Layer Number: 12 	 time: 23.6976
+69	Layer Name: Conv2d_12_depthwise/depthwise 	 Layer time: 1.5167 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x7x7
+70	Layer Name: Conv2d_12_depthwise/BatchNorm 	 Layer time: 0.6247 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
+71	Layer Name: Conv2d_12_depthwise/Relu6 	 Layer time: 0.3773 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
+72	Layer Name: Conv2d_12_pointwise/Conv2D 	 Layer time: 7.9413 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 1024x7x7
+73	Layer Name: Conv2d_12_pointwise/BatchNorm 	 Layer time: 0.9975 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+74	Layer Name: Conv2d_12_pointwise/Relu6 	 Layer time: 0.4722 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+Layer Number: 12 	 time: 11.9296
 ----------------------------
-75	Layer Name: Conv2d_13_depthwise/depthwise 	 Layer time: 1.7581 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-76	Layer Name: Conv2d_13_depthwise/BatchNorm 	 Layer time: 1.0301 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-77	Layer Name: Conv2d_13_depthwise/Relu6 	 Layer time: 0.5981 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-78	Layer Name: Conv2d_13_pointwise/Conv2D 	 Layer time: 38.6992 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-79	Layer Name: Conv2d_13_pointwise/BatchNorm 	 Layer time: 1.0615 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-80	Layer Name: Conv2d_13_pointwise/Relu6 	 Layer time: 0.6717 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-81	Layer Name: Logits/AvgPool_1a 	 Layer time: 0.6615 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024
-82	Layer Name: Logits/Conv2d_1c_1x1 	 Layer time: 1.8399 	 number of inputs: 3 	 input shape: 1024 	 output shape: 1000
-83	Layer Name: Reshape 	 Layer time: 0.4460 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
-84	Layer Name: Softmax 	 Layer time: 0.2061 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
-Layer Number: 13 	 time: 46.9722
+75	Layer Name: Conv2d_13_depthwise/depthwise 	 Layer time: 1.2326 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+76	Layer Name: Conv2d_13_depthwise/BatchNorm 	 Layer time: 0.9329 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+77	Layer Name: Conv2d_13_depthwise/Relu6 	 Layer time: 0.4666 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+78	Layer Name: Conv2d_13_pointwise/Conv2D 	 Layer time: 15.6696 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+79	Layer Name: Conv2d_13_pointwise/BatchNorm 	 Layer time: 0.9563 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+80	Layer Name: Conv2d_13_pointwise/Relu6 	 Layer time: 0.5079 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+81	Layer Name: Logits/AvgPool_1a 	 Layer time: 0.4611 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024
+82	Layer Name: Logits/Conv2d_1c_1x1 	 Layer time: 1.6676 	 number of inputs: 3 	 input shape: 1024 	 output shape: 1000
+83	Layer Name: Reshape 	 Layer time: 0.4189 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+84	Layer Name: Softmax 	 Layer time: 0.1979 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+Layer Number: 13 	 time: 22.5114
 ----------------------------
 
- Sum of Layers time: 519.5480
+ Sum of Layers time: 325.0918
 
 
-Graph0   Input: 123.954   Task: 641.141   send: 0.0020708   Out: 0.803688   Process: 765.9
+Graph0   Input: 119.125   Task: 447.034   send: 0.0021   Out: 0.787909   Process: 566.95
 
 
 
@@ -714,7 +732,7 @@ Graph0   Input: 123.954   Task: 641.141   send: 0.0020708   Out: 0.803688   Proc
 
 
 
-AVG Latency: 765.913
+AVG Latency: 566.963
 
 Profiling these DVFS settings finised
 Please Enter the desired Frequency setttings: 
@@ -1022,124 +1040,124 @@ Reading image: /data/local/ARM-CO-UP/assets//ppm_images_224//gondola.ppm
 0.0000 - [id = 914]
 0.0000 - [id = 536]
 0.0000 - [id = 449]
-0	Layer Name: Conv2d_0 	 Layer time: 9.5415 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 32x112x112
-1	Layer Name: Conv2d_0/BatchNorm 	 Layer time: 6.7214 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
-2	Layer Name: Conv2d_0/Relu6 	 Layer time: 3.0038 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
-Layer Number: 0 	 time: 19.2667
+0	Layer Name: Conv2d_0 	 Layer time: 8.4199 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 32x112x112
+1	Layer Name: Conv2d_0/BatchNorm 	 Layer time: 6.8285 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
+2	Layer Name: Conv2d_0/Relu6 	 Layer time: 1.4852 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
+Layer Number: 0 	 time: 16.7336
 ----------------------------
-3	Layer Name: Conv2d_1_depthwise/depthwise 	 Layer time: 5.1014 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 32x112x112
-4	Layer Name: Conv2d_1_depthwise/BatchNorm 	 Layer time: 6.4362 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
-5	Layer Name: Conv2d_1_depthwise/Relu6 	 Layer time: 2.5345 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
-6	Layer Name: Conv2d_1_pointwise/Conv2D 	 Layer time: 13.7850 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 64x112x112
-7	Layer Name: Conv2d_1_pointwise/BatchNorm 	 Layer time: 12.1108 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
-8	Layer Name: Conv2d_1_pointwise/Relu6 	 Layer time: 4.3931 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
-Layer Number: 1 	 time: 44.3608
+3	Layer Name: Conv2d_1_depthwise/depthwise 	 Layer time: 4.0176 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 32x112x112
+4	Layer Name: Conv2d_1_depthwise/BatchNorm 	 Layer time: 3.8746 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
+5	Layer Name: Conv2d_1_depthwise/Relu6 	 Layer time: 1.7400 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
+6	Layer Name: Conv2d_1_pointwise/Conv2D 	 Layer time: 7.4440 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 64x112x112
+7	Layer Name: Conv2d_1_pointwise/BatchNorm 	 Layer time: 6.5988 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
+8	Layer Name: Conv2d_1_pointwise/Relu6 	 Layer time: 2.6567 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
+Layer Number: 1 	 time: 26.3317
 ----------------------------
-9	Layer Name: Conv2d_2_depthwise/depthwise 	 Layer time: 5.3109 	 number of inputs: 3 	 input shape: 64x112x112 	 output shape: 64x56x56
-10	Layer Name: Conv2d_2_depthwise/BatchNorm 	 Layer time: 3.1243 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
-11	Layer Name: Conv2d_2_depthwise/Relu6 	 Layer time: 1.1614 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
-12	Layer Name: Conv2d_2_pointwise/Conv2D 	 Layer time: 11.7704 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 128x56x56
-13	Layer Name: Conv2d_2_pointwise/BatchNorm 	 Layer time: 6.0022 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-14	Layer Name: Conv2d_2_pointwise/Relu6 	 Layer time: 2.1017 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-Layer Number: 2 	 time: 29.4709
+9	Layer Name: Conv2d_2_depthwise/depthwise 	 Layer time: 3.0617 	 number of inputs: 3 	 input shape: 64x112x112 	 output shape: 64x56x56
+10	Layer Name: Conv2d_2_depthwise/BatchNorm 	 Layer time: 1.9753 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
+11	Layer Name: Conv2d_2_depthwise/Relu6 	 Layer time: 0.9368 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
+12	Layer Name: Conv2d_2_pointwise/Conv2D 	 Layer time: 5.7420 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 128x56x56
+13	Layer Name: Conv2d_2_pointwise/BatchNorm 	 Layer time: 3.4297 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+14	Layer Name: Conv2d_2_pointwise/Relu6 	 Layer time: 1.3424 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+Layer Number: 2 	 time: 16.4879
 ----------------------------
-15	Layer Name: Conv2d_3_depthwise/depthwise 	 Layer time: 5.2454 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
-16	Layer Name: Conv2d_3_depthwise/BatchNorm 	 Layer time: 6.0251 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-17	Layer Name: Conv2d_3_depthwise/Relu6 	 Layer time: 2.0866 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-18	Layer Name: Conv2d_3_pointwise/Conv2D 	 Layer time: 23.0262 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
-19	Layer Name: Conv2d_3_pointwise/BatchNorm 	 Layer time: 5.9855 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-20	Layer Name: Conv2d_3_pointwise/Relu6 	 Layer time: 2.1039 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-Layer Number: 3 	 time: 44.4726
+15	Layer Name: Conv2d_3_depthwise/depthwise 	 Layer time: 3.1405 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
+16	Layer Name: Conv2d_3_depthwise/BatchNorm 	 Layer time: 3.5094 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+17	Layer Name: Conv2d_3_depthwise/Relu6 	 Layer time: 1.3232 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+18	Layer Name: Conv2d_3_pointwise/Conv2D 	 Layer time: 9.8371 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
+19	Layer Name: Conv2d_3_pointwise/BatchNorm 	 Layer time: 3.3380 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+20	Layer Name: Conv2d_3_pointwise/Relu6 	 Layer time: 1.3857 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+Layer Number: 3 	 time: 22.5338
 ----------------------------
-21	Layer Name: Conv2d_4_depthwise/depthwise 	 Layer time: 3.9036 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x28x28
-22	Layer Name: Conv2d_4_depthwise/BatchNorm 	 Layer time: 1.5555 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
-23	Layer Name: Conv2d_4_depthwise/Relu6 	 Layer time: 0.6849 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
-24	Layer Name: Conv2d_4_pointwise/Conv2D 	 Layer time: 11.5285 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 256x28x28
-25	Layer Name: Conv2d_4_pointwise/BatchNorm 	 Layer time: 3.0548 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-26	Layer Name: Conv2d_4_pointwise/Relu6 	 Layer time: 1.0947 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-Layer Number: 4 	 time: 21.8220
+21	Layer Name: Conv2d_4_depthwise/depthwise 	 Layer time: 2.2896 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x28x28
+22	Layer Name: Conv2d_4_depthwise/BatchNorm 	 Layer time: 1.0828 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+23	Layer Name: Conv2d_4_depthwise/Relu6 	 Layer time: 0.4824 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+24	Layer Name: Conv2d_4_pointwise/Conv2D 	 Layer time: 5.0089 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 256x28x28
+25	Layer Name: Conv2d_4_pointwise/BatchNorm 	 Layer time: 1.8107 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+26	Layer Name: Conv2d_4_pointwise/Relu6 	 Layer time: 0.8539 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 4 	 time: 11.5283
 ----------------------------
-27	Layer Name: Conv2d_5_depthwise/depthwise 	 Layer time: 3.2092 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
-28	Layer Name: Conv2d_5_depthwise/BatchNorm 	 Layer time: 3.0563 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-29	Layer Name: Conv2d_5_depthwise/Relu6 	 Layer time: 1.0358 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-30	Layer Name: Conv2d_5_pointwise/Conv2D 	 Layer time: 26.5159 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
-31	Layer Name: Conv2d_5_pointwise/BatchNorm 	 Layer time: 3.0062 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-32	Layer Name: Conv2d_5_pointwise/Relu6 	 Layer time: 1.0312 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-Layer Number: 5 	 time: 37.8546
+27	Layer Name: Conv2d_5_depthwise/depthwise 	 Layer time: 2.0780 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
+28	Layer Name: Conv2d_5_depthwise/BatchNorm 	 Layer time: 1.8317 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+29	Layer Name: Conv2d_5_depthwise/Relu6 	 Layer time: 0.8203 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+30	Layer Name: Conv2d_5_pointwise/Conv2D 	 Layer time: 9.2146 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
+31	Layer Name: Conv2d_5_pointwise/BatchNorm 	 Layer time: 1.9095 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+32	Layer Name: Conv2d_5_pointwise/Relu6 	 Layer time: 0.7747 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 5 	 time: 16.6289
 ----------------------------
-33	Layer Name: Conv2d_6_depthwise/depthwise 	 Layer time: 2.4302 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x14x14
-34	Layer Name: Conv2d_6_depthwise/BatchNorm 	 Layer time: 0.8136 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
-35	Layer Name: Conv2d_6_depthwise/Relu6 	 Layer time: 0.6081 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
-36	Layer Name: Conv2d_6_pointwise/Conv2D 	 Layer time: 9.1592 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 512x14x14
-37	Layer Name: Conv2d_6_pointwise/BatchNorm 	 Layer time: 1.6150 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-38	Layer Name: Conv2d_6_pointwise/Relu6 	 Layer time: 0.7146 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 6 	 time: 15.3405
+33	Layer Name: Conv2d_6_depthwise/depthwise 	 Layer time: 1.6236 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x14x14
+34	Layer Name: Conv2d_6_depthwise/BatchNorm 	 Layer time: 0.6087 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+35	Layer Name: Conv2d_6_depthwise/Relu6 	 Layer time: 0.3493 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+36	Layer Name: Conv2d_6_pointwise/Conv2D 	 Layer time: 4.8518 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 512x14x14
+37	Layer Name: Conv2d_6_pointwise/BatchNorm 	 Layer time: 1.1111 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+38	Layer Name: Conv2d_6_pointwise/Relu6 	 Layer time: 0.4750 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 6 	 time: 9.0194
 ----------------------------
-39	Layer Name: Conv2d_7_depthwise/depthwise 	 Layer time: 2.0484 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-40	Layer Name: Conv2d_7_depthwise/BatchNorm 	 Layer time: 1.5729 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-41	Layer Name: Conv2d_7_depthwise/Relu6 	 Layer time: 0.6363 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-42	Layer Name: Conv2d_7_pointwise/Conv2D 	 Layer time: 17.5216 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-43	Layer Name: Conv2d_7_pointwise/BatchNorm 	 Layer time: 1.5847 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-44	Layer Name: Conv2d_7_pointwise/Relu6 	 Layer time: 0.8254 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 7 	 time: 24.1892
+39	Layer Name: Conv2d_7_depthwise/depthwise 	 Layer time: 1.4236 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+40	Layer Name: Conv2d_7_depthwise/BatchNorm 	 Layer time: 1.2544 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+41	Layer Name: Conv2d_7_depthwise/Relu6 	 Layer time: 0.5509 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+42	Layer Name: Conv2d_7_pointwise/Conv2D 	 Layer time: 9.5475 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+43	Layer Name: Conv2d_7_pointwise/BatchNorm 	 Layer time: 1.1382 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+44	Layer Name: Conv2d_7_pointwise/Relu6 	 Layer time: 0.4842 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 7 	 time: 14.3987
 ----------------------------
-45	Layer Name: Conv2d_8_depthwise/depthwise 	 Layer time: 2.0614 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-46	Layer Name: Conv2d_8_depthwise/BatchNorm 	 Layer time: 1.5651 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-47	Layer Name: Conv2d_8_depthwise/Relu6 	 Layer time: 0.6674 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-48	Layer Name: Conv2d_8_pointwise/Conv2D 	 Layer time: 17.4870 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-49	Layer Name: Conv2d_8_pointwise/BatchNorm 	 Layer time: 1.5960 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-50	Layer Name: Conv2d_8_pointwise/Relu6 	 Layer time: 0.6637 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 8 	 time: 24.0405
+45	Layer Name: Conv2d_8_depthwise/depthwise 	 Layer time: 1.4205 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+46	Layer Name: Conv2d_8_depthwise/BatchNorm 	 Layer time: 1.1418 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+47	Layer Name: Conv2d_8_depthwise/Relu6 	 Layer time: 0.5601 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+48	Layer Name: Conv2d_8_pointwise/Conv2D 	 Layer time: 9.5031 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+49	Layer Name: Conv2d_8_pointwise/BatchNorm 	 Layer time: 1.1822 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+50	Layer Name: Conv2d_8_pointwise/Relu6 	 Layer time: 0.4680 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 8 	 time: 14.2758
 ----------------------------
-51	Layer Name: Conv2d_9_depthwise/depthwise 	 Layer time: 2.0515 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-52	Layer Name: Conv2d_9_depthwise/BatchNorm 	 Layer time: 1.5655 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-53	Layer Name: Conv2d_9_depthwise/Relu6 	 Layer time: 0.6799 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-54	Layer Name: Conv2d_9_pointwise/Conv2D 	 Layer time: 17.4789 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-55	Layer Name: Conv2d_9_pointwise/BatchNorm 	 Layer time: 1.6226 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-56	Layer Name: Conv2d_9_pointwise/Relu6 	 Layer time: 0.6188 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 9 	 time: 24.0172
+51	Layer Name: Conv2d_9_depthwise/depthwise 	 Layer time: 1.5803 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+52	Layer Name: Conv2d_9_depthwise/BatchNorm 	 Layer time: 1.0365 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+53	Layer Name: Conv2d_9_depthwise/Relu6 	 Layer time: 0.5190 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+54	Layer Name: Conv2d_9_pointwise/Conv2D 	 Layer time: 9.4597 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+55	Layer Name: Conv2d_9_pointwise/BatchNorm 	 Layer time: 1.1894 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+56	Layer Name: Conv2d_9_pointwise/Relu6 	 Layer time: 0.6007 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 9 	 time: 14.3855
 ----------------------------
-57	Layer Name: Conv2d_10_depthwise/depthwise 	 Layer time: 2.0684 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-58	Layer Name: Conv2d_10_depthwise/BatchNorm 	 Layer time: 1.5612 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-59	Layer Name: Conv2d_10_depthwise/Relu6 	 Layer time: 0.8353 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-60	Layer Name: Conv2d_10_pointwise/Conv2D 	 Layer time: 17.5443 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-61	Layer Name: Conv2d_10_pointwise/BatchNorm 	 Layer time: 1.6008 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-62	Layer Name: Conv2d_10_pointwise/Relu6 	 Layer time: 0.5618 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 10 	 time: 24.1719
+57	Layer Name: Conv2d_10_depthwise/depthwise 	 Layer time: 1.6020 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+58	Layer Name: Conv2d_10_depthwise/BatchNorm 	 Layer time: 1.0644 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+59	Layer Name: Conv2d_10_depthwise/Relu6 	 Layer time: 0.4830 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+60	Layer Name: Conv2d_10_pointwise/Conv2D 	 Layer time: 9.4978 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+61	Layer Name: Conv2d_10_pointwise/BatchNorm 	 Layer time: 1.1638 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+62	Layer Name: Conv2d_10_pointwise/Relu6 	 Layer time: 0.6344 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 10 	 time: 14.4454
 ----------------------------
-63	Layer Name: Conv2d_11_depthwise/depthwise 	 Layer time: 2.0508 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-64	Layer Name: Conv2d_11_depthwise/BatchNorm 	 Layer time: 1.5579 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-65	Layer Name: Conv2d_11_depthwise/Relu6 	 Layer time: 0.8290 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-66	Layer Name: Conv2d_11_pointwise/Conv2D 	 Layer time: 17.4995 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-67	Layer Name: Conv2d_11_pointwise/BatchNorm 	 Layer time: 1.5935 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-68	Layer Name: Conv2d_11_pointwise/Relu6 	 Layer time: 0.6854 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 11 	 time: 24.2162
+63	Layer Name: Conv2d_11_depthwise/depthwise 	 Layer time: 1.6071 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+64	Layer Name: Conv2d_11_depthwise/BatchNorm 	 Layer time: 1.0765 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+65	Layer Name: Conv2d_11_depthwise/Relu6 	 Layer time: 0.4872 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+66	Layer Name: Conv2d_11_pointwise/Conv2D 	 Layer time: 9.4891 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+67	Layer Name: Conv2d_11_pointwise/BatchNorm 	 Layer time: 1.1002 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+68	Layer Name: Conv2d_11_pointwise/Relu6 	 Layer time: 0.6074 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 11 	 time: 14.3675
 ----------------------------
-69	Layer Name: Conv2d_12_depthwise/depthwise 	 Layer time: 1.6223 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x7x7
-70	Layer Name: Conv2d_12_depthwise/BatchNorm 	 Layer time: 0.5561 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
-71	Layer Name: Conv2d_12_depthwise/Relu6 	 Layer time: 0.4717 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
-72	Layer Name: Conv2d_12_pointwise/Conv2D 	 Layer time: 13.2197 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 1024x7x7
-73	Layer Name: Conv2d_12_pointwise/BatchNorm 	 Layer time: 0.8897 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-74	Layer Name: Conv2d_12_pointwise/Relu6 	 Layer time: 0.4499 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-Layer Number: 12 	 time: 17.2094
+69	Layer Name: Conv2d_12_depthwise/depthwise 	 Layer time: 1.2061 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x7x7
+70	Layer Name: Conv2d_12_depthwise/BatchNorm 	 Layer time: 0.4972 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
+71	Layer Name: Conv2d_12_depthwise/Relu6 	 Layer time: 0.3229 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
+72	Layer Name: Conv2d_12_pointwise/Conv2D 	 Layer time: 5.4825 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 1024x7x7
+73	Layer Name: Conv2d_12_pointwise/BatchNorm 	 Layer time: 0.7934 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+74	Layer Name: Conv2d_12_pointwise/Relu6 	 Layer time: 0.3485 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+Layer Number: 12 	 time: 8.6506
 ----------------------------
-75	Layer Name: Conv2d_13_depthwise/depthwise 	 Layer time: 1.3060 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-76	Layer Name: Conv2d_13_depthwise/BatchNorm 	 Layer time: 0.8695 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-77	Layer Name: Conv2d_13_depthwise/Relu6 	 Layer time: 0.6075 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-78	Layer Name: Conv2d_13_pointwise/Conv2D 	 Layer time: 26.5424 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-79	Layer Name: Conv2d_13_pointwise/BatchNorm 	 Layer time: 0.8407 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-80	Layer Name: Conv2d_13_pointwise/Relu6 	 Layer time: 0.4743 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-81	Layer Name: Logits/AvgPool_1a 	 Layer time: 0.5169 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024
-82	Layer Name: Logits/Conv2d_1c_1x1 	 Layer time: 1.6437 	 number of inputs: 3 	 input shape: 1024 	 output shape: 1000
-83	Layer Name: Reshape 	 Layer time: 0.3060 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
-84	Layer Name: Softmax 	 Layer time: 0.1418 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
-Layer Number: 13 	 time: 33.2489
+75	Layer Name: Conv2d_13_depthwise/depthwise 	 Layer time: 0.9565 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+76	Layer Name: Conv2d_13_depthwise/BatchNorm 	 Layer time: 0.7084 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+77	Layer Name: Conv2d_13_depthwise/Relu6 	 Layer time: 0.3518 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+78	Layer Name: Conv2d_13_pointwise/Conv2D 	 Layer time: 10.6695 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+79	Layer Name: Conv2d_13_pointwise/BatchNorm 	 Layer time: 0.6969 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+80	Layer Name: Conv2d_13_pointwise/Relu6 	 Layer time: 0.3647 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+81	Layer Name: Logits/AvgPool_1a 	 Layer time: 0.3639 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024
+82	Layer Name: Logits/Conv2d_1c_1x1 	 Layer time: 1.2070 	 number of inputs: 3 	 input shape: 1024 	 output shape: 1000
+83	Layer Name: Reshape 	 Layer time: 0.2894 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+84	Layer Name: Softmax 	 Layer time: 0.1462 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+Layer Number: 13 	 time: 15.7542
 ----------------------------
 
- Sum of Layers time: 383.6816
+ Sum of Layers time: 215.5413
 
 
-Graph0   Input: 83.9475   Task: 503.47   send: 0.0048708   Out: 0.57785   Process: 588
+Graph0   Input: 81.0099   Task: 335.29   send: 0.001575   Out: 0.568254   Process: 416.87
 
 
 
@@ -1147,7 +1165,7 @@ Graph0   Input: 83.9475   Task: 503.47   send: 0.0048708   Out: 0.57785   Proces
 
 
 
-AVG Latency: 588.009
+AVG Latency: 416.88
 
 Profiling these DVFS settings finised
 Please Enter the desired Frequency setttings: 
@@ -1455,124 +1473,124 @@ Reading image: /data/local/ARM-CO-UP/assets//ppm_images_224//school_bus.ppm
 0.0000 - [id = 874]
 0.0000 - [id = 864]
 0.0000 - [id = 555]
-0	Layer Name: Conv2d_0 	 Layer time: 7.6037 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 32x112x112
-1	Layer Name: Conv2d_0/BatchNorm 	 Layer time: 4.8436 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
-2	Layer Name: Conv2d_0/Relu6 	 Layer time: 2.0437 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
-Layer Number: 0 	 time: 14.4909
+0	Layer Name: Conv2d_0 	 Layer time: 5.8013 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 32x112x112
+1	Layer Name: Conv2d_0/BatchNorm 	 Layer time: 2.6535 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
+2	Layer Name: Conv2d_0/Relu6 	 Layer time: 1.3496 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
+Layer Number: 0 	 time: 9.8044
 ----------------------------
-3	Layer Name: Conv2d_1_depthwise/depthwise 	 Layer time: 5.1438 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 32x112x112
-4	Layer Name: Conv2d_1_depthwise/BatchNorm 	 Layer time: 4.8719 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
-5	Layer Name: Conv2d_1_depthwise/Relu6 	 Layer time: 2.1904 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
-6	Layer Name: Conv2d_1_pointwise/Conv2D 	 Layer time: 10.4875 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 64x112x112
-7	Layer Name: Conv2d_1_pointwise/BatchNorm 	 Layer time: 9.0217 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
-8	Layer Name: Conv2d_1_pointwise/Relu6 	 Layer time: 3.3044 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
-Layer Number: 1 	 time: 35.0197
+3	Layer Name: Conv2d_1_depthwise/depthwise 	 Layer time: 3.1289 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 32x112x112
+4	Layer Name: Conv2d_1_depthwise/BatchNorm 	 Layer time: 2.6000 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
+5	Layer Name: Conv2d_1_depthwise/Relu6 	 Layer time: 1.2925 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
+6	Layer Name: Conv2d_1_pointwise/Conv2D 	 Layer time: 5.4807 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 64x112x112
+7	Layer Name: Conv2d_1_pointwise/BatchNorm 	 Layer time: 4.8850 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
+8	Layer Name: Conv2d_1_pointwise/Relu6 	 Layer time: 1.9695 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
+Layer Number: 1 	 time: 19.3566
 ----------------------------
-9	Layer Name: Conv2d_2_depthwise/depthwise 	 Layer time: 4.5420 	 number of inputs: 3 	 input shape: 64x112x112 	 output shape: 64x56x56
-10	Layer Name: Conv2d_2_depthwise/BatchNorm 	 Layer time: 2.3326 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
-11	Layer Name: Conv2d_2_depthwise/Relu6 	 Layer time: 1.1182 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
-12	Layer Name: Conv2d_2_pointwise/Conv2D 	 Layer time: 11.5343 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 128x56x56
-13	Layer Name: Conv2d_2_pointwise/BatchNorm 	 Layer time: 4.5095 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-14	Layer Name: Conv2d_2_pointwise/Relu6 	 Layer time: 1.8511 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-Layer Number: 2 	 time: 25.8878
+9	Layer Name: Conv2d_2_depthwise/depthwise 	 Layer time: 2.6559 	 number of inputs: 3 	 input shape: 64x112x112 	 output shape: 64x56x56
+10	Layer Name: Conv2d_2_depthwise/BatchNorm 	 Layer time: 1.5003 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
+11	Layer Name: Conv2d_2_depthwise/Relu6 	 Layer time: 0.6666 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
+12	Layer Name: Conv2d_2_pointwise/Conv2D 	 Layer time: 4.3795 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 128x56x56
+13	Layer Name: Conv2d_2_pointwise/BatchNorm 	 Layer time: 2.4850 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+14	Layer Name: Conv2d_2_pointwise/Relu6 	 Layer time: 1.1903 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+Layer Number: 2 	 time: 12.8776
 ----------------------------
-15	Layer Name: Conv2d_3_depthwise/depthwise 	 Layer time: 5.2014 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
-16	Layer Name: Conv2d_3_depthwise/BatchNorm 	 Layer time: 4.4994 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-17	Layer Name: Conv2d_3_depthwise/Relu6 	 Layer time: 1.8544 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-18	Layer Name: Conv2d_3_pointwise/Conv2D 	 Layer time: 21.8462 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
-19	Layer Name: Conv2d_3_pointwise/BatchNorm 	 Layer time: 4.7571 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-20	Layer Name: Conv2d_3_pointwise/Relu6 	 Layer time: 1.8486 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-Layer Number: 3 	 time: 40.0071
+15	Layer Name: Conv2d_3_depthwise/depthwise 	 Layer time: 2.5736 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
+16	Layer Name: Conv2d_3_depthwise/BatchNorm 	 Layer time: 2.5647 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+17	Layer Name: Conv2d_3_depthwise/Relu6 	 Layer time: 1.0973 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+18	Layer Name: Conv2d_3_pointwise/Conv2D 	 Layer time: 7.3620 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
+19	Layer Name: Conv2d_3_pointwise/BatchNorm 	 Layer time: 2.5566 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+20	Layer Name: Conv2d_3_pointwise/Relu6 	 Layer time: 1.0546 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+Layer Number: 3 	 time: 17.2087
 ----------------------------
-21	Layer Name: Conv2d_4_depthwise/depthwise 	 Layer time: 3.3780 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x28x28
-22	Layer Name: Conv2d_4_depthwise/BatchNorm 	 Layer time: 1.2734 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
-23	Layer Name: Conv2d_4_depthwise/Relu6 	 Layer time: 0.8557 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
-24	Layer Name: Conv2d_4_pointwise/Conv2D 	 Layer time: 11.4076 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 256x28x28
-25	Layer Name: Conv2d_4_pointwise/BatchNorm 	 Layer time: 2.4107 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-26	Layer Name: Conv2d_4_pointwise/Relu6 	 Layer time: 1.1017 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-Layer Number: 4 	 time: 20.4271
+21	Layer Name: Conv2d_4_depthwise/depthwise 	 Layer time: 2.0257 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x28x28
+22	Layer Name: Conv2d_4_depthwise/BatchNorm 	 Layer time: 0.8571 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+23	Layer Name: Conv2d_4_depthwise/Relu6 	 Layer time: 0.4727 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+24	Layer Name: Conv2d_4_pointwise/Conv2D 	 Layer time: 3.7089 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 256x28x28
+25	Layer Name: Conv2d_4_pointwise/BatchNorm 	 Layer time: 1.3691 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+26	Layer Name: Conv2d_4_pointwise/Relu6 	 Layer time: 0.7548 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 4 	 time: 9.1883
 ----------------------------
-27	Layer Name: Conv2d_5_depthwise/depthwise 	 Layer time: 3.2120 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
-28	Layer Name: Conv2d_5_depthwise/BatchNorm 	 Layer time: 2.4571 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-29	Layer Name: Conv2d_5_depthwise/Relu6 	 Layer time: 1.0284 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-30	Layer Name: Conv2d_5_pointwise/Conv2D 	 Layer time: 19.8973 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
-31	Layer Name: Conv2d_5_pointwise/BatchNorm 	 Layer time: 2.2801 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-32	Layer Name: Conv2d_5_pointwise/Relu6 	 Layer time: 0.9759 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-Layer Number: 5 	 time: 29.8508
+27	Layer Name: Conv2d_5_depthwise/depthwise 	 Layer time: 1.6566 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
+28	Layer Name: Conv2d_5_depthwise/BatchNorm 	 Layer time: 1.4199 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+29	Layer Name: Conv2d_5_depthwise/Relu6 	 Layer time: 0.7163 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+30	Layer Name: Conv2d_5_pointwise/Conv2D 	 Layer time: 6.7325 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
+31	Layer Name: Conv2d_5_pointwise/BatchNorm 	 Layer time: 1.4363 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+32	Layer Name: Conv2d_5_pointwise/Relu6 	 Layer time: 0.6955 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 5 	 time: 12.6571
 ----------------------------
-33	Layer Name: Conv2d_6_depthwise/depthwise 	 Layer time: 2.0709 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x14x14
-34	Layer Name: Conv2d_6_depthwise/BatchNorm 	 Layer time: 0.8098 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
-35	Layer Name: Conv2d_6_depthwise/Relu6 	 Layer time: 0.5167 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
-36	Layer Name: Conv2d_6_pointwise/Conv2D 	 Layer time: 7.5324 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 512x14x14
-37	Layer Name: Conv2d_6_pointwise/BatchNorm 	 Layer time: 1.3181 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-38	Layer Name: Conv2d_6_pointwise/Relu6 	 Layer time: 0.5788 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 6 	 time: 12.8267
+33	Layer Name: Conv2d_6_depthwise/depthwise 	 Layer time: 1.3719 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x14x14
+34	Layer Name: Conv2d_6_depthwise/BatchNorm 	 Layer time: 0.5105 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+35	Layer Name: Conv2d_6_depthwise/Relu6 	 Layer time: 0.2570 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+36	Layer Name: Conv2d_6_pointwise/Conv2D 	 Layer time: 3.5794 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 512x14x14
+37	Layer Name: Conv2d_6_pointwise/BatchNorm 	 Layer time: 0.8928 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+38	Layer Name: Conv2d_6_pointwise/Relu6 	 Layer time: 0.4401 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 6 	 time: 7.0517
 ----------------------------
-39	Layer Name: Conv2d_7_depthwise/depthwise 	 Layer time: 1.9091 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-40	Layer Name: Conv2d_7_depthwise/BatchNorm 	 Layer time: 1.3995 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-41	Layer Name: Conv2d_7_depthwise/Relu6 	 Layer time: 0.7161 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-42	Layer Name: Conv2d_7_pointwise/Conv2D 	 Layer time: 14.8305 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-43	Layer Name: Conv2d_7_pointwise/BatchNorm 	 Layer time: 1.3121 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-44	Layer Name: Conv2d_7_pointwise/Relu6 	 Layer time: 0.6237 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 7 	 time: 20.7910
+39	Layer Name: Conv2d_7_depthwise/depthwise 	 Layer time: 1.1927 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+40	Layer Name: Conv2d_7_depthwise/BatchNorm 	 Layer time: 0.9083 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+41	Layer Name: Conv2d_7_depthwise/Relu6 	 Layer time: 0.4795 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+42	Layer Name: Conv2d_7_pointwise/Conv2D 	 Layer time: 7.1417 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+43	Layer Name: Conv2d_7_pointwise/BatchNorm 	 Layer time: 0.8410 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+44	Layer Name: Conv2d_7_pointwise/Relu6 	 Layer time: 0.4239 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 7 	 time: 10.9871
 ----------------------------
-45	Layer Name: Conv2d_8_depthwise/depthwise 	 Layer time: 1.9255 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-46	Layer Name: Conv2d_8_depthwise/BatchNorm 	 Layer time: 1.2259 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-47	Layer Name: Conv2d_8_depthwise/Relu6 	 Layer time: 0.6177 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-48	Layer Name: Conv2d_8_pointwise/Conv2D 	 Layer time: 14.9268 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-49	Layer Name: Conv2d_8_pointwise/BatchNorm 	 Layer time: 1.2954 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-50	Layer Name: Conv2d_8_pointwise/Relu6 	 Layer time: 0.6370 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 8 	 time: 20.6283
+45	Layer Name: Conv2d_8_depthwise/depthwise 	 Layer time: 1.1824 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+46	Layer Name: Conv2d_8_depthwise/BatchNorm 	 Layer time: 0.8766 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+47	Layer Name: Conv2d_8_depthwise/Relu6 	 Layer time: 0.4328 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+48	Layer Name: Conv2d_8_pointwise/Conv2D 	 Layer time: 7.1063 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+49	Layer Name: Conv2d_8_pointwise/BatchNorm 	 Layer time: 0.9541 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+50	Layer Name: Conv2d_8_pointwise/Relu6 	 Layer time: 0.3812 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 8 	 time: 10.9334
 ----------------------------
-51	Layer Name: Conv2d_9_depthwise/depthwise 	 Layer time: 1.8986 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-52	Layer Name: Conv2d_9_depthwise/BatchNorm 	 Layer time: 1.2781 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-53	Layer Name: Conv2d_9_depthwise/Relu6 	 Layer time: 0.6124 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-54	Layer Name: Conv2d_9_pointwise/Conv2D 	 Layer time: 14.8189 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-55	Layer Name: Conv2d_9_pointwise/BatchNorm 	 Layer time: 1.2423 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-56	Layer Name: Conv2d_9_pointwise/Relu6 	 Layer time: 0.6065 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 9 	 time: 20.4568
+51	Layer Name: Conv2d_9_depthwise/depthwise 	 Layer time: 1.2240 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+52	Layer Name: Conv2d_9_depthwise/BatchNorm 	 Layer time: 0.8308 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+53	Layer Name: Conv2d_9_depthwise/Relu6 	 Layer time: 0.3904 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+54	Layer Name: Conv2d_9_pointwise/Conv2D 	 Layer time: 7.1657 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+55	Layer Name: Conv2d_9_pointwise/BatchNorm 	 Layer time: 0.8765 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+56	Layer Name: Conv2d_9_pointwise/Relu6 	 Layer time: 0.3934 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 9 	 time: 10.8809
 ----------------------------
-57	Layer Name: Conv2d_10_depthwise/depthwise 	 Layer time: 1.9175 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-58	Layer Name: Conv2d_10_depthwise/BatchNorm 	 Layer time: 1.3571 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-59	Layer Name: Conv2d_10_depthwise/Relu6 	 Layer time: 0.6725 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-60	Layer Name: Conv2d_10_pointwise/Conv2D 	 Layer time: 14.8270 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-61	Layer Name: Conv2d_10_pointwise/BatchNorm 	 Layer time: 1.3670 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-62	Layer Name: Conv2d_10_pointwise/Relu6 	 Layer time: 0.7217 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 10 	 time: 20.8629
+57	Layer Name: Conv2d_10_depthwise/depthwise 	 Layer time: 1.2262 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+58	Layer Name: Conv2d_10_depthwise/BatchNorm 	 Layer time: 0.8511 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+59	Layer Name: Conv2d_10_depthwise/Relu6 	 Layer time: 0.3956 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+60	Layer Name: Conv2d_10_pointwise/Conv2D 	 Layer time: 7.1114 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+61	Layer Name: Conv2d_10_pointwise/BatchNorm 	 Layer time: 0.9654 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+62	Layer Name: Conv2d_10_pointwise/Relu6 	 Layer time: 0.4577 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 10 	 time: 11.0072
 ----------------------------
-63	Layer Name: Conv2d_11_depthwise/depthwise 	 Layer time: 2.0142 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-64	Layer Name: Conv2d_11_depthwise/BatchNorm 	 Layer time: 1.3916 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-65	Layer Name: Conv2d_11_depthwise/Relu6 	 Layer time: 0.6869 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-66	Layer Name: Conv2d_11_pointwise/Conv2D 	 Layer time: 14.9628 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-67	Layer Name: Conv2d_11_pointwise/BatchNorm 	 Layer time: 1.3099 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-68	Layer Name: Conv2d_11_pointwise/Relu6 	 Layer time: 0.5767 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 11 	 time: 20.9421
+63	Layer Name: Conv2d_11_depthwise/depthwise 	 Layer time: 1.3047 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+64	Layer Name: Conv2d_11_depthwise/BatchNorm 	 Layer time: 0.8292 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+65	Layer Name: Conv2d_11_depthwise/Relu6 	 Layer time: 0.4512 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+66	Layer Name: Conv2d_11_pointwise/Conv2D 	 Layer time: 7.0913 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+67	Layer Name: Conv2d_11_pointwise/BatchNorm 	 Layer time: 0.8717 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+68	Layer Name: Conv2d_11_pointwise/Relu6 	 Layer time: 0.5198 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 11 	 time: 11.0679
 ----------------------------
-69	Layer Name: Conv2d_12_depthwise/depthwise 	 Layer time: 1.3730 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x7x7
-70	Layer Name: Conv2d_12_depthwise/BatchNorm 	 Layer time: 0.4659 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
-71	Layer Name: Conv2d_12_depthwise/Relu6 	 Layer time: 0.4345 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
-72	Layer Name: Conv2d_12_pointwise/Conv2D 	 Layer time: 13.2081 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 1024x7x7
-73	Layer Name: Conv2d_12_pointwise/BatchNorm 	 Layer time: 0.8453 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-74	Layer Name: Conv2d_12_pointwise/Relu6 	 Layer time: 0.4043 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-Layer Number: 12 	 time: 16.7312
+69	Layer Name: Conv2d_12_depthwise/depthwise 	 Layer time: 1.0397 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x7x7
+70	Layer Name: Conv2d_12_depthwise/BatchNorm 	 Layer time: 0.3774 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
+71	Layer Name: Conv2d_12_depthwise/Relu6 	 Layer time: 0.2453 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
+72	Layer Name: Conv2d_12_pointwise/Conv2D 	 Layer time: 4.0199 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 1024x7x7
+73	Layer Name: Conv2d_12_pointwise/BatchNorm 	 Layer time: 0.6083 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+74	Layer Name: Conv2d_12_pointwise/Relu6 	 Layer time: 0.3071 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+Layer Number: 12 	 time: 6.5978
 ----------------------------
-75	Layer Name: Conv2d_13_depthwise/depthwise 	 Layer time: 1.1377 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-76	Layer Name: Conv2d_13_depthwise/BatchNorm 	 Layer time: 0.8109 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-77	Layer Name: Conv2d_13_depthwise/Relu6 	 Layer time: 0.4831 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-78	Layer Name: Conv2d_13_pointwise/Conv2D 	 Layer time: 25.2342 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-79	Layer Name: Conv2d_13_pointwise/BatchNorm 	 Layer time: 1.0340 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-80	Layer Name: Conv2d_13_pointwise/Relu6 	 Layer time: 0.6002 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-81	Layer Name: Logits/AvgPool_1a 	 Layer time: 0.4703 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024
-82	Layer Name: Logits/Conv2d_1c_1x1 	 Layer time: 1.7796 	 number of inputs: 3 	 input shape: 1024 	 output shape: 1000
-83	Layer Name: Reshape 	 Layer time: 0.2297 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
-84	Layer Name: Softmax 	 Layer time: 0.1125 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
-Layer Number: 13 	 time: 31.8922
+75	Layer Name: Conv2d_13_depthwise/depthwise 	 Layer time: 0.7070 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+76	Layer Name: Conv2d_13_depthwise/BatchNorm 	 Layer time: 0.5275 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+77	Layer Name: Conv2d_13_depthwise/Relu6 	 Layer time: 0.2821 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+78	Layer Name: Conv2d_13_pointwise/Conv2D 	 Layer time: 8.0432 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+79	Layer Name: Conv2d_13_pointwise/BatchNorm 	 Layer time: 0.5668 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+80	Layer Name: Conv2d_13_pointwise/Relu6 	 Layer time: 0.3331 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+81	Layer Name: Logits/AvgPool_1a 	 Layer time: 0.3129 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024
+82	Layer Name: Logits/Conv2d_1c_1x1 	 Layer time: 1.1460 	 number of inputs: 3 	 input shape: 1024 	 output shape: 1000
+83	Layer Name: Reshape 	 Layer time: 0.2238 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+84	Layer Name: Softmax 	 Layer time: 0.1256 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+Layer Number: 13 	 time: 12.2680
 ----------------------------
 
- Sum of Layers time: 330.8146
+ Sum of Layers time: 161.8867
 
 
-Graph0   Input: 61.729   Task: 449.426   send: 0.0014877   Out: 0.453221   Process: 511.61
+Graph0   Input: 59.4411   Task: 280.479   send: 0.0013707   Out: 0.440679   Process: 340.362
 
 
 
@@ -1580,7 +1598,7 @@ Graph0   Input: 61.729   Task: 449.426   send: 0.0014877   Out: 0.453221   Proce
 
 
 
-AVG Latency: 511.617
+AVG Latency: 340.37
 
 Profiling these DVFS settings finised
 Please Enter the desired Frequency setttings: 
@@ -1888,124 +1906,124 @@ Reading image: /data/local/ARM-CO-UP/assets//ppm_images_224//go_kart.ppm
 0.0000 - [id = 560]
 0.0000 - [id = 615]
 0.0000 - [id = 621]
-0	Layer Name: Conv2d_0 	 Layer time: 7.6291 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 32x112x112
-1	Layer Name: Conv2d_0/BatchNorm 	 Layer time: 4.8443 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
-2	Layer Name: Conv2d_0/Relu6 	 Layer time: 2.1435 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
-Layer Number: 0 	 time: 14.6169
+0	Layer Name: Conv2d_0 	 Layer time: 3.8091 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 32x112x112
+1	Layer Name: Conv2d_0/BatchNorm 	 Layer time: 2.1998 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
+2	Layer Name: Conv2d_0/Relu6 	 Layer time: 0.9731 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
+Layer Number: 0 	 time: 6.9821
 ----------------------------
-3	Layer Name: Conv2d_1_depthwise/depthwise 	 Layer time: 5.1219 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 32x112x112
-4	Layer Name: Conv2d_1_depthwise/BatchNorm 	 Layer time: 4.7893 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
-5	Layer Name: Conv2d_1_depthwise/Relu6 	 Layer time: 2.2056 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
-6	Layer Name: Conv2d_1_pointwise/Conv2D 	 Layer time: 10.1619 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 64x112x112
-7	Layer Name: Conv2d_1_pointwise/BatchNorm 	 Layer time: 8.2693 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
-8	Layer Name: Conv2d_1_pointwise/Relu6 	 Layer time: 3.1138 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
-Layer Number: 1 	 time: 33.6617
+3	Layer Name: Conv2d_1_depthwise/depthwise 	 Layer time: 2.6719 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 32x112x112
+4	Layer Name: Conv2d_1_depthwise/BatchNorm 	 Layer time: 2.1271 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
+5	Layer Name: Conv2d_1_depthwise/Relu6 	 Layer time: 1.0620 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
+6	Layer Name: Conv2d_1_pointwise/Conv2D 	 Layer time: 4.6919 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 64x112x112
+7	Layer Name: Conv2d_1_pointwise/BatchNorm 	 Layer time: 3.9208 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
+8	Layer Name: Conv2d_1_pointwise/Relu6 	 Layer time: 1.6785 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
+Layer Number: 1 	 time: 16.1522
 ----------------------------
-9	Layer Name: Conv2d_2_depthwise/depthwise 	 Layer time: 4.1687 	 number of inputs: 3 	 input shape: 64x112x112 	 output shape: 64x56x56
-10	Layer Name: Conv2d_2_depthwise/BatchNorm 	 Layer time: 2.2275 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
-11	Layer Name: Conv2d_2_depthwise/Relu6 	 Layer time: 1.2276 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
-12	Layer Name: Conv2d_2_pointwise/Conv2D 	 Layer time: 11.4455 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 128x56x56
-13	Layer Name: Conv2d_2_pointwise/BatchNorm 	 Layer time: 4.1408 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-14	Layer Name: Conv2d_2_pointwise/Relu6 	 Layer time: 1.5448 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-Layer Number: 2 	 time: 24.7548
+9	Layer Name: Conv2d_2_depthwise/depthwise 	 Layer time: 2.5061 	 number of inputs: 3 	 input shape: 64x112x112 	 output shape: 64x56x56
+10	Layer Name: Conv2d_2_depthwise/BatchNorm 	 Layer time: 1.1425 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
+11	Layer Name: Conv2d_2_depthwise/Relu6 	 Layer time: 0.6027 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
+12	Layer Name: Conv2d_2_pointwise/Conv2D 	 Layer time: 3.5858 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 128x56x56
+13	Layer Name: Conv2d_2_pointwise/BatchNorm 	 Layer time: 2.0598 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+14	Layer Name: Conv2d_2_pointwise/Relu6 	 Layer time: 0.8888 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+Layer Number: 2 	 time: 10.7857
 ----------------------------
-15	Layer Name: Conv2d_3_depthwise/depthwise 	 Layer time: 5.1915 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
-16	Layer Name: Conv2d_3_depthwise/BatchNorm 	 Layer time: 4.3128 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-17	Layer Name: Conv2d_3_depthwise/Relu6 	 Layer time: 1.7121 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-18	Layer Name: Conv2d_3_pointwise/Conv2D 	 Layer time: 21.9128 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
-19	Layer Name: Conv2d_3_pointwise/BatchNorm 	 Layer time: 5.1152 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-20	Layer Name: Conv2d_3_pointwise/Relu6 	 Layer time: 1.4987 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-Layer Number: 3 	 time: 39.7431
+15	Layer Name: Conv2d_3_depthwise/depthwise 	 Layer time: 2.2336 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
+16	Layer Name: Conv2d_3_depthwise/BatchNorm 	 Layer time: 2.0437 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+17	Layer Name: Conv2d_3_depthwise/Relu6 	 Layer time: 0.9306 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+18	Layer Name: Conv2d_3_pointwise/Conv2D 	 Layer time: 6.0985 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
+19	Layer Name: Conv2d_3_pointwise/BatchNorm 	 Layer time: 2.1050 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+20	Layer Name: Conv2d_3_pointwise/Relu6 	 Layer time: 0.9316 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+Layer Number: 3 	 time: 14.3429
 ----------------------------
-21	Layer Name: Conv2d_4_depthwise/depthwise 	 Layer time: 3.1068 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x28x28
-22	Layer Name: Conv2d_4_depthwise/BatchNorm 	 Layer time: 1.1804 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
-23	Layer Name: Conv2d_4_depthwise/Relu6 	 Layer time: 0.5926 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
-24	Layer Name: Conv2d_4_pointwise/Conv2D 	 Layer time: 11.1324 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 256x28x28
-25	Layer Name: Conv2d_4_pointwise/BatchNorm 	 Layer time: 2.2208 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-26	Layer Name: Conv2d_4_pointwise/Relu6 	 Layer time: 0.9760 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-Layer Number: 4 	 time: 19.2090
+21	Layer Name: Conv2d_4_depthwise/depthwise 	 Layer time: 1.8580 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x28x28
+22	Layer Name: Conv2d_4_depthwise/BatchNorm 	 Layer time: 0.6441 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+23	Layer Name: Conv2d_4_depthwise/Relu6 	 Layer time: 0.3417 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+24	Layer Name: Conv2d_4_pointwise/Conv2D 	 Layer time: 3.0791 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 256x28x28
+25	Layer Name: Conv2d_4_pointwise/BatchNorm 	 Layer time: 1.1947 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+26	Layer Name: Conv2d_4_pointwise/Relu6 	 Layer time: 0.6561 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 4 	 time: 7.7737
 ----------------------------
-27	Layer Name: Conv2d_5_depthwise/depthwise 	 Layer time: 3.0770 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
-28	Layer Name: Conv2d_5_depthwise/BatchNorm 	 Layer time: 2.2905 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-29	Layer Name: Conv2d_5_depthwise/Relu6 	 Layer time: 0.9315 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-30	Layer Name: Conv2d_5_pointwise/Conv2D 	 Layer time: 18.7360 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
-31	Layer Name: Conv2d_5_pointwise/BatchNorm 	 Layer time: 2.2274 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-32	Layer Name: Conv2d_5_pointwise/Relu6 	 Layer time: 1.0077 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-Layer Number: 5 	 time: 28.2701
+27	Layer Name: Conv2d_5_depthwise/depthwise 	 Layer time: 1.5208 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
+28	Layer Name: Conv2d_5_depthwise/BatchNorm 	 Layer time: 1.1449 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+29	Layer Name: Conv2d_5_depthwise/Relu6 	 Layer time: 0.5820 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+30	Layer Name: Conv2d_5_pointwise/Conv2D 	 Layer time: 5.5388 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
+31	Layer Name: Conv2d_5_pointwise/BatchNorm 	 Layer time: 1.0452 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+32	Layer Name: Conv2d_5_pointwise/Relu6 	 Layer time: 0.5691 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 5 	 time: 10.4010
 ----------------------------
-33	Layer Name: Conv2d_6_depthwise/depthwise 	 Layer time: 1.8700 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x14x14
-34	Layer Name: Conv2d_6_depthwise/BatchNorm 	 Layer time: 0.8337 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
-35	Layer Name: Conv2d_6_depthwise/Relu6 	 Layer time: 0.6125 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
-36	Layer Name: Conv2d_6_pointwise/Conv2D 	 Layer time: 6.9187 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 512x14x14
-37	Layer Name: Conv2d_6_pointwise/BatchNorm 	 Layer time: 1.2781 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-38	Layer Name: Conv2d_6_pointwise/Relu6 	 Layer time: 0.6261 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 6 	 time: 12.1390
+33	Layer Name: Conv2d_6_depthwise/depthwise 	 Layer time: 1.1782 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x14x14
+34	Layer Name: Conv2d_6_depthwise/BatchNorm 	 Layer time: 0.4016 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+35	Layer Name: Conv2d_6_depthwise/Relu6 	 Layer time: 0.2635 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+36	Layer Name: Conv2d_6_pointwise/Conv2D 	 Layer time: 2.9279 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 512x14x14
+37	Layer Name: Conv2d_6_pointwise/BatchNorm 	 Layer time: 0.8666 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+38	Layer Name: Conv2d_6_pointwise/Relu6 	 Layer time: 0.3531 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 6 	 time: 5.9910
 ----------------------------
-39	Layer Name: Conv2d_7_depthwise/depthwise 	 Layer time: 1.9367 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-40	Layer Name: Conv2d_7_depthwise/BatchNorm 	 Layer time: 1.1957 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-41	Layer Name: Conv2d_7_depthwise/Relu6 	 Layer time: 0.6388 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-42	Layer Name: Conv2d_7_pointwise/Conv2D 	 Layer time: 13.1299 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-43	Layer Name: Conv2d_7_pointwise/BatchNorm 	 Layer time: 1.2681 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-44	Layer Name: Conv2d_7_pointwise/Relu6 	 Layer time: 0.5844 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 7 	 time: 18.7537
+39	Layer Name: Conv2d_7_depthwise/depthwise 	 Layer time: 1.0967 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+40	Layer Name: Conv2d_7_depthwise/BatchNorm 	 Layer time: 0.7560 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+41	Layer Name: Conv2d_7_depthwise/Relu6 	 Layer time: 0.3242 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+42	Layer Name: Conv2d_7_pointwise/Conv2D 	 Layer time: 5.9342 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+43	Layer Name: Conv2d_7_pointwise/BatchNorm 	 Layer time: 0.6992 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+44	Layer Name: Conv2d_7_pointwise/Relu6 	 Layer time: 0.3387 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 7 	 time: 9.1490
 ----------------------------
-45	Layer Name: Conv2d_8_depthwise/depthwise 	 Layer time: 1.8652 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-46	Layer Name: Conv2d_8_depthwise/BatchNorm 	 Layer time: 1.1948 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-47	Layer Name: Conv2d_8_depthwise/Relu6 	 Layer time: 0.6259 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-48	Layer Name: Conv2d_8_pointwise/Conv2D 	 Layer time: 13.0699 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-49	Layer Name: Conv2d_8_pointwise/BatchNorm 	 Layer time: 1.3154 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-50	Layer Name: Conv2d_8_pointwise/Relu6 	 Layer time: 0.5574 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 8 	 time: 18.6287
+45	Layer Name: Conv2d_8_depthwise/depthwise 	 Layer time: 1.0974 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+46	Layer Name: Conv2d_8_depthwise/BatchNorm 	 Layer time: 0.6732 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+47	Layer Name: Conv2d_8_depthwise/Relu6 	 Layer time: 0.3659 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+48	Layer Name: Conv2d_8_pointwise/Conv2D 	 Layer time: 5.9023 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+49	Layer Name: Conv2d_8_pointwise/BatchNorm 	 Layer time: 0.7321 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+50	Layer Name: Conv2d_8_pointwise/Relu6 	 Layer time: 0.3329 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 8 	 time: 9.1036
 ----------------------------
-51	Layer Name: Conv2d_9_depthwise/depthwise 	 Layer time: 1.8637 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-52	Layer Name: Conv2d_9_depthwise/BatchNorm 	 Layer time: 1.2709 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-53	Layer Name: Conv2d_9_depthwise/Relu6 	 Layer time: 0.5793 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-54	Layer Name: Conv2d_9_pointwise/Conv2D 	 Layer time: 13.1116 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-55	Layer Name: Conv2d_9_pointwise/BatchNorm 	 Layer time: 1.1971 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-56	Layer Name: Conv2d_9_pointwise/Relu6 	 Layer time: 0.6557 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 9 	 time: 18.6783
+51	Layer Name: Conv2d_9_depthwise/depthwise 	 Layer time: 1.0126 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+52	Layer Name: Conv2d_9_depthwise/BatchNorm 	 Layer time: 0.6873 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+53	Layer Name: Conv2d_9_depthwise/Relu6 	 Layer time: 0.3317 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+54	Layer Name: Conv2d_9_pointwise/Conv2D 	 Layer time: 5.9585 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+55	Layer Name: Conv2d_9_pointwise/BatchNorm 	 Layer time: 0.6460 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+56	Layer Name: Conv2d_9_pointwise/Relu6 	 Layer time: 0.3858 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 9 	 time: 9.0219
 ----------------------------
-57	Layer Name: Conv2d_10_depthwise/depthwise 	 Layer time: 1.9243 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-58	Layer Name: Conv2d_10_depthwise/BatchNorm 	 Layer time: 1.3293 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-59	Layer Name: Conv2d_10_depthwise/Relu6 	 Layer time: 0.6838 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-60	Layer Name: Conv2d_10_pointwise/Conv2D 	 Layer time: 13.1767 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-61	Layer Name: Conv2d_10_pointwise/BatchNorm 	 Layer time: 1.3327 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-62	Layer Name: Conv2d_10_pointwise/Relu6 	 Layer time: 0.5291 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 10 	 time: 18.9759
+57	Layer Name: Conv2d_10_depthwise/depthwise 	 Layer time: 0.9776 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+58	Layer Name: Conv2d_10_depthwise/BatchNorm 	 Layer time: 0.7921 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+59	Layer Name: Conv2d_10_depthwise/Relu6 	 Layer time: 0.4342 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+60	Layer Name: Conv2d_10_pointwise/Conv2D 	 Layer time: 6.0251 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+61	Layer Name: Conv2d_10_pointwise/BatchNorm 	 Layer time: 0.6951 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+62	Layer Name: Conv2d_10_pointwise/Relu6 	 Layer time: 0.3450 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 10 	 time: 9.2691
 ----------------------------
-63	Layer Name: Conv2d_11_depthwise/depthwise 	 Layer time: 1.9220 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-64	Layer Name: Conv2d_11_depthwise/BatchNorm 	 Layer time: 1.2870 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-65	Layer Name: Conv2d_11_depthwise/Relu6 	 Layer time: 0.7498 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-66	Layer Name: Conv2d_11_pointwise/Conv2D 	 Layer time: 13.2038 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-67	Layer Name: Conv2d_11_pointwise/BatchNorm 	 Layer time: 1.3848 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-68	Layer Name: Conv2d_11_pointwise/Relu6 	 Layer time: 0.6307 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 11 	 time: 19.1782
+63	Layer Name: Conv2d_11_depthwise/depthwise 	 Layer time: 1.1204 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+64	Layer Name: Conv2d_11_depthwise/BatchNorm 	 Layer time: 0.7320 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+65	Layer Name: Conv2d_11_depthwise/Relu6 	 Layer time: 0.3492 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+66	Layer Name: Conv2d_11_pointwise/Conv2D 	 Layer time: 5.9865 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+67	Layer Name: Conv2d_11_pointwise/BatchNorm 	 Layer time: 0.7050 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+68	Layer Name: Conv2d_11_pointwise/Relu6 	 Layer time: 0.3403 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 11 	 time: 9.2334
 ----------------------------
-69	Layer Name: Conv2d_12_depthwise/depthwise 	 Layer time: 1.2630 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x7x7
-70	Layer Name: Conv2d_12_depthwise/BatchNorm 	 Layer time: 0.5387 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
-71	Layer Name: Conv2d_12_depthwise/Relu6 	 Layer time: 0.3754 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
-72	Layer Name: Conv2d_12_pointwise/Conv2D 	 Layer time: 13.0237 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 1024x7x7
-73	Layer Name: Conv2d_12_pointwise/BatchNorm 	 Layer time: 0.8772 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-74	Layer Name: Conv2d_12_pointwise/Relu6 	 Layer time: 0.4830 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-Layer Number: 12 	 time: 16.5612
+69	Layer Name: Conv2d_12_depthwise/depthwise 	 Layer time: 0.8940 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x7x7
+70	Layer Name: Conv2d_12_depthwise/BatchNorm 	 Layer time: 0.2830 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
+71	Layer Name: Conv2d_12_depthwise/Relu6 	 Layer time: 0.1879 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
+72	Layer Name: Conv2d_12_pointwise/Conv2D 	 Layer time: 3.4356 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 1024x7x7
+73	Layer Name: Conv2d_12_pointwise/BatchNorm 	 Layer time: 0.5573 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+74	Layer Name: Conv2d_12_pointwise/Relu6 	 Layer time: 0.2288 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+Layer Number: 12 	 time: 5.5866
 ----------------------------
-75	Layer Name: Conv2d_13_depthwise/depthwise 	 Layer time: 0.9926 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-76	Layer Name: Conv2d_13_depthwise/BatchNorm 	 Layer time: 0.9122 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-77	Layer Name: Conv2d_13_depthwise/Relu6 	 Layer time: 0.4467 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-78	Layer Name: Conv2d_13_pointwise/Conv2D 	 Layer time: 25.0110 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-79	Layer Name: Conv2d_13_pointwise/BatchNorm 	 Layer time: 1.0128 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-80	Layer Name: Conv2d_13_pointwise/Relu6 	 Layer time: 0.4655 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-81	Layer Name: Logits/AvgPool_1a 	 Layer time: 0.4477 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024
-82	Layer Name: Logits/Conv2d_1c_1x1 	 Layer time: 1.7333 	 number of inputs: 3 	 input shape: 1024 	 output shape: 1000
-83	Layer Name: Reshape 	 Layer time: 0.1956 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
-84	Layer Name: Softmax 	 Layer time: 0.1034 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
-Layer Number: 13 	 time: 31.3207
+75	Layer Name: Conv2d_13_depthwise/depthwise 	 Layer time: 0.6173 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+76	Layer Name: Conv2d_13_depthwise/BatchNorm 	 Layer time: 0.4636 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+77	Layer Name: Conv2d_13_depthwise/Relu6 	 Layer time: 0.2221 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+78	Layer Name: Conv2d_13_pointwise/Conv2D 	 Layer time: 6.5798 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+79	Layer Name: Conv2d_13_pointwise/BatchNorm 	 Layer time: 0.4791 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+80	Layer Name: Conv2d_13_pointwise/Relu6 	 Layer time: 0.2487 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+81	Layer Name: Logits/AvgPool_1a 	 Layer time: 0.3186 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024
+82	Layer Name: Logits/Conv2d_1c_1x1 	 Layer time: 1.2012 	 number of inputs: 3 	 input shape: 1024 	 output shape: 1000
+83	Layer Name: Reshape 	 Layer time: 0.1801 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+84	Layer Name: Softmax 	 Layer time: 0.0944 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+Layer Number: 13 	 time: 10.4048
 ----------------------------
 
- Sum of Layers time: 314.4911
+ Sum of Layers time: 134.1970
 
 
-Graph0   Input: 50.0615   Task: 432.382   send: 0.0012835   Out: 0.378408   Process: 482.823
+Graph0   Input: 48.1666   Task: 252.383   send: 0.0012834   Out: 0.383717   Process: 300.935
 
 
 
@@ -2013,7 +2031,7 @@ Graph0   Input: 50.0615   Task: 432.382   send: 0.0012835   Out: 0.378408   Proc
 
 
 
-AVG Latency: 482.83
+AVG Latency: 300.942
 
 Profiling these DVFS settings finised
 Please Enter the desired Frequency setttings: 
@@ -2321,124 +2339,124 @@ Reading image: /data/local/ARM-CO-UP/assets//ppm_images_224//gold_fish.ppm
 0.0000 - [id = 7]
 0.0000 - [id = 8]
 0.0000 - [id = 46]
-0	Layer Name: Conv2d_0 	 Layer time: 7.5622 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 32x112x112
-1	Layer Name: Conv2d_0/BatchNorm 	 Layer time: 4.7570 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
-2	Layer Name: Conv2d_0/Relu6 	 Layer time: 2.1954 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
-Layer Number: 0 	 time: 14.5146
+0	Layer Name: Conv2d_0 	 Layer time: 3.5523 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 32x112x112
+1	Layer Name: Conv2d_0/BatchNorm 	 Layer time: 1.8600 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
+2	Layer Name: Conv2d_0/Relu6 	 Layer time: 0.8810 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
+Layer Number: 0 	 time: 6.2933
 ----------------------------
-3	Layer Name: Conv2d_1_depthwise/depthwise 	 Layer time: 5.0996 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 32x112x112
-4	Layer Name: Conv2d_1_depthwise/BatchNorm 	 Layer time: 4.8706 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
-5	Layer Name: Conv2d_1_depthwise/Relu6 	 Layer time: 2.1205 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
-6	Layer Name: Conv2d_1_pointwise/Conv2D 	 Layer time: 10.0538 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 64x112x112
-7	Layer Name: Conv2d_1_pointwise/BatchNorm 	 Layer time: 8.2716 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
-8	Layer Name: Conv2d_1_pointwise/Relu6 	 Layer time: 3.1742 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
-Layer Number: 1 	 time: 33.5903
+3	Layer Name: Conv2d_1_depthwise/depthwise 	 Layer time: 2.4443 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 32x112x112
+4	Layer Name: Conv2d_1_depthwise/BatchNorm 	 Layer time: 1.9352 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
+5	Layer Name: Conv2d_1_depthwise/Relu6 	 Layer time: 0.8489 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
+6	Layer Name: Conv2d_1_pointwise/Conv2D 	 Layer time: 4.0699 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 64x112x112
+7	Layer Name: Conv2d_1_pointwise/BatchNorm 	 Layer time: 3.1846 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
+8	Layer Name: Conv2d_1_pointwise/Relu6 	 Layer time: 1.7621 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
+Layer Number: 1 	 time: 14.2449
 ----------------------------
-9	Layer Name: Conv2d_2_depthwise/depthwise 	 Layer time: 3.9105 	 number of inputs: 3 	 input shape: 64x112x112 	 output shape: 64x56x56
-10	Layer Name: Conv2d_2_depthwise/BatchNorm 	 Layer time: 2.2374 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
-11	Layer Name: Conv2d_2_depthwise/Relu6 	 Layer time: 1.1819 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
-12	Layer Name: Conv2d_2_pointwise/Conv2D 	 Layer time: 11.3876 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 128x56x56
-13	Layer Name: Conv2d_2_pointwise/BatchNorm 	 Layer time: 4.1007 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-14	Layer Name: Conv2d_2_pointwise/Relu6 	 Layer time: 1.5685 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-Layer Number: 2 	 time: 24.3866
+9	Layer Name: Conv2d_2_depthwise/depthwise 	 Layer time: 2.3081 	 number of inputs: 3 	 input shape: 64x112x112 	 output shape: 64x56x56
+10	Layer Name: Conv2d_2_depthwise/BatchNorm 	 Layer time: 0.9140 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
+11	Layer Name: Conv2d_2_depthwise/Relu6 	 Layer time: 0.7147 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
+12	Layer Name: Conv2d_2_pointwise/Conv2D 	 Layer time: 3.1330 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 128x56x56
+13	Layer Name: Conv2d_2_pointwise/BatchNorm 	 Layer time: 1.6961 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+14	Layer Name: Conv2d_2_pointwise/Relu6 	 Layer time: 0.8728 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+Layer Number: 2 	 time: 9.6387
 ----------------------------
-15	Layer Name: Conv2d_3_depthwise/depthwise 	 Layer time: 5.2837 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
-16	Layer Name: Conv2d_3_depthwise/BatchNorm 	 Layer time: 4.2250 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-17	Layer Name: Conv2d_3_depthwise/Relu6 	 Layer time: 1.7608 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-18	Layer Name: Conv2d_3_pointwise/Conv2D 	 Layer time: 21.9107 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
-19	Layer Name: Conv2d_3_pointwise/BatchNorm 	 Layer time: 4.9463 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-20	Layer Name: Conv2d_3_pointwise/Relu6 	 Layer time: 1.5518 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-Layer Number: 3 	 time: 39.6784
+15	Layer Name: Conv2d_3_depthwise/depthwise 	 Layer time: 2.0442 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
+16	Layer Name: Conv2d_3_depthwise/BatchNorm 	 Layer time: 1.7661 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+17	Layer Name: Conv2d_3_depthwise/Relu6 	 Layer time: 0.8611 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+18	Layer Name: Conv2d_3_pointwise/Conv2D 	 Layer time: 5.4151 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
+19	Layer Name: Conv2d_3_pointwise/BatchNorm 	 Layer time: 1.6251 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+20	Layer Name: Conv2d_3_pointwise/Relu6 	 Layer time: 1.0467 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+Layer Number: 3 	 time: 12.7583
 ----------------------------
-21	Layer Name: Conv2d_4_depthwise/depthwise 	 Layer time: 2.9504 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x28x28
-22	Layer Name: Conv2d_4_depthwise/BatchNorm 	 Layer time: 1.2007 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
-23	Layer Name: Conv2d_4_depthwise/Relu6 	 Layer time: 0.7280 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
-24	Layer Name: Conv2d_4_pointwise/Conv2D 	 Layer time: 11.1992 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 256x28x28
-25	Layer Name: Conv2d_4_pointwise/BatchNorm 	 Layer time: 2.2298 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-26	Layer Name: Conv2d_4_pointwise/Relu6 	 Layer time: 1.0233 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-Layer Number: 4 	 time: 19.3314
+21	Layer Name: Conv2d_4_depthwise/depthwise 	 Layer time: 1.8487 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x28x28
+22	Layer Name: Conv2d_4_depthwise/BatchNorm 	 Layer time: 0.6444 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+23	Layer Name: Conv2d_4_depthwise/Relu6 	 Layer time: 0.2999 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+24	Layer Name: Conv2d_4_pointwise/Conv2D 	 Layer time: 2.7773 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 256x28x28
+25	Layer Name: Conv2d_4_pointwise/BatchNorm 	 Layer time: 0.9229 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+26	Layer Name: Conv2d_4_pointwise/Relu6 	 Layer time: 0.5447 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 4 	 time: 7.0379
 ----------------------------
-27	Layer Name: Conv2d_5_depthwise/depthwise 	 Layer time: 3.1323 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
-28	Layer Name: Conv2d_5_depthwise/BatchNorm 	 Layer time: 2.2830 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-29	Layer Name: Conv2d_5_depthwise/Relu6 	 Layer time: 0.9848 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-30	Layer Name: Conv2d_5_pointwise/Conv2D 	 Layer time: 18.8054 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
-31	Layer Name: Conv2d_5_pointwise/BatchNorm 	 Layer time: 2.1393 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-32	Layer Name: Conv2d_5_pointwise/Relu6 	 Layer time: 1.0105 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-Layer Number: 5 	 time: 28.3554
+27	Layer Name: Conv2d_5_depthwise/depthwise 	 Layer time: 1.2840 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
+28	Layer Name: Conv2d_5_depthwise/BatchNorm 	 Layer time: 0.9685 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+29	Layer Name: Conv2d_5_depthwise/Relu6 	 Layer time: 0.7802 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+30	Layer Name: Conv2d_5_pointwise/Conv2D 	 Layer time: 4.7292 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
+31	Layer Name: Conv2d_5_pointwise/BatchNorm 	 Layer time: 0.9435 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+32	Layer Name: Conv2d_5_pointwise/Relu6 	 Layer time: 0.6682 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 5 	 time: 9.3735
 ----------------------------
-33	Layer Name: Conv2d_6_depthwise/depthwise 	 Layer time: 1.8285 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x14x14
-34	Layer Name: Conv2d_6_depthwise/BatchNorm 	 Layer time: 0.8026 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
-35	Layer Name: Conv2d_6_depthwise/Relu6 	 Layer time: 0.4187 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
-36	Layer Name: Conv2d_6_pointwise/Conv2D 	 Layer time: 6.1702 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 512x14x14
-37	Layer Name: Conv2d_6_pointwise/BatchNorm 	 Layer time: 1.1931 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-38	Layer Name: Conv2d_6_pointwise/Relu6 	 Layer time: 0.5709 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 6 	 time: 10.9839
+33	Layer Name: Conv2d_6_depthwise/depthwise 	 Layer time: 1.1559 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x14x14
+34	Layer Name: Conv2d_6_depthwise/BatchNorm 	 Layer time: 0.4292 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+35	Layer Name: Conv2d_6_depthwise/Relu6 	 Layer time: 0.2376 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+36	Layer Name: Conv2d_6_pointwise/Conv2D 	 Layer time: 2.6252 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 512x14x14
+37	Layer Name: Conv2d_6_pointwise/BatchNorm 	 Layer time: 0.6062 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+38	Layer Name: Conv2d_6_pointwise/Relu6 	 Layer time: 0.4101 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 6 	 time: 5.4643
 ----------------------------
-39	Layer Name: Conv2d_7_depthwise/depthwise 	 Layer time: 1.9011 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-40	Layer Name: Conv2d_7_depthwise/BatchNorm 	 Layer time: 1.2688 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-41	Layer Name: Conv2d_7_depthwise/Relu6 	 Layer time: 0.4985 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-42	Layer Name: Conv2d_7_pointwise/Conv2D 	 Layer time: 11.9349 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-43	Layer Name: Conv2d_7_pointwise/BatchNorm 	 Layer time: 1.2056 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-44	Layer Name: Conv2d_7_pointwise/Relu6 	 Layer time: 0.5609 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 7 	 time: 17.3697
+39	Layer Name: Conv2d_7_depthwise/depthwise 	 Layer time: 0.9842 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+40	Layer Name: Conv2d_7_depthwise/BatchNorm 	 Layer time: 0.6392 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+41	Layer Name: Conv2d_7_depthwise/Relu6 	 Layer time: 0.3239 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+42	Layer Name: Conv2d_7_pointwise/Conv2D 	 Layer time: 5.2272 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+43	Layer Name: Conv2d_7_pointwise/BatchNorm 	 Layer time: 0.6625 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+44	Layer Name: Conv2d_7_pointwise/Relu6 	 Layer time: 0.3165 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 7 	 time: 8.1535
 ----------------------------
-45	Layer Name: Conv2d_8_depthwise/depthwise 	 Layer time: 1.9056 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-46	Layer Name: Conv2d_8_depthwise/BatchNorm 	 Layer time: 1.3378 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-47	Layer Name: Conv2d_8_depthwise/Relu6 	 Layer time: 0.6061 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-48	Layer Name: Conv2d_8_pointwise/Conv2D 	 Layer time: 11.9043 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-49	Layer Name: Conv2d_8_pointwise/BatchNorm 	 Layer time: 1.1603 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-50	Layer Name: Conv2d_8_pointwise/Relu6 	 Layer time: 0.6724 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 8 	 time: 17.5865
+45	Layer Name: Conv2d_8_depthwise/depthwise 	 Layer time: 1.0913 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+46	Layer Name: Conv2d_8_depthwise/BatchNorm 	 Layer time: 0.6458 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+47	Layer Name: Conv2d_8_depthwise/Relu6 	 Layer time: 0.3139 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+48	Layer Name: Conv2d_8_pointwise/Conv2D 	 Layer time: 5.2637 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+49	Layer Name: Conv2d_8_pointwise/BatchNorm 	 Layer time: 0.6573 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+50	Layer Name: Conv2d_8_pointwise/Relu6 	 Layer time: 0.3335 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 8 	 time: 8.3054
 ----------------------------
-51	Layer Name: Conv2d_9_depthwise/depthwise 	 Layer time: 1.8821 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-52	Layer Name: Conv2d_9_depthwise/BatchNorm 	 Layer time: 1.3201 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-53	Layer Name: Conv2d_9_depthwise/Relu6 	 Layer time: 0.6834 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-54	Layer Name: Conv2d_9_pointwise/Conv2D 	 Layer time: 11.9665 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-55	Layer Name: Conv2d_9_pointwise/BatchNorm 	 Layer time: 1.2858 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-56	Layer Name: Conv2d_9_pointwise/Relu6 	 Layer time: 0.6692 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 9 	 time: 17.8070
+51	Layer Name: Conv2d_9_depthwise/depthwise 	 Layer time: 1.0858 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+52	Layer Name: Conv2d_9_depthwise/BatchNorm 	 Layer time: 0.6249 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+53	Layer Name: Conv2d_9_depthwise/Relu6 	 Layer time: 0.3189 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+54	Layer Name: Conv2d_9_pointwise/Conv2D 	 Layer time: 5.2756 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+55	Layer Name: Conv2d_9_pointwise/BatchNorm 	 Layer time: 0.6208 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+56	Layer Name: Conv2d_9_pointwise/Relu6 	 Layer time: 0.3331 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 9 	 time: 8.2591
 ----------------------------
-57	Layer Name: Conv2d_10_depthwise/depthwise 	 Layer time: 1.9314 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-58	Layer Name: Conv2d_10_depthwise/BatchNorm 	 Layer time: 1.2875 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-59	Layer Name: Conv2d_10_depthwise/Relu6 	 Layer time: 0.6986 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-60	Layer Name: Conv2d_10_pointwise/Conv2D 	 Layer time: 12.0538 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-61	Layer Name: Conv2d_10_pointwise/BatchNorm 	 Layer time: 1.3108 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-62	Layer Name: Conv2d_10_pointwise/Relu6 	 Layer time: 0.6091 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 10 	 time: 17.8912
+57	Layer Name: Conv2d_10_depthwise/depthwise 	 Layer time: 1.0746 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+58	Layer Name: Conv2d_10_depthwise/BatchNorm 	 Layer time: 0.6202 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+59	Layer Name: Conv2d_10_depthwise/Relu6 	 Layer time: 0.2910 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+60	Layer Name: Conv2d_10_pointwise/Conv2D 	 Layer time: 5.2641 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+61	Layer Name: Conv2d_10_pointwise/BatchNorm 	 Layer time: 0.6594 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+62	Layer Name: Conv2d_10_pointwise/Relu6 	 Layer time: 0.2985 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 10 	 time: 8.2079
 ----------------------------
-63	Layer Name: Conv2d_11_depthwise/depthwise 	 Layer time: 1.8899 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-64	Layer Name: Conv2d_11_depthwise/BatchNorm 	 Layer time: 1.1466 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-65	Layer Name: Conv2d_11_depthwise/Relu6 	 Layer time: 0.5430 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-66	Layer Name: Conv2d_11_pointwise/Conv2D 	 Layer time: 11.9273 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-67	Layer Name: Conv2d_11_pointwise/BatchNorm 	 Layer time: 1.2675 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-68	Layer Name: Conv2d_11_pointwise/Relu6 	 Layer time: 0.6671 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 11 	 time: 17.4414
+63	Layer Name: Conv2d_11_depthwise/depthwise 	 Layer time: 1.0902 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+64	Layer Name: Conv2d_11_depthwise/BatchNorm 	 Layer time: 0.6002 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+65	Layer Name: Conv2d_11_depthwise/Relu6 	 Layer time: 0.3178 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+66	Layer Name: Conv2d_11_pointwise/Conv2D 	 Layer time: 5.2536 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+67	Layer Name: Conv2d_11_pointwise/BatchNorm 	 Layer time: 0.5845 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+68	Layer Name: Conv2d_11_pointwise/Relu6 	 Layer time: 0.3322 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 11 	 time: 8.1786
 ----------------------------
-69	Layer Name: Conv2d_12_depthwise/depthwise 	 Layer time: 1.2677 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x7x7
-70	Layer Name: Conv2d_12_depthwise/BatchNorm 	 Layer time: 0.7195 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
-71	Layer Name: Conv2d_12_depthwise/Relu6 	 Layer time: 0.2515 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
-72	Layer Name: Conv2d_12_pointwise/Conv2D 	 Layer time: 13.0510 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 1024x7x7
-73	Layer Name: Conv2d_12_pointwise/BatchNorm 	 Layer time: 0.9119 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-74	Layer Name: Conv2d_12_pointwise/Relu6 	 Layer time: 0.4113 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-Layer Number: 12 	 time: 16.6129
+69	Layer Name: Conv2d_12_depthwise/depthwise 	 Layer time: 0.9836 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x7x7
+70	Layer Name: Conv2d_12_depthwise/BatchNorm 	 Layer time: 0.3123 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
+71	Layer Name: Conv2d_12_depthwise/Relu6 	 Layer time: 0.1756 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
+72	Layer Name: Conv2d_12_pointwise/Conv2D 	 Layer time: 2.8514 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 1024x7x7
+73	Layer Name: Conv2d_12_pointwise/BatchNorm 	 Layer time: 0.5249 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+74	Layer Name: Conv2d_12_pointwise/Relu6 	 Layer time: 0.2237 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+Layer Number: 12 	 time: 5.0714
 ----------------------------
-75	Layer Name: Conv2d_13_depthwise/depthwise 	 Layer time: 0.8981 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-76	Layer Name: Conv2d_13_depthwise/BatchNorm 	 Layer time: 0.8633 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-77	Layer Name: Conv2d_13_depthwise/Relu6 	 Layer time: 0.4397 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-78	Layer Name: Conv2d_13_pointwise/Conv2D 	 Layer time: 24.9153 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-79	Layer Name: Conv2d_13_pointwise/BatchNorm 	 Layer time: 0.9150 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-80	Layer Name: Conv2d_13_pointwise/Relu6 	 Layer time: 0.3618 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-81	Layer Name: Logits/AvgPool_1a 	 Layer time: 0.4235 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024
-82	Layer Name: Logits/Conv2d_1c_1x1 	 Layer time: 1.7148 	 number of inputs: 3 	 input shape: 1024 	 output shape: 1000
-83	Layer Name: Reshape 	 Layer time: 0.1675 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
-84	Layer Name: Softmax 	 Layer time: 0.0987 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
-Layer Number: 13 	 time: 30.7976
+75	Layer Name: Conv2d_13_depthwise/depthwise 	 Layer time: 0.8067 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+76	Layer Name: Conv2d_13_depthwise/BatchNorm 	 Layer time: 0.4250 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+77	Layer Name: Conv2d_13_depthwise/Relu6 	 Layer time: 0.2088 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+78	Layer Name: Conv2d_13_pointwise/Conv2D 	 Layer time: 5.7715 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+79	Layer Name: Conv2d_13_pointwise/BatchNorm 	 Layer time: 0.4472 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+80	Layer Name: Conv2d_13_pointwise/Relu6 	 Layer time: 0.2169 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+81	Layer Name: Logits/AvgPool_1a 	 Layer time: 0.3115 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024
+82	Layer Name: Logits/Conv2d_1c_1x1 	 Layer time: 1.0984 	 number of inputs: 3 	 input shape: 1024 	 output shape: 1000
+83	Layer Name: Reshape 	 Layer time: 0.1525 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+84	Layer Name: Softmax 	 Layer time: 0.0854 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+Layer Number: 13 	 time: 9.5239
 ----------------------------
 
- Sum of Layers time: 306.3468
+ Sum of Layers time: 120.5106
 
 
-Graph0   Input: 42.0291   Task: 423.928   send: 0.0012543   Out: 0.330342   Process: 466.289
+Graph0   Input: 40.5085   Task: 238.346   send: 0.0011375   Out: 0.326842   Process: 279.183
 
 
 
@@ -2446,7 +2464,7 @@ Graph0   Input: 42.0291   Task: 423.928   send: 0.0012543   Out: 0.330342   Proc
 
 
 
-AVG Latency: 466.295
+AVG Latency: 279.19
 
 Profiling these DVFS settings finised
 Please Enter the desired Frequency setttings: 
@@ -2754,124 +2772,124 @@ Reading image: /data/local/ARM-CO-UP/assets//ppm_images_224//gondola.ppm
 0.0000 - [id = 914]
 0.0000 - [id = 536]
 0.0000 - [id = 449]
-0	Layer Name: Conv2d_0 	 Layer time: 7.6557 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 32x112x112
-1	Layer Name: Conv2d_0/BatchNorm 	 Layer time: 4.7995 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
-2	Layer Name: Conv2d_0/Relu6 	 Layer time: 2.2171 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
-Layer Number: 0 	 time: 14.6723
+0	Layer Name: Conv2d_0 	 Layer time: 3.2576 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 32x112x112
+1	Layer Name: Conv2d_0/BatchNorm 	 Layer time: 1.6038 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
+2	Layer Name: Conv2d_0/Relu6 	 Layer time: 0.8721 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
+Layer Number: 0 	 time: 5.7336
 ----------------------------
-3	Layer Name: Conv2d_1_depthwise/depthwise 	 Layer time: 5.0797 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 32x112x112
-4	Layer Name: Conv2d_1_depthwise/BatchNorm 	 Layer time: 4.8654 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
-5	Layer Name: Conv2d_1_depthwise/Relu6 	 Layer time: 2.2069 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
-6	Layer Name: Conv2d_1_pointwise/Conv2D 	 Layer time: 10.0398 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 64x112x112
-7	Layer Name: Conv2d_1_pointwise/BatchNorm 	 Layer time: 8.2442 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
-8	Layer Name: Conv2d_1_pointwise/Relu6 	 Layer time: 3.1162 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
-Layer Number: 1 	 time: 33.5521
+3	Layer Name: Conv2d_1_depthwise/depthwise 	 Layer time: 2.2602 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 32x112x112
+4	Layer Name: Conv2d_1_depthwise/BatchNorm 	 Layer time: 1.6374 	 number of inputs: 5 	 input shape: 32x112x112 	 output shape: 32x112x112
+5	Layer Name: Conv2d_1_depthwise/Relu6 	 Layer time: 0.8530 	 number of inputs: 1 	 input shape: 32x112x112 	 output shape: 32x112x112
+6	Layer Name: Conv2d_1_pointwise/Conv2D 	 Layer time: 3.6409 	 number of inputs: 3 	 input shape: 32x112x112 	 output shape: 64x112x112
+7	Layer Name: Conv2d_1_pointwise/BatchNorm 	 Layer time: 2.7604 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
+8	Layer Name: Conv2d_1_pointwise/Relu6 	 Layer time: 1.5955 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
+Layer Number: 1 	 time: 12.7474
 ----------------------------
-9	Layer Name: Conv2d_2_depthwise/depthwise 	 Layer time: 3.7149 	 number of inputs: 3 	 input shape: 64x112x112 	 output shape: 64x56x56
-10	Layer Name: Conv2d_2_depthwise/BatchNorm 	 Layer time: 2.4877 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
-11	Layer Name: Conv2d_2_depthwise/Relu6 	 Layer time: 1.1539 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
-12	Layer Name: Conv2d_2_pointwise/Conv2D 	 Layer time: 11.2762 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 128x56x56
-13	Layer Name: Conv2d_2_pointwise/BatchNorm 	 Layer time: 4.0746 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-14	Layer Name: Conv2d_2_pointwise/Relu6 	 Layer time: 1.4502 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-Layer Number: 2 	 time: 24.1575
+9	Layer Name: Conv2d_2_depthwise/depthwise 	 Layer time: 2.3966 	 number of inputs: 3 	 input shape: 64x112x112 	 output shape: 64x56x56
+10	Layer Name: Conv2d_2_depthwise/BatchNorm 	 Layer time: 0.9075 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
+11	Layer Name: Conv2d_2_depthwise/Relu6 	 Layer time: 0.5004 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
+12	Layer Name: Conv2d_2_pointwise/Conv2D 	 Layer time: 2.7914 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 128x56x56
+13	Layer Name: Conv2d_2_pointwise/BatchNorm 	 Layer time: 1.6670 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+14	Layer Name: Conv2d_2_pointwise/Relu6 	 Layer time: 1.0877 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+Layer Number: 2 	 time: 9.3505
 ----------------------------
-15	Layer Name: Conv2d_3_depthwise/depthwise 	 Layer time: 5.1911 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
-16	Layer Name: Conv2d_3_depthwise/BatchNorm 	 Layer time: 4.1589 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-17	Layer Name: Conv2d_3_depthwise/Relu6 	 Layer time: 1.7071 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-18	Layer Name: Conv2d_3_pointwise/Conv2D 	 Layer time: 21.7900 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
-19	Layer Name: Conv2d_3_pointwise/BatchNorm 	 Layer time: 4.6849 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
-20	Layer Name: Conv2d_3_pointwise/Relu6 	 Layer time: 1.4742 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
-Layer Number: 3 	 time: 39.0062
+15	Layer Name: Conv2d_3_depthwise/depthwise 	 Layer time: 1.9336 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
+16	Layer Name: Conv2d_3_depthwise/BatchNorm 	 Layer time: 1.4455 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+17	Layer Name: Conv2d_3_depthwise/Relu6 	 Layer time: 0.9080 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+18	Layer Name: Conv2d_3_pointwise/Conv2D 	 Layer time: 4.5884 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x56x56
+19	Layer Name: Conv2d_3_pointwise/BatchNorm 	 Layer time: 1.4411 	 number of inputs: 5 	 input shape: 128x56x56 	 output shape: 128x56x56
+20	Layer Name: Conv2d_3_pointwise/Relu6 	 Layer time: 1.0996 	 number of inputs: 1 	 input shape: 128x56x56 	 output shape: 128x56x56
+Layer Number: 3 	 time: 11.4162
 ----------------------------
-21	Layer Name: Conv2d_4_depthwise/depthwise 	 Layer time: 2.8068 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x28x28
-22	Layer Name: Conv2d_4_depthwise/BatchNorm 	 Layer time: 1.1582 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
-23	Layer Name: Conv2d_4_depthwise/Relu6 	 Layer time: 0.6053 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
-24	Layer Name: Conv2d_4_pointwise/Conv2D 	 Layer time: 11.0396 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 256x28x28
-25	Layer Name: Conv2d_4_pointwise/BatchNorm 	 Layer time: 2.2039 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-26	Layer Name: Conv2d_4_pointwise/Relu6 	 Layer time: 0.8231 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-Layer Number: 4 	 time: 18.6370
+21	Layer Name: Conv2d_4_depthwise/depthwise 	 Layer time: 1.7659 	 number of inputs: 3 	 input shape: 128x56x56 	 output shape: 128x28x28
+22	Layer Name: Conv2d_4_depthwise/BatchNorm 	 Layer time: 0.5136 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+23	Layer Name: Conv2d_4_depthwise/Relu6 	 Layer time: 0.2802 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+24	Layer Name: Conv2d_4_pointwise/Conv2D 	 Layer time: 2.3745 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 256x28x28
+25	Layer Name: Conv2d_4_pointwise/BatchNorm 	 Layer time: 0.7962 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+26	Layer Name: Conv2d_4_pointwise/Relu6 	 Layer time: 0.5108 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 4 	 time: 6.2411
 ----------------------------
-27	Layer Name: Conv2d_5_depthwise/depthwise 	 Layer time: 3.0778 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
-28	Layer Name: Conv2d_5_depthwise/BatchNorm 	 Layer time: 2.3352 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-29	Layer Name: Conv2d_5_depthwise/Relu6 	 Layer time: 0.9156 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-30	Layer Name: Conv2d_5_pointwise/Conv2D 	 Layer time: 18.6594 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
-31	Layer Name: Conv2d_5_pointwise/BatchNorm 	 Layer time: 2.1433 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
-32	Layer Name: Conv2d_5_pointwise/Relu6 	 Layer time: 0.8003 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
-Layer Number: 5 	 time: 27.9316
+27	Layer Name: Conv2d_5_depthwise/depthwise 	 Layer time: 1.2345 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
+28	Layer Name: Conv2d_5_depthwise/BatchNorm 	 Layer time: 0.8515 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+29	Layer Name: Conv2d_5_depthwise/Relu6 	 Layer time: 0.5281 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+30	Layer Name: Conv2d_5_pointwise/Conv2D 	 Layer time: 4.2111 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x28x28
+31	Layer Name: Conv2d_5_pointwise/BatchNorm 	 Layer time: 0.8552 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+32	Layer Name: Conv2d_5_pointwise/Relu6 	 Layer time: 0.5158 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 5 	 time: 8.1962
 ----------------------------
-33	Layer Name: Conv2d_6_depthwise/depthwise 	 Layer time: 1.7260 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x14x14
-34	Layer Name: Conv2d_6_depthwise/BatchNorm 	 Layer time: 0.8551 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
-35	Layer Name: Conv2d_6_depthwise/Relu6 	 Layer time: 0.4090 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
-36	Layer Name: Conv2d_6_pointwise/Conv2D 	 Layer time: 5.4466 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 512x14x14
-37	Layer Name: Conv2d_6_pointwise/BatchNorm 	 Layer time: 1.1581 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-38	Layer Name: Conv2d_6_pointwise/Relu6 	 Layer time: 0.5232 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 6 	 time: 10.1179
+33	Layer Name: Conv2d_6_depthwise/depthwise 	 Layer time: 1.0711 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 256x14x14
+34	Layer Name: Conv2d_6_depthwise/BatchNorm 	 Layer time: 0.3050 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+35	Layer Name: Conv2d_6_depthwise/Relu6 	 Layer time: 0.2010 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+36	Layer Name: Conv2d_6_pointwise/Conv2D 	 Layer time: 2.4170 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 512x14x14
+37	Layer Name: Conv2d_6_pointwise/BatchNorm 	 Layer time: 0.5000 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+38	Layer Name: Conv2d_6_pointwise/Relu6 	 Layer time: 0.2736 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 6 	 time: 4.7675
 ----------------------------
-39	Layer Name: Conv2d_7_depthwise/depthwise 	 Layer time: 1.8621 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-40	Layer Name: Conv2d_7_depthwise/BatchNorm 	 Layer time: 1.3195 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-41	Layer Name: Conv2d_7_depthwise/Relu6 	 Layer time: 0.6020 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-42	Layer Name: Conv2d_7_pointwise/Conv2D 	 Layer time: 11.6512 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-43	Layer Name: Conv2d_7_pointwise/BatchNorm 	 Layer time: 1.1802 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-44	Layer Name: Conv2d_7_pointwise/Relu6 	 Layer time: 0.4892 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 7 	 time: 17.1042
+39	Layer Name: Conv2d_7_depthwise/depthwise 	 Layer time: 0.9684 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+40	Layer Name: Conv2d_7_depthwise/BatchNorm 	 Layer time: 0.4816 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+41	Layer Name: Conv2d_7_depthwise/Relu6 	 Layer time: 0.2765 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+42	Layer Name: Conv2d_7_pointwise/Conv2D 	 Layer time: 4.7190 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+43	Layer Name: Conv2d_7_pointwise/BatchNorm 	 Layer time: 0.5865 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+44	Layer Name: Conv2d_7_pointwise/Relu6 	 Layer time: 0.2913 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 7 	 time: 7.3232
 ----------------------------
-45	Layer Name: Conv2d_8_depthwise/depthwise 	 Layer time: 1.8698 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-46	Layer Name: Conv2d_8_depthwise/BatchNorm 	 Layer time: 1.3486 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-47	Layer Name: Conv2d_8_depthwise/Relu6 	 Layer time: 0.5790 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-48	Layer Name: Conv2d_8_pointwise/Conv2D 	 Layer time: 11.4945 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-49	Layer Name: Conv2d_8_pointwise/BatchNorm 	 Layer time: 1.1918 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-50	Layer Name: Conv2d_8_pointwise/Relu6 	 Layer time: 0.6057 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 8 	 time: 17.0894
+45	Layer Name: Conv2d_8_depthwise/depthwise 	 Layer time: 0.8937 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+46	Layer Name: Conv2d_8_depthwise/BatchNorm 	 Layer time: 0.7144 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+47	Layer Name: Conv2d_8_depthwise/Relu6 	 Layer time: 0.2804 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+48	Layer Name: Conv2d_8_pointwise/Conv2D 	 Layer time: 4.6741 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+49	Layer Name: Conv2d_8_pointwise/BatchNorm 	 Layer time: 0.5454 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+50	Layer Name: Conv2d_8_pointwise/Relu6 	 Layer time: 0.3063 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 8 	 time: 7.4142
 ----------------------------
-51	Layer Name: Conv2d_9_depthwise/depthwise 	 Layer time: 1.8557 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-52	Layer Name: Conv2d_9_depthwise/BatchNorm 	 Layer time: 1.3458 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-53	Layer Name: Conv2d_9_depthwise/Relu6 	 Layer time: 0.6234 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-54	Layer Name: Conv2d_9_pointwise/Conv2D 	 Layer time: 11.3915 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-55	Layer Name: Conv2d_9_pointwise/BatchNorm 	 Layer time: 1.1346 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-56	Layer Name: Conv2d_9_pointwise/Relu6 	 Layer time: 0.5199 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 9 	 time: 16.8708
+51	Layer Name: Conv2d_9_depthwise/depthwise 	 Layer time: 0.8320 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+52	Layer Name: Conv2d_9_depthwise/BatchNorm 	 Layer time: 0.5363 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+53	Layer Name: Conv2d_9_depthwise/Relu6 	 Layer time: 0.3217 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+54	Layer Name: Conv2d_9_pointwise/Conv2D 	 Layer time: 4.7818 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+55	Layer Name: Conv2d_9_pointwise/BatchNorm 	 Layer time: 0.5122 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+56	Layer Name: Conv2d_9_pointwise/Relu6 	 Layer time: 0.2867 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 9 	 time: 7.2707
 ----------------------------
-57	Layer Name: Conv2d_10_depthwise/depthwise 	 Layer time: 1.8827 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-58	Layer Name: Conv2d_10_depthwise/BatchNorm 	 Layer time: 1.3037 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-59	Layer Name: Conv2d_10_depthwise/Relu6 	 Layer time: 0.4851 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-60	Layer Name: Conv2d_10_pointwise/Conv2D 	 Layer time: 11.6292 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-61	Layer Name: Conv2d_10_pointwise/BatchNorm 	 Layer time: 1.1408 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-62	Layer Name: Conv2d_10_pointwise/Relu6 	 Layer time: 0.6202 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 10 	 time: 17.0616
+57	Layer Name: Conv2d_10_depthwise/depthwise 	 Layer time: 0.8814 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+58	Layer Name: Conv2d_10_depthwise/BatchNorm 	 Layer time: 0.5217 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+59	Layer Name: Conv2d_10_depthwise/Relu6 	 Layer time: 0.3098 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+60	Layer Name: Conv2d_10_pointwise/Conv2D 	 Layer time: 4.7927 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+61	Layer Name: Conv2d_10_pointwise/BatchNorm 	 Layer time: 0.5202 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+62	Layer Name: Conv2d_10_pointwise/Relu6 	 Layer time: 0.2671 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 10 	 time: 7.2929
 ----------------------------
-63	Layer Name: Conv2d_11_depthwise/depthwise 	 Layer time: 1.8709 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-64	Layer Name: Conv2d_11_depthwise/BatchNorm 	 Layer time: 1.4198 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-65	Layer Name: Conv2d_11_depthwise/Relu6 	 Layer time: 0.7160 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-66	Layer Name: Conv2d_11_pointwise/Conv2D 	 Layer time: 11.3608 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
-67	Layer Name: Conv2d_11_pointwise/BatchNorm 	 Layer time: 1.1815 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
-68	Layer Name: Conv2d_11_pointwise/Relu6 	 Layer time: 0.5973 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
-Layer Number: 11 	 time: 17.1464
+63	Layer Name: Conv2d_11_depthwise/depthwise 	 Layer time: 0.9897 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+64	Layer Name: Conv2d_11_depthwise/BatchNorm 	 Layer time: 0.5989 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+65	Layer Name: Conv2d_11_depthwise/Relu6 	 Layer time: 0.2652 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+66	Layer Name: Conv2d_11_pointwise/Conv2D 	 Layer time: 4.6995 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x14x14
+67	Layer Name: Conv2d_11_pointwise/BatchNorm 	 Layer time: 0.5940 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+68	Layer Name: Conv2d_11_pointwise/Relu6 	 Layer time: 0.4235 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 11 	 time: 7.5709
 ----------------------------
-69	Layer Name: Conv2d_12_depthwise/depthwise 	 Layer time: 1.2184 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x7x7
-70	Layer Name: Conv2d_12_depthwise/BatchNorm 	 Layer time: 0.6274 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
-71	Layer Name: Conv2d_12_depthwise/Relu6 	 Layer time: 0.1730 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
-72	Layer Name: Conv2d_12_pointwise/Conv2D 	 Layer time: 13.1041 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 1024x7x7
-73	Layer Name: Conv2d_12_pointwise/BatchNorm 	 Layer time: 0.9644 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-74	Layer Name: Conv2d_12_pointwise/Relu6 	 Layer time: 0.4539 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-Layer Number: 12 	 time: 16.5412
+69	Layer Name: Conv2d_12_depthwise/depthwise 	 Layer time: 0.6731 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 512x7x7
+70	Layer Name: Conv2d_12_depthwise/BatchNorm 	 Layer time: 0.2894 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
+71	Layer Name: Conv2d_12_depthwise/Relu6 	 Layer time: 0.2376 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
+72	Layer Name: Conv2d_12_pointwise/Conv2D 	 Layer time: 2.6563 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 1024x7x7
+73	Layer Name: Conv2d_12_pointwise/BatchNorm 	 Layer time: 0.4321 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+74	Layer Name: Conv2d_12_pointwise/Relu6 	 Layer time: 0.2784 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+Layer Number: 12 	 time: 4.5669
 ----------------------------
-75	Layer Name: Conv2d_13_depthwise/depthwise 	 Layer time: 0.9658 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-76	Layer Name: Conv2d_13_depthwise/BatchNorm 	 Layer time: 0.8900 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-77	Layer Name: Conv2d_13_depthwise/Relu6 	 Layer time: 0.3298 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-78	Layer Name: Conv2d_13_pointwise/Conv2D 	 Layer time: 25.0824 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-79	Layer Name: Conv2d_13_pointwise/BatchNorm 	 Layer time: 0.8891 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-80	Layer Name: Conv2d_13_pointwise/Relu6 	 Layer time: 0.2671 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
-81	Layer Name: Logits/AvgPool_1a 	 Layer time: 0.4091 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024
-82	Layer Name: Logits/Conv2d_1c_1x1 	 Layer time: 1.5471 	 number of inputs: 3 	 input shape: 1024 	 output shape: 1000
-83	Layer Name: Reshape 	 Layer time: 0.1454 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
-84	Layer Name: Softmax 	 Layer time: 0.0797 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
-Layer Number: 13 	 time: 30.6054
+75	Layer Name: Conv2d_13_depthwise/depthwise 	 Layer time: 0.5429 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+76	Layer Name: Conv2d_13_depthwise/BatchNorm 	 Layer time: 0.3442 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+77	Layer Name: Conv2d_13_depthwise/Relu6 	 Layer time: 0.2232 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+78	Layer Name: Conv2d_13_pointwise/Conv2D 	 Layer time: 5.0980 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+79	Layer Name: Conv2d_13_pointwise/BatchNorm 	 Layer time: 0.4133 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+80	Layer Name: Conv2d_13_pointwise/Relu6 	 Layer time: 0.1908 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+81	Layer Name: Logits/AvgPool_1a 	 Layer time: 0.2915 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024
+82	Layer Name: Logits/Conv2d_1c_1x1 	 Layer time: 1.1665 	 number of inputs: 3 	 input shape: 1024 	 output shape: 1000
+83	Layer Name: Reshape 	 Layer time: 0.1383 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+84	Layer Name: Softmax 	 Layer time: 0.0821 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+Layer Number: 13 	 time: 8.4909
 ----------------------------
 
- Sum of Layers time: 300.4935
+ Sum of Layers time: 108.3821
 
 
-Graph0   Input: 35.7512   Task: 417.697   send: 0.0012252   Out: 0.294642   Process: 453.744
+Graph0   Input: 34.628   Task: 225.918   send: 0.001021   Out: 0.296362   Process: 260.844
 
 
 
@@ -2879,7 +2897,7 @@ Graph0   Input: 35.7512   Task: 417.697   send: 0.0012252   Out: 0.294642   Proc
 
 
 
-AVG Latency: 453.75
+AVG Latency: 260.85
 
 Profiling these DVFS settings finised
 Please Enter the desired Frequency setttings: 

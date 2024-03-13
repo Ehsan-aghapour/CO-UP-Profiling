@@ -4,6 +4,6 @@ List of devices attached
 disconnected everything
 adbd is already running as root
 remount succeeded
-/home/ehsan/UvA/ARMCL/Rock-Pi/ARM-COUP/utils/DVFS/governor_pandoon.ko: 1 file pushed, 0 skipped. 1687.4 MB/s (260080 bytes in 0.000s)
+/home/ehsan/UvA/ARMCL/Rock-Pi/ARM-COUP/utils/DVFS/governor_pandoon.ko: 1 file pushed, 0 skipped. 73.0 MB/s (260080 bytes in 0.003s)
 Module is already inserted, removing and reinserting...
 

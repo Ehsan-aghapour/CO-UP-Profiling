@@ -95,39 +95,39 @@ def Value(graph,comp,freq,layer,metric,attr,debug=False):
         if comp=='N':
             if attr=='Power':
                 if metric=='in':
-                    return Layers_df_indexed.loc[(*index_base, 'in', freq[0]), attr][0]
+                    return Layers_df_indexed.loc[(*index_base, 'in', freq[0]), attr].iloc[0]
                 else:
                     power_values=[]
                     for ll in layer:
                         if(ll in [57,58,65,66]):
                             power_values.append(5707)
                         else:
-                            power_values.append(Layers_df_indexed.loc[(*index_base, 'task', freq[0]), attr][0])
+                            power_values.append(Layers_df_indexed.loc[(*index_base, 'task', freq[0]), attr].iloc[0])
                     return power_values[0] 
             if attr=='Time':
                 if metric=='task' or metric=="run":
-                    return Layers_df_indexed.loc[(*index_base, 'task', freq[0]), attr][0]
+                    return Layers_df_indexed.loc[(*index_base, 'task', freq[0]), attr].iloc[0]
                 if metric=='load':
-                    return Layers_df_indexed.loc[(*index_base, 'NPU_load', freq[0]), attr][0]
+                    return Layers_df_indexed.loc[(*index_base, 'NPU_load', freq[0]), attr].iloc[0]
                 if metric=='unload':
-                    t=(Layers_df_indexed.loc[(*index_base, 'NPU_run_get', freq[0]), attr][0] -  Layers_df_indexed.loc[(*index_base, 'task', freq[0]), attr][0])
-                    t+=Layers_df_indexed.loc[(*index_base, 'NPU_fill_tensor', freq[0]), attr][0]
+                    t=(Layers_df_indexed.loc[(*index_base, 'NPU_run_get', freq[0]), attr].iloc[0] -  Layers_df_indexed.loc[(*index_base, 'task', freq[0]), attr].iloc[0])
+                    t+=Layers_df_indexed.loc[(*index_base, 'NPU_fill_tensor', freq[0]), attr].iloc[0]
                     return t
                 
                 if metric=='in':
-                    return Layers_df_indexed.loc[(graph, comp, freq[0], layer, 'in', freq[0]), attr][0]
+                    return Layers_df_indexed.loc[(graph, comp, freq[0], layer, 'in', freq[0]), attr].iloc[0]
                 
                 if metric=='out':
                     #print(f'getting value: {graph}, {comp},{layer}')
-                    return Layers_df_indexed.loc[(*index_base, 'out', freq[0]), attr][0]
+                    return Layers_df_indexed.loc[(*index_base, 'out', freq[0]), attr].iloc[0]
                 
                 if metric=='transfer':
-                    return Layers_df_indexed.loc[(*index_base, 'transfer', freq[0]), attr][0]
+                    return Layers_df_indexed.loc[(*index_base, 'transfer', freq[0]), attr].iloc[0]
                 
         else:
-            return Layers_df_indexed.loc[(*index_base, metric, -1), attr][0]
+            return Layers_df_indexed.loc[(*index_base, metric, -1), attr].iloc[0]
     if len(freq)==2:
-        return Layers_df_indexed.loc[(*index_base, metric, freq[1]), attr][0]
+        return Layers_df_indexed.loc[(*index_base, metric, freq[1]), attr].iloc[0]
     else:
         return -1
 

@@ -1,7 +1,8 @@
 graphs=["YOLOv3","MobileV1"]
 target_acc=66
 target_graph="YOLOv3"
-p_dir='/home/ehsan/UvA/ARMCL/Rock-Pi/CO-UP-Profiling/Profiling'
+p_dir='../Profiling'
+#p_dir='/home/ehsan/UvA/ARMCL/Rock-Pi/CO-UP-Profiling/Profiling'
 #p_dir='/home/ehsan/UvA/ARMCL/Rock-Pi/LW-ARM-CO-UP/New/Model/test'
 NLayers={"YOLOv3":75, "MobileV1":14}
 model_names = { "MobileV1":"Mobile.h5", "YOLOv3":"YOLOv3.h5" }

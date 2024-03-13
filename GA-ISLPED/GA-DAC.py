@@ -44,6 +44,8 @@ print(f'Running Ga for model:{target_graph} for target accuracy:{target_acc}')
 
 
 # +
+########################################################
+# N with just min freq
 def decode_gene_0(v):
     if v==0:
         return "N",[v]
@@ -53,8 +55,21 @@ def decode_gene_0(v):
         return "B",[v-6]
     elif v<20:
         return "L",[v-14]
-    
-def decode_gene(v):
+def decoder_0(chromosome):
+    freqs=[]
+    ps=''
+    for gene in chromosome:
+        p,fs=decode_gene_2(gene)
+        ps+=p
+        freqs.append(fs)
+    return freqs,ps
+
+
+
+
+#####################################################
+# N with max freq and Reorder based on their pareto  
+def decode_gene_1(v):
     if v==0:
         return "N",[7]
     elif v<7 :
@@ -63,11 +78,59 @@ def decode_gene(v):
         return "B",[v-7]
     elif v<20:
         return "G",[v-15,7]
-def decoder(chromosome):
+def decoder_1(chromosome):
     freqs=[]
     ps=''
     for gene in chromosome:
-        p,fs=decode_gene(gene)
+        p,fs=decode_gene_1(gene)
+        ps+=p
+        freqs.append(fs)
+    return freqs,ps
+
+#######################################################
+    
+# N with 8 B freqs   
+def decode_gene_2(v):
+    if v<8:
+        return "N",[v]
+    elif v<14 :
+        return "L",[v-8]
+    elif v<22:
+        return "B",[v-14]
+    elif v<27:
+        return "G",[v-22,7]
+
+
+    
+def decoder_2(chromosome):
+    freqs=[]
+    ps=''
+    for gene in chromosome:
+        p,fs=decode_gene_2(gene)
+        ps+=p
+        freqs.append(fs)
+    return freqs,ps
+
+
+##############################################################
+
+#just max and min DVFS
+translate={0:('N',[7]),
+          1:('L',[5]),
+          2:('B',[7]),
+          3:('G',[4,7]),
+          4:('N',[0]),
+          5:('L',[0]),
+          6:('B',[0]),
+          7:('G',[0,0])}
+def decode_gene_3(v):
+    return translate[v]
+
+def decoder_3(chromosome):
+    freqs=[]
+    ps=''
+    for gene in chromosome:
+        p,fs=decode_gene_3(gene)
         ps+=p
         freqs.append(fs)
     return freqs,ps
@@ -77,7 +140,7 @@ def decoder(chromosome):
 
 #np.set_printoptions(threshold=np.inf)
 #class MyProblem(ElementwiseProblem):
-class MyProblem(Problem):
+class MyProblem_0(Problem):
     generation=0
     def set_target_accuracy(self,target_accuracy):
         self.target_accuracy=target_accuracy
@@ -88,7 +151,7 @@ class MyProblem(Problem):
         self.n=NLayers[_graph]
         print("Initialize the problem for graph with " + str(self.n) + " layers.")
         _xl=np.full(self.n,0)
-        _xu=np.full(self.n,19)
+        _xu=np.full(self.n,20)
         super().__init__(n_var=self.n,
                          n_obj=2,
                          n_constr=1,
@@ -107,7 +170,7 @@ class MyProblem(Problem):
         X = np.round(X).astype(int)
         np.set_printoptions(threshold=np.inf)
         #print(X)
-        configs=[decoder(x1) for x1 in X]
+        configs=[decoder_0(x1) for x1 in X]
         
         inference_time = np.zeros(X.shape[0])
         avg_power = np.zeros(X.shape[0])
@@ -163,30 +226,320 @@ class MyProblem(Problem):
         out["G"] = [G]
 
 
-def define_initial_population():
-    initial_population = np.random.randint(low=0, high=20, size=(200, 75))
+#np.set_printoptions(threshold=np.inf)
+#class MyProblem(ElementwiseProblem):
+class MyProblem_1(Problem):
+    generation=0
+    def set_target_accuracy(self,target_accuracy):
+        self.target_accuracy=target_accuracy
+        print(f'target accuracy is set to {self.target_accuracy}')
+    def __init__(self,_graph,target_accuracy):
+        self.target_accuracy=target_accuracy
+        self.g=_graph
+        self.n=NLayers[_graph]
+        print("Initialize the problem for graph with " + str(self.n) + " layers.")
+        _xl=np.full(self.n,0)
+        _xu=np.full(self.n,20)
+        super().__init__(n_var=self.n,
+                         n_obj=2,
+                         n_constr=1,
+                         xl=np.array(_xl),
+                         xu=np.array(_xu),
+                         vtype=int
+                        )
+        #self.integer = np.arange(20)
+
+    def worker_function(self,config):
+        return P.Inference_Cost(_graph=self.g, _freq=config[0], _order=config[1], _dvfs_delay='variable',_debug=False)
+
+        
+    def _evaluate(self, X, out, *args, **kwargs):
+        #print(f'target accuracy is {self.target_accuracy}')
+        X = np.round(X).astype(int)
+        np.set_printoptions(threshold=np.inf)
+        #print(X)
+        configs=[decoder_1(x1) for x1 in X]
+        
+        inference_time = np.zeros(X.shape[0])
+        avg_power = np.zeros(X.shape[0])
+        
+        '''start_time = time.time()
+        # Iterate over each solution for the second function
+        for i,config in enumerate(configs):
+            print(f'graph is {self.g} config is {config}')
+            inference_time[i],avg_power[i],_ = P.Inference_Cost(_graph=self.g,_freq=config[0],_order=config[1],_dvfs_delay='variable')
+            print(inference_time[i],avg_power[i])
+            if np.isnan(inference_time[i]):
+                print(X[i])
+                print(config)
+                input("nan")
+        end_time = time.time()
+        print("Execution time of one call:", end_time - start_time)
+        print(inference_time,avg_power)
+        inference_time = np.zeros(X.shape[0])
+        avg_power = np.zeros(X.shape[0])'''
+                
+        
+            
+        # Run in parallel
+        start_time = time.time()
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            results = executor.map(self.worker_function, configs)
+
+        # Iterate through the results and assign them
+        for i, result in enumerate(results):
+            inference_time[i], avg_power[i], _ = result
+            #print(configs[i][1],result)
+            if np.isnan(inference_time[i]) or np.isnan(avg_power[i]):
+                print(configs[i],result)
+                input("nan value detected\n")
+            
+        end_time = time.time()
+        print(f"Gen:{self.generation} Execution time of one call:{end_time - start_time}")
+        self.generation=self.generation+1;
+        #print(inference_time,avg_power)   
+        #input()
+            
+        x_quantization=np.where(X==0,1,0)
+        predicted_accuracy = model.predict(x_quantization).flatten()
+        #print(predicted_accuracy)
+        #G= predicted_accuracy - self.target_accuracy
+        G= self.target_accuracy - predicted_accuracy
+        #print(G)
+        #input()
+        #print(f'time:{inference_time}')
+        #print(f'power:{avg_power}')
+
+        out["F"] = [inference_time, avg_power]
+        out["G"] = [G]
+
+
+#np.set_printoptions(threshold=np.inf)
+#class MyProblem(ElementwiseProblem):
+class MyProblem_2(Problem):
+    generation=0
+    def set_target_accuracy(self,target_accuracy):
+        self.target_accuracy=target_accuracy
+        print(f'target accuracy is set to {self.target_accuracy}')
+    def __init__(self,_graph,target_accuracy):
+        self.target_accuracy=target_accuracy
+        self.g=_graph
+        self.n=NLayers[_graph]
+        print("Initialize the problem for graph with " + str(self.n) + " layers.")
+        _xl=np.full(self.n,0)
+        _xu=np.full(self.n,26)
+        super().__init__(n_var=self.n,
+                         n_obj=2,
+                         n_constr=1,
+                         xl=np.array(_xl),
+                         xu=np.array(_xu),
+                         vtype=int
+                        )
+        #self.integer = np.arange(20)
+
+    def worker_function(self,config):
+        return P.Inference_Cost(_graph=self.g, _freq=config[0], _order=config[1], _dvfs_delay='variable',_debug=False)
+
+        
+    def _evaluate(self, X, out, *args, **kwargs):
+        #print(f'target accuracy is {self.target_accuracy}')
+        X = np.round(X).astype(int)
+        np.set_printoptions(threshold=np.inf)
+        #print(X)
+        configs=[decoder_2(x1) for x1 in X]
+        
+        inference_time = np.zeros(X.shape[0])
+        avg_power = np.zeros(X.shape[0])
+        
+        '''start_time = time.time()
+        # Iterate over each solution for the second function
+        for i,config in enumerate(configs):
+            print(f'graph is {self.g} config is {config}')
+            inference_time[i],avg_power[i],_ = P.Inference_Cost(_graph=self.g,_freq=config[0],_order=config[1],_dvfs_delay='variable')
+            print(inference_time[i],avg_power[i])
+            if np.isnan(inference_time[i]):
+                print(X[i])
+                print(config)
+                input("nan")
+        end_time = time.time()
+        print("Execution time of one call:", end_time - start_time)
+        print(inference_time,avg_power)
+        inference_time = np.zeros(X.shape[0])
+        avg_power = np.zeros(X.shape[0])'''
+                
+        
+            
+        # Run in parallel
+        start_time = time.time()
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            results = executor.map(self.worker_function, configs)
+
+        # Iterate through the results and assign them
+        for i, result in enumerate(results):
+            inference_time[i], avg_power[i], _ = result
+            #print(configs[i][1],result)
+            if np.isnan(inference_time[i]) or np.isnan(avg_power[i]):
+                print(configs[i],result)
+                input("nan value detected\n")
+            
+        end_time = time.time()
+        print(f"Gen:{self.generation} Execution time of one call:{end_time - start_time}")
+        self.generation=self.generation+1;
+        #print(inference_time,avg_power)   
+        #input()
+            
+        x_quantization=np.where(X==0,1,0)
+        predicted_accuracy = model.predict(x_quantization).flatten()
+        #print(predicted_accuracy)
+        #G= predicted_accuracy - self.target_accuracy
+        G= self.target_accuracy - predicted_accuracy
+        #print(G)
+        #input()
+        #print(f'time:{inference_time}')
+        #print(f'power:{avg_power}')
+
+        out["F"] = [inference_time, avg_power]
+        out["G"] = [G]
+
+
+#np.set_printoptions(threshold=np.inf)
+#class MyProblem(ElementwiseProblem):
+class MyProblem_3(Problem):
+    generation=0
+    def set_target_accuracy(self,target_accuracy):
+        self.target_accuracy=target_accuracy
+        print(f'target accuracy is set to {self.target_accuracy}')
+    def __init__(self,_graph,target_accuracy):
+        self.target_accuracy=target_accuracy
+        self.g=_graph
+        self.n=NLayers[_graph]
+        print("Initialize the problem for graph with " + str(self.n) + " layers.")
+        _xl=np.full(self.n,0)
+        _xu=np.full(self.n,7)
+        super().__init__(n_var=self.n,
+                         n_obj=2,
+                         n_constr=1,
+                         xl=np.array(_xl),
+                         xu=np.array(_xu),
+                         vtype=int
+                        )
+        #self.integer = np.arange(20)
+
+    def worker_function(self,config):
+        return P.Inference_Cost(_graph=self.g, _freq=config[0], _order=config[1], _dvfs_delay='variable',_debug=False)
+
+        
+    def _evaluate(self, X, out, *args, **kwargs):
+        #print(f'target accuracy is {self.target_accuracy}')
+        X = np.round(X).astype(int)
+        np.set_printoptions(threshold=np.inf)
+        #print(X)
+        configs=[decoder_3(x1) for x1 in X]
+        
+        inference_time = np.zeros(X.shape[0])
+        avg_power = np.zeros(X.shape[0])
+        
+        '''start_time = time.time()
+        # Iterate over each solution for the second function
+        for i,config in enumerate(configs):
+            print(f'graph is {self.g} config is {config}')
+            inference_time[i],avg_power[i],_ = P.Inference_Cost(_graph=self.g,_freq=config[0],_order=config[1],_dvfs_delay='variable')
+            print(inference_time[i],avg_power[i])
+            if np.isnan(inference_time[i]):
+                print(X[i])
+                print(config)
+                input("nan")
+        end_time = time.time()
+        print("Execution time of one call:", end_time - start_time)
+        print(inference_time,avg_power)
+        inference_time = np.zeros(X.shape[0])
+        avg_power = np.zeros(X.shape[0])'''
+                
+        
+            
+        # Run in parallel
+        start_time = time.time()
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            results = executor.map(self.worker_function, configs)
+
+        # Iterate through the results and assign them
+        for i, result in enumerate(results):
+            inference_time[i], avg_power[i], _ = result
+            #print(configs[i][1],result)
+            if np.isnan(inference_time[i]) or np.isnan(avg_power[i]):
+                print(configs[i],result)
+                input("nan value detected\n")
+            
+        end_time = time.time()
+        print(f"Gen:{self.generation} Execution time of one call:{end_time - start_time}")
+        self.generation=self.generation+1;
+        #print(inference_time,avg_power)   
+        #input()
+            
+        x_quantization=np.where(X==0,1,0)
+        predicted_accuracy = model.predict(x_quantization).flatten()
+        #print(predicted_accuracy)
+        #G= predicted_accuracy - self.target_accuracy
+        G= self.target_accuracy - predicted_accuracy
+        #print(G)
+        #input()
+        #print(f'time:{inference_time}')
+        #print(f'power:{avg_power}')
+
+        out["F"] = [inference_time, avg_power]
+        out["G"] = [G]
+
+import random
+def define_initial_population(decoder_type=3):
+    
+    NPU=[]
+    L=[]
+    if decoder_type in [0,1]:
+        NPU=[0]
+        L=[1,7]
+        up=20
+    
+    if decoder_type in [2]:
+        NPU=[0,7]
+        L=[8,13]
+        up=26
+    
+    if decoder_type in [3]:
+        NPU=[0,4]
+        L=[1,5] 
+        up=7
+        
+    initial_population = np.random.randint(low=0, high=up, size=(200, 75))
+    
+   
     j=0
     for i in range(1,76):
         arr=np.zeros(75)
-        arr[:]=6
-        arr[:i]=0
+        # to select between min freq or max freq (of NPU and L) together
+        _index=random.choice([0,-1])
+        #6
+        arr[:]=L[_index]
+        #0
+        arr[:i]=NPU[_index]
         #print(arr)
         initial_population[j]=arr
         j=j+1
     for i in range(1,76):
         arr=np.zeros(75)
-        arr[:]=6
-        arr[i:]=0
+        _index=random.choice([0,-1])
+        #6
+        arr[:]=L[_index]
+        #0
+        arr[i:]=NPU[_index]
         #print(arr)
         initial_population[j]=arr
         j=j+1
 
-    '''for k,x in enumerate(initial_population):
-        print(k,x)'''
+    for k,x in enumerate(initial_population):
+        print(k,x)
     return initial_population
 initial_population=define_initial_population()
-initial_population
-
+#initial_population
 
 # +
 def my_callback(algorithm):
@@ -198,7 +551,7 @@ def my_callback(algorithm):
 def print_best_objectives(algorithm):
     best_f1 = algorithm.pop.get("F")[:, 0].min()
     best_f2 = algorithm.pop.get("F")[:, 1].min()
-    print(f"\nGeneration:{algorithm.n_gen} Best f1: {best_f1}, Best f2: {best_f2}\n******************************************************\n\n\n")
+    print(f"\nGeneration:{algorithm.n_gen} Best f1: {best_f1}, Best f2: {best_f2}\n******************************************************\n\n\n")    
     if algorithm.n_gen==1:
         # Access the current population
         population = algorithm.pop.get("X")
@@ -212,11 +565,12 @@ def print_best_objectives(algorithm):
 
 
 # +
-problem = MyProblem(target_graph,66)
+problem_2 = MyProblem_2(target_graph,66)
+problem_3 = MyProblem_3(target_graph,66)
 algorithm = NSGA2(
     pop_size=200,
     eliminate_duplicates=True,
-    init_pop=initial_population,
+    #init_pop=initial_population,
 )    
     
 algorithm.callback = my_callback
@@ -266,11 +620,11 @@ def to_csv(res):
 
 
 # +
-def run(n=400,_target_acc=66):
+def run(n=400,_target_acc=66,_problem=problem_2):
     global res,target_acc
-    problem.set_target_accuracy(_target_acc)
+    _problem.set_target_accuracy(_target_acc)
     target_acc=_target_acc
-    res = minimize(problem,
+    res = minimize(_problem,
                    algorithm,
                    ("n_gen", n),
                    verbose=True,
@@ -283,13 +637,21 @@ def run(n=400,_target_acc=66):
         pickle.dump(res, f)
     return res
 
-target_accuracies = [accuracy / 10 for accuracy in range(647, 688, 2)]
-target_accuracies.append(68.77)
-print(target_accuracies)
-for target in target_accuracies:
-    res=run(n=400,_target_acc=target)
-    plot_res(res)
-    to_csv(res)
+run_flag=True
+if run_flag==True:
+    global initial_population
+    target_accuracies = [accuracy / 10 for accuracy in range(647, 688, 2)]
+    target_accuracies.append(68.77)
+    print(target_accuracies)
+    for target in target_accuracies:
+        initial_population=define_initial_population(decoder_type=3)
+        res=run(n=1000,_target_acc=target,_problem=problem_3)
+        plot_res(res)
+        to_csv(res)
+        initial_population=res.X
+        res2=run(n=1000,_target_acc=target,_problem=problem_3)
+        plot_res(res2)
+        to_csv(res2)
 # -
 
 if False:
@@ -360,14 +722,52 @@ def hv_cal(Name_GA,Name_BL):
     d=pd.DataFrame(pareto_frontier_ga,columns=["Time","Power"])
     d.to_csv("motivation_example_islped_paper.csv")
     
-    
+
 
 _Name_GA="YOLOv3-66.pkl"
 _Name_BL='YOLOv3_ParotoFront68.2711766072.csv'
 _Name_GA="R/GA/"+_Name_GA
 _Name_BL="R/Baseline/"+_Name_BL
 hv_cal(Name_GA=_Name_GA,Name_BL=_Name_BL)
+# +
+def hv_cal_ref(file_name,ref_point):
+    df=pd.read_csv(file_name)
+    df['pred_total_time']=df['pred_total_time']/1000
+    df['pred_average_power']=df['pred_average_power']/1000
+    pareto_frontier=df[['pred_total_time','pred_average_power']].to_numpy()
+    #print(pareto_frontier)
+    #print(pareto_frontier.shape)
+    hv=pg.hypervolume(pareto_frontier)
+    #print(hv)
+    volume=hv.compute(ref_point)
+    print(f'file {file_name} hv {volume}')
+    return(volume)
+
+#hv_cal_ref(file_name='csvs/YOLOv3_64.7.csv',ref_point=[12.31,5.55])
+#max power and time with little cpu
+_ref_point=[12.31,5.55]
+#_ref_point=[20,10]
+import os
+# Specify the directory path
+directory = 'csvs/'
+# Get the list of files in the directory
+files = os.listdir(directory)
+files = [file for file in files if not file.startswith(".~lock")]
+hvs=[]
+#df_hv = pd.DataFrame(columns=['Filename', 'HV'])
+for f in files:
+    print(f'\nCalculating hv for file {f}')
+    hv=hv_cal_ref(file_name=directory+f,ref_point=_ref_point)
+    hvs.append({'Filename':f,'HV':hv})
+    #df_hv = df_hv.append({'Filename': f, 'HV': hv}, ignore_index=True)
+
+df_hv=pd.DataFrame(hvs)
+#display(df_hv)
+df_hv=df_hv.sort_values(by='HV',ascending=True)
+display(df_hv)
+df_hv.to_csv('hvs.csv')
 # -
+
 if False:
     #inference_time,avg_power,_=P.Inference_Cost(_graph=graph,_freq=config[0],_order=config[1],_dvfs_delay='variable')
     x='[ 8 14  0  6  3  2  4  7  8 10  8 13  4 17]'

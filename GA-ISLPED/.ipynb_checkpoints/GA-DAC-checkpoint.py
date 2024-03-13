@@ -81,6 +81,7 @@ class MyProblem(Problem):
     generation=0
     def set_target_accuracy(self,target_accuracy):
         self.target_accuracy=target_accuracy
+        print(f'target accuracy is set to {self.target_accuracy}')
     def __init__(self,_graph,target_accuracy):
         self.target_accuracy=target_accuracy
         self.g=_graph
@@ -102,7 +103,7 @@ class MyProblem(Problem):
 
         
     def _evaluate(self, X, out, *args, **kwargs):
-        
+        #print(f'target accuracy is {self.target_accuracy}')
         X = np.round(X).astype(int)
         np.set_printoptions(threshold=np.inf)
         #print(X)
@@ -163,16 +164,16 @@ class MyProblem(Problem):
 
 
 def define_initial_population():
-    initial_population = np.random.randint(low=0, high=20, size=(100, 75))
+    initial_population = np.random.randint(low=0, high=20, size=(200, 75))
     j=0
-    for i in range(1,45):
+    for i in range(1,76):
         arr=np.zeros(75)
         arr[:]=6
         arr[:i]=0
         #print(arr)
         initial_population[j]=arr
         j=j+1
-    for i in range(45,76):
+    for i in range(1,76):
         arr=np.zeros(75)
         arr[:]=6
         arr[i:]=0
@@ -184,6 +185,7 @@ def define_initial_population():
         print(k,x)'''
     return initial_population
 initial_population=define_initial_population()
+initial_population
 
 
 # +
@@ -212,7 +214,7 @@ def print_best_objectives(algorithm):
 # +
 problem = MyProblem(target_graph,66)
 algorithm = NSGA2(
-    pop_size=100,
+    pop_size=200,
     eliminate_duplicates=True,
     init_pop=initial_population,
 )    
@@ -264,7 +266,7 @@ def to_csv(res):
 
 
 # +
-def run(n=200,_target_acc=66):
+def run(n=400,_target_acc=66):
     global res,target_acc
     problem.set_target_accuracy(_target_acc)
     target_acc=_target_acc
@@ -285,7 +287,7 @@ target_accuracies = [accuracy / 10 for accuracy in range(647, 688, 2)]
 target_accuracies.append(68.77)
 print(target_accuracies)
 for target in target_accuracies:
-    res=run(n=200,_target_acc=target)
+    res=run(n=400,_target_acc=target)
     plot_res(res)
     to_csv(res)
 # -

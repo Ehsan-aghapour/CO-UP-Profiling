@@ -257,7 +257,7 @@ def to_csv(res):
         'pred_average_power': res.F[:, 1],
         'pred_total_time': res.F[:, 0],  # Assuming the first objective is objective_1
     })
-    display(data)
+    #display(data)
     print(f'writing results df to {target_graph}_{target_acc}.csv')
     data.to_csv(f"{target_graph}_{target_acc}.csv")
 
@@ -285,7 +285,7 @@ target_accuracies = [accuracy / 10 for accuracy in range(647, 688, 2)]
 target_accuracies.append(68.77)
 print(target_accuracies)
 for target in target_accuracies:
-    res=run(n=5,_target_acc=target)
+    res=run(n=200,_target_acc=target)
     plot_res(res)
     to_csv(res)
 # -

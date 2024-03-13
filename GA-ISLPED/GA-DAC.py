@@ -79,6 +79,8 @@ def decoder(chromosome):
 #class MyProblem(ElementwiseProblem):
 class MyProblem(Problem):
     generation=0
+    def set_target_accuracy(self,target_accuracy):
+        self.target_accuracy=target_accuracy
     def __init__(self,_graph,target_accuracy):
         self.target_accuracy=target_accuracy
         self.g=_graph
@@ -135,7 +137,7 @@ class MyProblem(Problem):
         # Iterate through the results and assign them
         for i, result in enumerate(results):
             inference_time[i], avg_power[i], _ = result
-            print(configs[i][1],result)
+            #print(configs[i][1],result)
             if np.isnan(inference_time[i]) or np.isnan(avg_power[i]):
                 print(configs[i],result)
                 input("nan value detected\n")
@@ -178,8 +180,8 @@ def define_initial_population():
         initial_population[j]=arr
         j=j+1
 
-    for k,x in enumerate(initial_population):
-        print(k,x)
+    '''for k,x in enumerate(initial_population):
+        print(k,x)'''
     return initial_population
 initial_population=define_initial_population()
 
@@ -194,7 +196,7 @@ def my_callback(algorithm):
 def print_best_objectives(algorithm):
     best_f1 = algorithm.pop.get("F")[:, 0].min()
     best_f2 = algorithm.pop.get("F")[:, 1].min()
-    print(f"\n\n\n*******************\nGeneration:{algorithm.n_gen} Best f1: {best_f1}, Best f2: {best_f2}")
+    print(f"\nGeneration:{algorithm.n_gen} Best f1: {best_f1}, Best f2: {best_f2}\n******************************************************\n\n\n")
     if algorithm.n_gen==1:
         # Access the current population
         population = algorithm.pop.get("X")
@@ -205,7 +207,7 @@ def print_best_objectives(algorithm):
 
     
     
-    
+
 
 # +
 problem = MyProblem(target_graph,66)
@@ -223,11 +225,52 @@ algorithm.callback = print_best_objectives
 #algorithm.callback = my_callback
 # -
 
-def run():
-    global res
+def print_res(res):
+    for i in range(len(res.X)):
+        if res.F[i][0]!=np.nan:
+            x = res.X[i]
+            y = res.F[i]
+            print(f"Solution {i+1}: Decision Variables , Objective Values = {y}")
+
+
+# +
+def plot_res(res):
+    plot = Scatter()
+    plot.add(res.F, edgecolor="red", facecolor="none")
+    plot.save(f"{target_graph}_{target_acc}.jpg")
+    plot.show()
+    
+#plot_res()
+
+
+# -
+
+def to_csv(res):
+    X = np.round(res.X).astype(int)
+
+    configs = [decoder(x1) for x1 in X]
+
+    data = pd.DataFrame({
+        'graph': [target_graph] * len(configs),
+        'order': [config[1] for config in configs],
+        'freq': [tuple(tuple(c) for c in config[0]) for config in configs],
+        'pred_average_power': res.F[:, 1],
+        'pred_total_time': res.F[:, 0],  # Assuming the first objective is objective_1
+    })
+    display(data)
+    print(f'writing results df to {target_graph}_{target_acc}.csv')
+    data.to_csv(f"{target_graph}_{target_acc}.csv")
+
+
+
+# +
+def run(n=200,_target_acc=66):
+    global res,target_acc
+    problem.set_target_accuracy(_target_acc)
+    target_acc=_target_acc
     res = minimize(problem,
                    algorithm,
-                   ("n_gen", 200),
+                   ("n_gen", n),
                    verbose=True,
                    seed=1,
                    save_history=True,
@@ -236,44 +279,21 @@ def run():
     import pickle
     with open(f'{target_graph}-{target_acc}.pkl', "wb") as f:
         pickle.dump(res, f)
-run()
+    return res
+
+target_accuracies = [accuracy / 10 for accuracy in range(647, 688, 2)]
+target_accuracies.append(68.77)
+print(target_accuracies)
+for target in target_accuracies:
+    res=run(n=5,_target_acc=target)
+    plot_res(res)
+    to_csv(res)
+# -
 
 if False:
     fff=[[2], [0], [0], [0], [2, 7], [1, 7], [3, 7], [1], [2], [4], [2], [7], [3, 7], [3], [0, 7], [7], [2], [5], [2, 7], [3, 7], [1], [4], [0], [7], [3], [3], [1, 7], [0, 7], [2, 7], [3], [1, 7], [2], [4], [4], [7], [0], [7], [2], [0], [0], [5], [0], [4, 7], [1], [1, 7], [3], [3], [0], [4, 7], [1, 7], [0], [7], [3, 7], [4, 7], [3], [0, 7], [5], [2, 7], [5], [7], [1, 7], [2], [7], [2], [0, 7], [4], [7], [4], [4], [5], [3], [2, 7], [2, 7], [1], [2]]
     ordd='BLNBGGGBBBBBGLGBBBGGLLBBLLGGGLGBLBBBBLNLLLGLGBLBGGNBGGBGBGBBGBBBGBBBLBLGGLB'
     P.Inference_Cost(_graph='YOLOv3',_order=ordd,_freq=fff,_debug=True)
-
-
-def print_res():
-    for i in range(len(res.X)):
-        if res.F[i][0]!=np.nan:
-            x = res.X[i]
-            y = res.F[i]
-            print(f"Solution {i+1}: Decision Variables , Objective Values = {y}")
-
-
-def plot_res():
-    plot = Scatter()
-    plot.add(res.F, edgecolor="red", facecolor="none")
-    plot.show()
-plot_res()
-
-# +
-X = np.round(res.X).astype(int)
-
-configs = [decoder(x1) for x1 in X]
-
-data = pd.DataFrame({
-    'graph': [target_graph] * len(configs),
-    'order': [config[1] for config in configs],
-    'freq': [tuple(tuple(c) for c in config[0]) for config in configs],
-    'pred_average_power': res.F[:, 1],
-    'pred_total_time': res.F[:, 0],  # Assuming the first objective is objective_1
-})
-display(data)
-data.to_csv(f"{target_graph}_{target_acc}.csv")
-
-# -
 
 d2=pd.read_csv(f"{target_graph}_{target_acc}.csv")
 d3=utils.format_freqs(d2['freq'])

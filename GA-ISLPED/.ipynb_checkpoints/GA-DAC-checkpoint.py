@@ -692,7 +692,7 @@ if run_flag_yolo==True:
         ) 
         algorithm.callback = print_best_objectives
         #initial_population = np.concatenate((res.X, define_initial_population(decoder_type=2)), axis=0)
-caching=True   
+caching=False   
 run_flag_mobile=True
 if run_flag_mobile==True:
     #global initial_population
@@ -707,7 +707,7 @@ if run_flag_mobile==True:
         target_acc=target
         if Path(f'{target_graph}-{target_acc}.pkl').exists() and caching:
             print(f'{target_graph}-{target_acc}.pkl is existed loading it')
-            with open(f'{target_graph}-{target_acc}.pkl', "wb") as f:
+            with open(f'{target_graph}-{target_acc}.pkl', "rb") as f:
                 res=pickle.load(f)
         else:
             print(f'{target_graph}-{target_acc}.pkl is not existed')
@@ -722,10 +722,6 @@ if run_flag_mobile==True:
         ) 
         algorithm.callback = print_best_objectives
         #initial_population = np.concatenate((res.X, define_initial_population(decoder_type=2)), axis=0)
-
-""
-if Path(f'{target_graph}-{target_acc}.pkl').exist():
-    print('yes')
 
 ""
 # -

@@ -377,8 +377,6 @@ class MyProblem_2(Problem):
         print(inference_time,avg_power)
         inference_time = np.zeros(X.shape[0])
         avg_power = np.zeros(X.shape[0])'''
-                
-        
             
         # Run in parallel
         start_time = time.time()
@@ -392,7 +390,7 @@ class MyProblem_2(Problem):
             if np.isnan(inference_time[i]) or np.isnan(avg_power[i]):
                 print(configs[i],result)
                 input("nan value detected\n")
-            
+        
         end_time = time.time()
         print(f"Gen:{self.generation} Execution time of one call:{end_time - start_time}")
         self.generation=self.generation+1;
@@ -671,6 +669,8 @@ def run(n=400,_target_acc=66,_problem=problem_2,_algorithm=algorithm):
     with open(f'{target_graph}-{target_acc}.pkl', "wb") as f:
         pickle.dump(res, f)
     return res
+from pathlib import Path
+
 
 run_flag_yolo=False
 if run_flag_yolo==True:
@@ -692,7 +692,7 @@ if run_flag_yolo==True:
         ) 
         algorithm.callback = print_best_objectives
         #initial_population = np.concatenate((res.X, define_initial_population(decoder_type=2)), axis=0)
-        
+caching=True   
 run_flag_mobile=True
 if run_flag_mobile==True:
     #global initial_population
@@ -704,9 +704,14 @@ if run_flag_mobile==True:
     print(target_accuracies)
     #input()
     for target in target_accuracies:
-        res=run(n=1000,_target_acc=target,_problem=problem_2,_algorithm=algorithm)
-        plot_res(res)
-        to_csv(res,decode_gene_2)
+        if Path(f'{target_graph}-{target_acc}.pkl').exists() and caching:
+            print(f'{target_graph}-{target_acc}.pkl is existed loading it')
+            with open(f'{target_graph}-{target_acc}.pkl', "wb") as f:
+                res=pickle.load(f)
+        else:
+            res=run(n=400,_target_acc=target,_problem=problem_2,_algorithm=algorithm)
+            plot_res(res)
+            to_csv(res,decode_gene_2)
         #print(f'found results: {res.X}')
         algorithm = NSGA2(
             pop_size=200,
@@ -715,6 +720,10 @@ if run_flag_mobile==True:
         ) 
         algorithm.callback = print_best_objectives
         #initial_population = np.concatenate((res.X, define_initial_population(decoder_type=2)), axis=0)
+
+""
+if Path(f'{target_graph}-{target_acc}.pkl').exist():
+    print('yes')
 
 ""
 # -
@@ -865,20 +874,41 @@ if False:
     import math
     np.isnan(inference_time)
 
+""
+modelyolo=models.load_model("YOLOv3.h5")
 x=np.zeros(75)
-x[26:]=1
-x[34:38]=5
+x[:]=0
+#x[26:]=1
+#x[34:38]=5
 x_quantization=np.array([x])
 x_quantization
 
 # +
-mask = np.isin(x_quantization, [0, 5])
+mask = np.isin(x_quantization, [0,1,2,3,4,5,6,7])
 
 # Use np.where() to set 1 for True values in the mask, and 0 for False values
 x = np.where(mask, 1, 0)
-x
+print(x)
 # -
 
+modelyolo.predict(x).flatten()
+
+""
+x=np.zeros(14)
+x[:]=0
+#x[26:]=1
+#x[34:38]=5
+#x_quantization=np.array([x])
+#x_quantization
+
+# +
+mask = np.isin(x, [0,1,2,3,4,5,6,7])
+
+# Use np.where() to set 1 for True values in the mask, and 0 for False values
+x = np.where(mask, 1, 0)
+x_quantization=np.array([x])
+# -
+print(x_quantization)
 model.predict(x_quantization).flatten()
 
 ""

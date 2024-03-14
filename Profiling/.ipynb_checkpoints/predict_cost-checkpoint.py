@@ -1,5 +1,6 @@
 from config import *
 from utils import *
+import utils
 import numpy as np
 Test=4
 
@@ -524,14 +525,14 @@ def Comm_Cost(g='alex',fn=[[0],[1],[2],[3],[4],[5],[6],[7]],cmps=8*'B', debug=Fa
 def Inference_Cost(_graph='alex',_freq=[[0],[1],[2],[3],[4],[5],[6],[7]],_order=8*'B',_dvfs_delay=3.5, _debug=False):
     #print(_graph,_freq,_order)
     fff=[]
-    if _freq=="min":
+    if _freq=="min" or _freq=="{{min}}" or _freq[0]=="{{min}}":
         for c in _order:
             if c=='G' or c=='N':
                 fff.append([0,0])
             else:
                 fff.append([0])
         _freq=fff
-    if _freq=="max":
+    if _freq=="max" or _freq=="{{max}}" or _freq[0]=="{{max}}":
         for c in _order:
             if c=='G':
                 fff.append([4,7])
@@ -583,7 +584,7 @@ if Test==3:
     _g='MobileV1'
     print(Inference_Cost(_graph=_g,_order='N'*NLayers[_g],_freq=[[7]]*NLayers[_g],_debug=True))
     
-if True:
+if False:
     fff=[[2], [0], [0], [0], [2, 7], [1, 7], [3, 7], [1], [2], [4], [2], [7], [3, 7], [3], [0, 7], [7], [2], [5], [2, 7], [3, 7], [1], [4], [0], [7], [3], [3], [1, 7], [0, 7], [2, 7], [3], [1, 7], [2], [4], [4], [7], [0], [7], [2], [0], [0], [5], [0], [4, 7], [1], [1, 7], [3], [3], [0], [4, 7], [1, 7], [0], [7], [3, 7], [4, 7], [3], [0, 7], [5], [2, 7], [5], [7], [1, 7], [2], [7], [2], [0, 7], [4], [7], [4], [4], [5], [3], [2, 7], [2, 7], [1], [2]]
     ordd='BLNBGGGBBBBBGLGBBBGGLLBBLLGGGLGBLBBBBLNLLLGLGBLBGGNBGGBGBGBBGBBBGBBBLBLGGLB'
     r=Inference_Cost(_graph='YOLOv3',_order=ordd,_freq=fff,_debug=False)
@@ -599,7 +600,7 @@ if True:
 # -
 
 
-if True:
+if False:
     k=49
     j=0
     ordd = 'L' * 75
@@ -735,10 +736,221 @@ def eval_function(member):
     idle_energy=(target_latency-t)*idle_power/1000
     interval_energy=idle_energy+e
     return -interval_energy
+# +
+def Fill_prediction(_FileName, dvfs_delay):
+    if _FileName.exists():
+        Evals_df=pd.read_csv(_FileName).drop_duplicates()
+    else:
+        print("Ga result file is not existed")
+        return
+    
+    if 'input_e' in Evals_df:
+        Evals_df['total_e']=Evals_df['input_e']+Evals_df['task_e']+Evals_df['output_e']
+    cases=Evals_df.shape[0]
+    print(f'There are {cases}')
+    
+    Regenerate_Predeiction=False
+    Regenerate_Errors=False
+    
+    def prediction(row):
+        #print(row)
+        graph=row['graph']
+        #freq=utils.format_to_list([row['freq']])[0]
+        freq=utils.format_freqs([row['freq']])
+        order=row['order']
+        #print(graph,freq,order,dvfs_delay)
+        return Inference_Cost(_graph=graph,_freq=freq,_order=order,_dvfs_delay=dvfs_delay, _debug=False)
+    if 'Predicted_Time' not in Evals_df:
+        Evals_df[['Predicted_Time','Predicted_Power','Predicted_Energy']]=Evals_df.apply(prediction,axis=1, result_type='expand')
+    if 'Predicted_Time' in Evals_df:
+        if pd.isna(Evals_df['Predicted_Time']).any() or Regenerate_Predeiction:
+            Evals_df[['Predicted_Time','Predicted_Power','Predicted_Energy']]=Evals_df.apply(prediction,axis=1, result_type='expand')
+    
+    #display(Evals_df)
+    def calc_EE(row):
+        Measured=1000.0/row['total_e']
+        Pred=1000.0/row['Predicted_Energy']
+        Err=(Pred-Measured)/Measured
+        return 100.0*Err
+    
+    def calc_Power(row):
+        measured=row['total_e']/row['total_time']
+        pred=row['Predicted_Energy']/row['Predicted_Time']
+        Err=100*(pred-measured)/measured
+        return Err
+    
+    def calc_Power_MAE(row):
+        measured=row['total_e']/row['total_time']
+        pred=row['Predicted_Energy']/row['Predicted_Time']
+        Err=abs(pred-measured)
+        return Err
+    
+    def calc_FPS(row):
+        measured=1000/row['total_time']
+        pred=1000/row['Predicted_Time']
+        Err=100.0*(pred-measured)/measured
+        return Err
+    
+    '''if 'Error_Time' not in Evals_df or Regenerate_Errors:
+        Evals_df['Error_Time']=Evals_df.apply(lambda x:100*(x['Predicted_Time']-x['total_time'])/x['total_time'],axis=1)
+    if 'Error_Energy' not in Evals_df or Regenerate_Errors:
+        Evals_df['Error_Energy']=Evals_df.apply(lambda x:100*(x['Predicted_Energy']-x['total_e'])/x['total_e'],axis=1)
+    if 'Error_EE' not in Evals_df or Regenerate_Errors:
+        Evals_df['Error_EE']=Evals_df.apply(calc_EE,axis=1)
+    #Evals_df['Error_Power']=Evals_df.apply(lambda x:100*abs( (x['Predicted_Energy']/x['Predicted_Time']) - (x['total_e']/x['total_time']) /(x['total_e']/x['total_time']) ),axis=1)
+    if 'Error_Power' not in Evals_df or Regenerate_Errors:
+        Evals_df['Error_Power']=Evals_df.apply(calc_Power,axis=1)
+    if 'Error_FPS' not in Evals_df or Regenerate_Errors:
+        Evals_df['Error_FPS']=Evals_df.apply(calc_FPS,axis=1)
+        
+    Evals_df['MAE_Time']=Evals_df.apply(lambda x:abs(x['Predicted_Time']-x['total_time']),axis=1)
+    Evals_df['MAE_Power']=Evals_df.apply(calc_Power_MAE,axis=1)'''
+    
+    new_file=_FileName.with_name(_FileName.name.replace(".csv", "_prediction.csv"))
+    Evals_df.to_csv(new_file)
+
+if Test==2:
+    for g in graphs:
+        fname=Path('Evaluations_'+g+'.csv')
+        Fill_prediction(fname, 'variable')
+
+#Fill_prediction(Path("yolo.csv"),'variable')
+Fill_prediction(Path("Yolov3_analyze_layers.csv"),'variable')
+
+
 # -
 
+def produce_desing_points(g='YOLOv3'):
+    #EvalFile=Evaluations_csv.with_name(Evaluations_csv.name.replace(".csv", "_" + g + ".csv"))
+    EvalFile=Path("Yolov3_analyze_layers.csv").resolve()
+    if EvalFile.exists():
+        Evaluations_df=pd.read_csv(EvalFile)
+    else:
+        Evaluations_df=pd.DataFrame(columns=['graph','order','freq','input_time','task_time','output_time','total_time', 'input_power','task_power'])    
+    cases=Evaluations_df[Evaluations_df['graph']==g].shape[0]
+    print(f'There are {cases} existed for graph {g}')
+    #num_evals=max(0,num_evals-cases)
+    #num_orders=math.ceil(num_evals/num_freqs)
+    
+    
+    _n=NLayers[g]
+    base_string='B'*_n
+    
+    
+    #For Figure6
+    '''orders=[]
+    for i in range(len(base_string)):
+        order=base_string[:i]+'N'+base_string[i+1:]
+        orders.append(order)'''
+        
+    # For Figure 7
+    
+    orders=[]
+    '''for i in range(76, 0, -1):
+        binary_sequence = np.zeros(75, dtype=str)
+        if i < 76:
+            binary_sequence[i-1:] = 'N'
+
+        # Convert 'L' for remaining elements
+        binary_sequence[:i-1] = 'L'
+        binary_sequence = ''.join(binary_sequence)
+        print(binary_sequence)
+        orders.append(binary_sequence)'''
+        
+        
+    for i in range(0, 76, 1):
+        binary_sequence = np.zeros(75, dtype=str)
+        binary_sequence[0:]='L'
+        if i > 0:
+            binary_sequence[0:i] = 'N'
+
+        
+        binary_sequence = ''.join(binary_sequence)
+        print(binary_sequence)
+        orders.append(binary_sequence)
+    
+    
+        
+        
+    print(orders)
+    print(len(orders))
+    
+    
+               
+    #_fs=str(tuple([7]*_n))
+    fs={}
+    for order in orders:        
+        fs[order]=['{{max}}']
+            
+    
+    for order in fs:
+        for f in fs[order]:
+            row=Evaluations_df[(Evaluations_df['order']==order) & (Evaluations_df['freq']==str(f)) & (Evaluations_df['graph']==g)]
+            if row.shape[0]==0:
+                Evaluations_df.loc[len(Evaluations_df)]={"graph":g,"order":order,"freq":f}
+            
+    Evaluations_df.to_csv(EvalFile,index=False)
+#produce_desing_points(g='YOLOv3')
+
+#def Anlze_Error():
+#if True:
+if Test==1:
+    for g in graphs:
+        print(f'Graph: {g}')
+        if not Path('Evaluations_'+g+'_prediction.csv').exists():
+            continue
+        Evals_df=pd.read_csv('Evaluations_'+g+'_prediction.csv')
+        #error_time = abs(100.0*(Evals_df['Predicted_Time'] - Evals_df['total_time'])/Evals_df['total_time'])
+        #print(abs(error_time).describe())
+        #error_energy = abs(100.0*((1000.0/Evals_df['Predicted_Energy']) - (1000.0/Evals_df['total_e']))/(1000.0/Evals_df['total_e']))
+        #error_energy=Evals_df['Error_Time']
+        error_energy=abs(Evals_df['Error_Energy'])
+        #error_energy=Evals_df['Error_EE']
+        #plt.hist(error_energy, bins=50, density=True)
+        print(error_energy.describe())
+        # Add normal curve
+        mu, std = norm.fit(error_energy)
+        x = np.linspace(-30, 30, 200)
+
+        y = norm.pdf(x, mu, std)
+        plt.plot(x, y, label=g)
+        plt.xlabel('Error%')
+        plt.ylabel('Pdf')
+        
+    plt.legend()
+    plt.show()
 
 
+# +
+def prediction(File,row_num,dvfs_delay):
+        _FileName=Path(File)
+        if _FileName.exists():
+            Evals_df=pd.read_csv(_FileName).drop_duplicates()
+        else:
+            print("Ga result file is not existed")
+            return
+
+        cases=Evals_df.shape[0]
+        print(f'There are {cases}')
+        #print(row)
+        #Evals_df=Evals_df.sort_values('Error_Time',ascending=False)
+        row=Evals_df.iloc[row_num]
+        graph=row['graph']
+        freq=utils.format_to_list([row['freq']])
+        order=row['order']
+        #print(graph,freq,order,dvfs_delay)
+        t,e=Inference_Cost(_graph=graph,_freq=freq[0],_order=order,_dvfs_delay=dvfs_delay, _debug=True)
+        print(f'total_time:{t}, total_e:{e}')
+        run=False
+        if run:
+            Real_Evaluation(g=graph,_ord=order,_fs=freq)
+            
+        return t,e
+    
+
+if Test==2:
+    g='google'
+    prediction('Evaluations_'+g+'_prediction.csv',0,'variable')
 
 # +
 import random

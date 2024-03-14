@@ -670,7 +670,7 @@ def run(n=400,_target_acc=66,_problem=problem_2,_algorithm=algorithm):
 
 run_flag=True
 if run_flag==True:
-    global initial_population
+    #global initial_population
     initial_population=define_initial_population(decoder_type=2)
     target_accuracies = [accuracy / 10 for accuracy in range(647, 688, 2)]
     target_accuracies.append(68.77)

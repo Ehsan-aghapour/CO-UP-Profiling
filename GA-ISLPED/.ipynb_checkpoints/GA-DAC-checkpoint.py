@@ -380,6 +380,7 @@ class MyProblem_2(Problem):
             
         # Run in parallel
         start_time = time.time()
+        #with concurrent.futures.ProcessPoolExecutor(max_workers=64) as executor:
         with concurrent.futures.ProcessPoolExecutor() as executor:
             results = executor.map(self.worker_function, configs)
 
@@ -697,7 +698,7 @@ run_flag_mobile=True
 if run_flag_mobile==True:
     #global initial_population
     initial_population=define_initial_population(decoder_type=2)
-    target_accuracies = [accuracy / 100 for accuracy in range(6735, 6836, 5)]
+    target_accuracies = [accuracy / 100 for accuracy in range(6735, 6836, 20)]
     target_accuracies[-1]=68.36
     print(len(target_accuracies))
     target_accuracies.reverse()
@@ -710,7 +711,7 @@ if run_flag_mobile==True:
             with open(f'{target_graph}-{target_acc}.pkl', "rb") as f:
                 res=pickle.load(f)
         else:
-            print(f'{target_graph}-{target_acc}.pkl is not existed')
+            print(f'{target_graph}-{target_acc}.pkl is not existed or caching is Off')
             res=run(n=400,_target_acc=target,_problem=problem_2,_algorithm=algorithm)
             plot_res(res)
             to_csv(res,decode_gene_2)
@@ -827,9 +828,25 @@ def hv_cal_ref(file_name,ref_point):
     return(volume)
 
 #hv_cal_ref(file_name='csvs/YOLOv3_64.7.csv',ref_point=[12.31,5.55])
+
+#YOLOv3
 #max power and time with little cpu
-_ref_point=[12.31,5.55]
+_ref_point_yolo__L=[12.31,5.55]
+_ref_point_yolo=[20.32,7.1]
 #_ref_point=[20,10]
+
+#MobileV1
+#max power and time with little cpu
+_ref_point_mobile=[0.5,7] #0.49,6.96
+#_ref_point=[20,10]
+
+_ref_point=[20,20]
+if target_graph=='YOLOv3':
+    _ref_point=_ref_point_yolo
+if target_graph=='MobileV1':
+    _ref_point=_ref_point_yolo
+print(f'Reference point for HV Calculation is {_ref_point}')
+
 import os
 # Specify the directory path
 directory = '2/csvs/'

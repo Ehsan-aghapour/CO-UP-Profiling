@@ -673,7 +673,7 @@ def run(n=400,_target_acc=66,_problem=problem_2,_algorithm=algorithm):
     return res
 
 run_flag_yolo=False
-if run_flag==True:
+if run_flag_yolo==True:
     #global initial_population
     initial_population=define_initial_population(decoder_type=2)
     target_accuracies = [accuracy / 10 for accuracy in range(647, 688, 2)]
@@ -694,14 +694,15 @@ if run_flag==True:
         #initial_population = np.concatenate((res.X, define_initial_population(decoder_type=2)), axis=0)
         
 run_flag_mobile=True
-if run_flag==True:
+if run_flag_mobile==True:
     #global initial_population
     initial_population=define_initial_population(decoder_type=2)
     target_accuracies = [accuracy / 100 for accuracy in range(6735, 6836, 5)]
     target_accuracies[-1]=68.36
+    print(len(target_accuracies))
     target_accuracies.reverse()
     print(target_accuracies)
-    input()
+    #input()
     for target in target_accuracies:
         res=run(n=1000,_target_acc=target,_problem=problem_2,_algorithm=algorithm)
         plot_res(res)

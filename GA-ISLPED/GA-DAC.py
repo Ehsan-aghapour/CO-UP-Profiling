@@ -702,7 +702,7 @@ if run_flag_mobile==True:
     print(len(target_accuracies))
     target_accuracies.reverse()
     print(target_accuracies)
-    input()
+    #input()
     for target in target_accuracies:
         res=run(n=1000,_target_acc=target,_problem=problem_2,_algorithm=algorithm)
         plot_res(res)

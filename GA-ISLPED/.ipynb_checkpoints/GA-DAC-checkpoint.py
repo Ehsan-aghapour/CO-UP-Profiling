@@ -136,6 +136,16 @@ def decoder_3(chromosome):
     return freqs,ps
 
 
+def decoder(chromosome,decode_gene):
+    freqs=[]
+    ps=''
+    for gene in chromosome:
+        p,fs=decode_gene(gene)
+        ps+=p
+        freqs.append(fs)
+    return freqs,ps
+
+
 # -
 
 #np.set_printoptions(threshold=np.inf)
@@ -342,11 +352,11 @@ class MyProblem_2(Problem):
 
         
     def _evaluate(self, X, out, *args, **kwargs):
-        #print(f'target accuracy is {self.target_accuracy}')
+        print(f'target accuracy is {self.target_accuracy}')
         X = np.round(X).astype(int)
         np.set_printoptions(threshold=np.inf)
-        #print(X)
-        configs=[decoder_2(x1) for x1 in X]
+        #print(X.shape)
+        configs=[decoder(x1,decode_gene_2) for x1 in X]
         
         inference_time = np.zeros(X.shape[0])
         avg_power = np.zeros(X.shape[0])
@@ -387,8 +397,16 @@ class MyProblem_2(Problem):
         self.generation=self.generation+1;
         #print(inference_time,avg_power)   
         #input()
-            
-        x_quantization=np.where(X==0,1,0)
+          
+        #when the only case of NPU is 0
+        #x_quantization=np.where(X==0,1,0)
+        #when there are a list of values that are NPU
+        mask = np.isin(X, [0,1,2,3,4,5,6,7])
+        # Use np.where() to set 1 for True values in the mask, and 0 for False values
+        x_quantization = np.where(mask, 1, 0)
+        #print(f'x quant: {x_quantization}')
+        
+        
         predicted_accuracy = model.predict(x_quantization).flatten()
         #print(predicted_accuracy)
         #G= predicted_accuracy - self.target_accuracy
@@ -476,7 +494,7 @@ class MyProblem_3(Problem):
         #print(inference_time,avg_power)   
         #input()
             
-        x_quantization=np.where(X==0,1,0)
+        x_quantization=np.where((X==0) | (X==4),1,0)
         predicted_accuracy = model.predict(x_quantization).flatten()
         #print(predicted_accuracy)
         #G= predicted_accuracy - self.target_accuracy
@@ -490,8 +508,9 @@ class MyProblem_3(Problem):
         out["G"] = [G]
 
 import random
-def define_initial_population(decoder_type=3):
+def define_initial_population(decoder_type=2):
     
+    #hold min and max freq 
     NPU=[]
     L=[]
     if decoder_type in [0,1]:
@@ -517,6 +536,7 @@ def define_initial_population(decoder_type=3):
         arr=np.zeros(75)
         # to select between min freq or max freq (of NPU and L) together
         _index=random.choice([0,-1])
+        _index=-1
         #6
         arr[:]=L[_index]
         #0
@@ -527,6 +547,7 @@ def define_initial_population(decoder_type=3):
     for i in range(1,76):
         arr=np.zeros(75)
         _index=random.choice([0,-1])
+        _index=-1
         #6
         arr[:]=L[_index]
         #0
@@ -534,9 +555,14 @@ def define_initial_population(decoder_type=3):
         #print(arr)
         initial_population[j]=arr
         j=j+1
+    
+    arr=np.zeros(75)
+    arr[:]=L[0]
+    initial_population[j]=arr
+    j=j+1
 
-    for k,x in enumerate(initial_population):
-        print(k,x)
+    '''for k,x in enumerate(initial_population):
+        print(k,x)'''
     return initial_population
 initial_population=define_initial_population()
 #initial_population
@@ -552,13 +578,19 @@ def print_best_objectives(algorithm):
     best_f1 = algorithm.pop.get("F")[:, 0].min()
     best_f2 = algorithm.pop.get("F")[:, 1].min()
     print(f"\nGeneration:{algorithm.n_gen} Best f1: {best_f1}, Best f2: {best_f2}\n******************************************************\n\n\n")    
-    if algorithm.n_gen==1:
+    if algorithm.n_gen==1 and False:
         # Access the current population
         population = algorithm.pop.get("X")
         # Modify the population (for demonstration purposes, adding random noise)
-        population[:len(initial_population)] = initial_population[:]
+        if len(population) > len(initial_population):
+            population[:len(initial_population)] = initial_population
+        else:
+            population=initial_population[:len(population)]
         # Update the population in the algorithm object
         algorithm.pop.set("X", population)
+        
+        print(f'{len(population)} population updated to: {population}')
+        input()
 
     
     
@@ -570,7 +602,7 @@ problem_3 = MyProblem_3(target_graph,66)
 algorithm = NSGA2(
     pop_size=200,
     eliminate_duplicates=True,
-    #init_pop=initial_population,
+    sampling=initial_population,
 )    
     
 algorithm.callback = my_callback
@@ -601,10 +633,10 @@ def plot_res(res):
 
 # -
 
-def to_csv(res):
+def to_csv(res,decode_gene):
     X = np.round(res.X).astype(int)
 
-    configs = [decoder(x1) for x1 in X]
+    configs = [decoder(x1,decode_gene) for x1 in X]
 
     data = pd.DataFrame({
         'graph': [target_graph] * len(configs),
@@ -618,14 +650,13 @@ def to_csv(res):
     data.to_csv(f"{target_graph}_{target_acc}.csv")
 
 
-
 # +
-def run(n=400,_target_acc=66,_problem=problem_2):
+def run(n=400,_target_acc=66,_problem=problem_2,_algorithm=algorithm):
     global res,target_acc
     _problem.set_target_accuracy(_target_acc)
     target_acc=_target_acc
     res = minimize(_problem,
-                   algorithm,
+                   _algorithm,
                    ("n_gen", n),
                    verbose=True,
                    seed=1,
@@ -640,18 +671,22 @@ def run(n=400,_target_acc=66,_problem=problem_2):
 run_flag=True
 if run_flag==True:
     global initial_population
+    initial_population=define_initial_population(decoder_type=2)
     target_accuracies = [accuracy / 10 for accuracy in range(647, 688, 2)]
     target_accuracies.append(68.77)
+    target_accuracies.reverse()
     print(target_accuracies)
     for target in target_accuracies:
-        initial_population=define_initial_population(decoder_type=3)
-        res=run(n=1000,_target_acc=target,_problem=problem_3)
+        res=run(n=1000,_target_acc=target,_problem=problem_2,_algorithm=algorithm)
         plot_res(res)
-        to_csv(res)
-        initial_population=res.X
-        res2=run(n=1000,_target_acc=target,_problem=problem_3)
-        plot_res(res2)
-        to_csv(res2)
+        to_csv(res,decode_gene_2)
+        #print(f'found results: {res.X}')
+        algorithm = NSGA2(
+            pop_size=200,
+            eliminate_duplicates=True,
+            sampling=np.concatenate((res.X, initial_population), axis=0)
+        ) 
+        #initial_population = np.concatenate((res.X, define_initial_population(decoder_type=2)), axis=0)
 # -
 
 if False:
@@ -791,7 +826,16 @@ if False:
 
 x=np.zeros(75)
 x[26:]=1
+x[34:38]=5
 x_quantization=np.array([x])
 x_quantization
+
+# +
+mask = np.isin(x_quantization, [0, 5])
+
+# Use np.where() to set 1 for True values in the mask, and 0 for False values
+x = np.where(mask, 1, 0)
+x
+# -
 
 model.predict(x_quantization).flatten()

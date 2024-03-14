@@ -665,12 +665,12 @@ def run(n=400,_target_acc=66,_problem=problem_2,_algorithm=algorithm):
                    save_history=True,
                   )
 
-    import pickle
+    
     with open(f'{target_graph}-{target_acc}.pkl', "wb") as f:
         pickle.dump(res, f)
     return res
 from pathlib import Path
-
+import pickle
 
 run_flag_yolo=False
 if run_flag_yolo==True:
@@ -704,11 +704,13 @@ if run_flag_mobile==True:
     print(target_accuracies)
     #input()
     for target in target_accuracies:
+        target_acc=target
         if Path(f'{target_graph}-{target_acc}.pkl').exists() and caching:
             print(f'{target_graph}-{target_acc}.pkl is existed loading it')
             with open(f'{target_graph}-{target_acc}.pkl', "wb") as f:
                 res=pickle.load(f)
         else:
+            print(f'{target_graph}-{target_acc}.pkl is not existed')
             res=run(n=400,_target_acc=target,_problem=problem_2,_algorithm=algorithm)
             plot_res(res)
             to_csv(res,decode_gene_2)

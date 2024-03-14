@@ -815,9 +815,7 @@ if Test==2:
         Fill_prediction(fname, 'variable')
 
 #Fill_prediction(Path("yolo.csv"),'variable')
-Fill_prediction(Path("Yolov3_analyze_layers.csv"),'variable')
-
-
+#Fill_prediction(Path("Yolov3_analyze_layers.csv"),'variable')
 # -
 
 def produce_desing_points(g='YOLOv3'):

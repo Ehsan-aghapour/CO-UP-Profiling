@@ -529,7 +529,7 @@ if Test==3:
 #DAC:
 #Run_Eval_For_GA(_FileName=Path('YOLOv3-66.csv').resolve())
 
-Run_Eval_For_GA(_FileName=Path('Yolo66.csv').resolve())
+#Run_Eval_For_GA(_FileName=Path('Yolo66.csv').resolve())
 
 
 

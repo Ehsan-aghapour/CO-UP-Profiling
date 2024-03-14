@@ -1,6 +1,7 @@
 graphs=["YOLOv3","MobileV1"]
 target_acc=66
 target_graph="YOLOv3"
+target_graph="MobileV1"
 p_dir='../Profiling'
 #p_dir='/home/ehsan/UvA/ARMCL/Rock-Pi/CO-UP-Profiling/Profiling'
 #p_dir='/home/ehsan/UvA/ARMCL/Rock-Pi/LW-ARM-CO-UP/New/Model/test'
@@ -30,11 +31,13 @@ from tensorflow.keras import layers, models
 import pandas as pd
 # +
 model=None
-'''if sys.argv[1]=="y":
+'''
+if sys.argv[1]=="y":
     target_graph="YOLOv3"
 if sys.argv[1]=="m":
     target_graph="MobileV1"
-target_acc=float(sys.argv[2])'''
+target_acc=float(sys.argv[2])
+'''
 
 model_name=model_names[target_graph]
 model=models.load_model(model_name)
@@ -87,8 +90,7 @@ def decoder_1(chromosome):
         freqs.append(fs)
     return freqs,ps
 
-#######################################################
-    
+""
 # N with 8 B freqs   
 def decode_gene_2(v):
     if v<8:
@@ -112,8 +114,7 @@ def decoder_2(chromosome):
     return freqs,ps
 
 
-##############################################################
-
+""
 #just max and min DVFS
 translate={0:('N',[7]),
           1:('L',[5]),
@@ -528,12 +529,15 @@ def define_initial_population(decoder_type=2):
         L=[1,5] 
         up=7
         
-    initial_population = np.random.randint(low=0, high=up, size=(200, 75))
+        
+    n_layers=NLayers[target_graph]
+    initial_population = np.random.randint(low=0, high=up, size=(200, n_layers))
     
    
     j=0
-    for i in range(1,76):
-        arr=np.zeros(75)
+    
+    for i in range(1,n_layers+1):
+        arr=np.zeros(n_layers)
         # to select between min freq or max freq (of NPU and L) together
         _index=random.choice([0,-1])
         _index=-1
@@ -544,8 +548,8 @@ def define_initial_population(decoder_type=2):
         #print(arr)
         initial_population[j]=arr
         j=j+1
-    for i in range(1,76):
-        arr=np.zeros(75)
+    for i in range(1,n_layers+1):
+        arr=np.zeros(n_layers)
         _index=random.choice([0,-1])
         _index=-1
         #6
@@ -556,7 +560,7 @@ def define_initial_population(decoder_type=2):
         initial_population[j]=arr
         j=j+1
     
-    arr=np.zeros(75)
+    arr=np.zeros(n_layers)
     arr[:]=L[0]
     initial_population[j]=arr
     j=j+1
@@ -668,7 +672,7 @@ def run(n=400,_target_acc=66,_problem=problem_2,_algorithm=algorithm):
         pickle.dump(res, f)
     return res
 
-run_flag=True
+run_flag_yolo=False
 if run_flag==True:
     #global initial_population
     initial_population=define_initial_population(decoder_type=2)
@@ -686,7 +690,32 @@ if run_flag==True:
             eliminate_duplicates=True,
             sampling=np.concatenate((res.X, initial_population), axis=0)
         ) 
+        algorithm.callback = print_best_objectives
         #initial_population = np.concatenate((res.X, define_initial_population(decoder_type=2)), axis=0)
+        
+run_flag_mobile=True
+if run_flag==True:
+    #global initial_population
+    initial_population=define_initial_population(decoder_type=2)
+    target_accuracies = [accuracy / 100 for accuracy in range(6735, 6836, 5)]
+    target_accuracies[-1]=68.36
+    target_accuracies.reverse()
+    print(target_accuracies)
+    input()
+    for target in target_accuracies:
+        res=run(n=1000,_target_acc=target,_problem=problem_2,_algorithm=algorithm)
+        plot_res(res)
+        to_csv(res,decode_gene_2)
+        #print(f'found results: {res.X}')
+        algorithm = NSGA2(
+            pop_size=200,
+            eliminate_duplicates=True,
+            sampling=np.concatenate((res.X, initial_population), axis=0)
+        ) 
+        algorithm.callback = print_best_objectives
+        #initial_population = np.concatenate((res.X, define_initial_population(decoder_type=2)), axis=0)
+
+""
 # -
 
 if False:
@@ -706,17 +735,17 @@ unique_values_order = Evals_df[Evals_df['graph']==target_graph]['order'].unique(
 #print(grouped.unique())
 print(unique_values_order)
 
-# +
-import pygmo as pg
-import numpy as np
-import pandas as pd
-import pickle
+""
 
-'''model_name=model_names[target_graph]
+
+'''
+model_name=model_names[target_graph]
 model=models.load_model(model_name)
-problem = MyProblem(target_graph,66)'''
+problem = MyProblem(target_graph,66)
+'''
 
-'''res = minimize(problem,
+'''
+res = minimize(problem,
                algorithm,
                ("n_gen", 200),
                verbose=False,
@@ -726,9 +755,14 @@ problem = MyProblem(target_graph,66)'''
 
 import pickle
 with open(f'{target_graph}-{target_acc}', "wb") as f:
-    pickle.dump(res, f)'''
+    pickle.dump(res, f)
+'''
 
-
+# +
+import pygmo as pg
+import numpy as np
+import pandas as pd
+import pickle
 def hv_cal(Name_GA,Name_BL):
     with open(Name_GA,'rb') as f:
         res=pickle.load(f)
@@ -764,7 +798,13 @@ _Name_BL='YOLOv3_ParotoFront68.2711766072.csv'
 _Name_GA="R/GA/"+_Name_GA
 _Name_BL="R/Baseline/"+_Name_BL
 hv_cal(Name_GA=_Name_GA,Name_BL=_Name_BL)
+
+""
 # +
+import pygmo as pg
+import numpy as np
+import pandas as pd
+import pickle
 def hv_cal_ref(file_name,ref_point):
     df=pd.read_csv(file_name)
     df['pred_total_time']=df['pred_total_time']/1000
@@ -784,7 +824,7 @@ _ref_point=[12.31,5.55]
 #_ref_point=[20,10]
 import os
 # Specify the directory path
-directory = 'csvs/'
+directory = '2/csvs/'
 # Get the list of files in the directory
 files = os.listdir(directory)
 files = [file for file in files if not file.startswith(".~lock")]
@@ -839,3 +879,6 @@ x
 # -
 
 model.predict(x_quantization).flatten()
+
+""
+

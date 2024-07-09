@@ -32,26 +32,32 @@ def Parse(timefile,graph,order,frqss):
             print(f'Next freq:{freqs}')
             freq_indx=freq_indx+1
             
-        if "Profiling these DVFS settings finised" in l:
+        if "Profiling these DVFS settings finished" in l:
             print(f'Tasks:{t}')
             print(f'Inputs:{ins}')
             print(f'trans:{trans}')
             print(f'outs:{outs}')
             for layer in t:
                 cmp=order[layer]
-                freq=freqs[layer]
                 Host_freq=-1
-                if order[layer]=="G":
-                    Host_freq=freq[1]
+                Layer_freq=-1
+                print(freqs)
+                if freqs[0] in ['min','{min}','{{min}}','max','{max}','{{max}}']:
+                    Host_freq=freqs[0]
+                    Layer_freq=freqs[0]
+                else:
+                    Layer_freq=freqs[layer][0]
+                    if order[layer]=="G":
+                        Host_freq=freqs[layer][1]
                 
                 #input()
-                time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":freq[0],"Freq_Host":Host_freq, "Layer":layer,"Metric":"task","Time":t[layer]}
+                time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":Layer_freq,"Freq_Host":Host_freq, "Layer":layer,"Metric":"task","Time":t[layer]}
                 if layer in ins:
-                    time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":freq[0],"Freq_Host":Host_freq, "Layer":layer,"Metric":"in","Time":ins[layer]}
+                    time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":Layer_freq,"Freq_Host":Host_freq, "Layer":layer,"Metric":"in","Time":ins[layer]}
                 if layer in outs:
-                    time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":freq[0],"Freq_Host":Host_freq, "Layer":layer,"Metric":"out","Time":outs[layer]}
+                    time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":Layer_freq,"Freq_Host":Host_freq, "Layer":layer,"Metric":"out","Time":outs[layer]}
                 if layer in trans:
-                    time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":freq[0],"Freq_Host":Host_freq, "Layer":layer,"Metric":"trans","Time":trans[layer]}
+                    time_df.loc[len(time_df)]={"Graph":graph, "Component":cmp,"Freq":Layer_freq,"Freq_Host":Host_freq, "Layer":layer,"Metric":"trans","Time":trans[layer]}
                     
                 
             t={}
@@ -105,7 +111,7 @@ def Parse_transfer_graph(timefile,graph,order,frqss):
     transfer_df_time = pd.DataFrame(columns=['order', 'freq', 'transfer_time', 'RecFreq','SenderFreq'])
     
     for l in lines:     
-        if "Profiling these DVFS settings finised" in l:
+        if "Profiling these DVFS settings finished" in l:
             print(f'Tasks:{t}')
             print(f'Inputs:{ins}')
             print(f'trans:{trans}')
@@ -236,7 +242,7 @@ def Parse_NPU(timefile,graph,order,frqss):
             print(f'Next freq:{freqs}')
             freq_indx=freq_indx+1
             
-        if "Profiling these DVFS settings finised" in l:
+        if "Profiling these DVFS settings finished" in l:
             print(f'Tasks:{T_Layer}')
             for layer in NPU_run_time:
                 cmp=order[layer]
@@ -343,7 +349,7 @@ def Parse_total(timefile,graph,order,frqss):
     parts=[]
     df_time = pd.DataFrame(columns=['graph', 'order', 'freq', 'input_time', 'task_time','output_time', 'total_time','pipelinetime'])
     for l in lines:        
-        if "Profiling these DVFS settings finised" in l:
+        if "Profiling these DVFS settings finished" in l:
             print(f'Input_time:{input_time}')
             s=sum(parts)
             print(f'parts:{parts}, sum:{s}')            

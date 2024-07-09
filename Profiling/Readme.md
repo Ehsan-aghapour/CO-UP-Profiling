@@ -8,3 +8,8 @@ that needs to be check out
 
 Transfers2: the receiver of the subgraph calls tensor->handle()->map(); in previsou it was called by sender (the reason that transfer to gpu takes longer in previous versions)
 
+
+
+
+Add your garph
+

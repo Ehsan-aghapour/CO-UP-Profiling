@@ -26,7 +26,7 @@ def Profile(_ff=[[[0],[1],[2],[3,6],[4],[5],[6],[7]]],_Num_frames=Num_frames,ord
     #print(len(_ff))
     ff=utils.format_freqs(_ff)
     print(f'\n\nformatted freqs:\n {ff}')
-    os.system(f"adb push {cnn_dir}/build/examples/Pipeline/{cnn[graph]} /data/local/ARM-CO-UP/test_graph/")
+    os.system(f"adb push {cnn_dir}/build/examples/{Example}/{cnn[graph]} /data/local/ARM-CO-UP/test_graph/")
     #os.system(f"adb push {cnn_dir}/build/examples/n-pipe-NPU/{cnn[graph].replace('pipeline','n_pipe_npu')} /data/local/ARM-CO-UP/test_graph/")
     os.system('adb shell "echo 0 > /sys/class/gpio/gpio157/value"')
     time.sleep(5)
@@ -227,8 +227,11 @@ def Profile_Transfer_Layers(ff=["7-6-4-[3,6]-4-5-6-7"],_Num_frames=Num_frames,or
 ### It calls profile_Transfer_Layers and Parse_Transfer_Layers functions
 def Profile_Transfer_Time(graph="alex"):
     utils.ab()
-    os.system(f"adb push {cnn_dir}/build/examples/Pipeline/{cnn[graph]} /data/local/ARM-CO-UP/test_graph/")
+    os.system(f"adb push {cnn_dir}/build/examples/{Example}/{cnn[graph]} /data/local/ARM-CO-UP/test_graph/")
     os.system('adb shell "echo 0 > /sys/class/gpio/gpio157/value"')
+    
+    print("salam")
+    input()
     time.sleep(5)
     global Transfers_df
     NL=NLayers[graph]
@@ -271,6 +274,7 @@ if Test==4:
     Run_Profile_Transfer_Time()
 
 
+# +
 ### This function is for profiling time and power of tasks in real graphs
 ### In ARMCL you need to sleep between tasks 
 ### As transfer time for most cases is less than 1.4 ms (sample interval of power measurement setup)
@@ -300,7 +304,7 @@ def Profile_Task_Time(graph):
         Layers_logs.mkdir(parents=True, exist_ok=True)
         pwrfile=f'{Layers_logs}/power_{graph}_'+order+'.csv'
         timefile=f'{Layers_logs}/time_{graph}_'+order+'.txt'
-        Profile(frqss,Num_frames,order,graph,pwrfile,timefile,caching=True,_power_profie_mode="layers")
+        Profile(frqss,Num_frames,order,graph,pwrfile,timefile,caching=False,_power_profie_mode="layers")
         #time.sleep(10)
         time_df=parse_perf.Parse(timefile,graph,order,frqss)
         power_df=parse_power.Parse_Power(pwrfile,graph,order,frqss)
@@ -312,6 +316,8 @@ def Profile_Task_Time(graph):
         Layers_df=pd.concat([Layers_df,merged_df], ignore_index=True)
         Layers_df.to_csv(Layers_csv,index=False)
         time.sleep(20)
+        
+Profile_Task_Time('Res18EE')
 
 
 # +

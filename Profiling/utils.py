@@ -12,7 +12,10 @@ import time
 
 ### ab command for checking the board connection and make root access
 def ab():
-    rr='ab'
+    #khadas
+    rr='ablan'
+    #rockpi
+    #rr='ab'
     print(f'Command is: {rr}')
     p = subprocess.Popen(rr.split())
     p.communicate()
@@ -27,10 +30,11 @@ def ab():
 ### Convert freqs list to string
 def format_freqs(fs=[ [ [7],[6],[4],[3,6],[4],[5],[6],[7] ], [] ]):
         formated_fs=[]
-        print(fs)
+        #print(fs)
         #input()
         for f in fs:
-            if f[0]=="min":
+            #if f[0]=="min" or f[0]=="max":
+            if type(f[0])==str:
                 formated_fs.append(f)
                 continue
             if f[0]=='{':
@@ -42,14 +46,22 @@ def format_freqs(fs=[ [ [7],[6],[4],[3,6],[4],[5],[6],[7] ], [] ]):
             ff = '-'.join(['[' + str(sublist[0]) + ',' + str(sublist[1]) + ']' if len(sublist) > 1 else str(sublist[0]) for sublist in f])
             #print(ff)
             formated_fs.append(ff)
+        print(f'formatted freqs are:\n{formated_fs}')
         return formated_fs
 
 
 def format_to_list(fs):
     formated_fs=[]
     for f in fs:
+        if f[0]=="min" or f[0]=="max":
+            formated_fs.append(f)
+            continue
+        if f[0]=='{':
+            formated_fs.append(f)
+            continue
         t=[[int(j) for j in re.findall(r"\b\d+\b", l)] for l in f.split('),')]
         formated_fs.append(t)
+    print(f'list freqs are:\n{formated_fs}')
     return formated_fs
 
 def to_index(fs):

@@ -15,7 +15,7 @@ import subprocess
 Test=5
 ### This is common function to run a case
 ## Remember to modify ARMcL code based on your desire
-def Profile(_ff=[[[0],[1],[2],[3,6],[4],[5],[6],[7]]],_Num_frames=Num_frames,order='BBBGBBBB',graph="Alex",pwr="pwr.csv",tme="temp.txt", caching=True, kernel_c=96, _power_profie_mode='whole',gpu_host='B',npu_host='B',threads_big=2,threads_little=4):
+def Profile(_ff=[[[0],[1],[2],[3,6],[4],[5],[6],[7]]],_Num_frames=Num_frames,order='BBBGBBBB',graph="Alex",pwr="pwr.csv",tme="temp.txt", caching=True, kernel_c=96, _power_profie_mode='whole',gpu_host='B',npu_host='B',threads_big=Threads_big,threads_little=Threads_little):
     #caching=False
     if os.path.isfile(pwr) and os.path.isfile(tme) and caching:
         print("loading existed files")
@@ -25,10 +25,28 @@ def Profile(_ff=[[[0],[1],[2],[3,6],[4],[5],[6],[7]]],_Num_frames=Num_frames,ord
     #print(_ff)
     #print(len(_ff))
     ff=utils.format_freqs(_ff)
+    #print(_ff)
     print(f'\n\nformatted freqs:\n {ff}')
-    os.system(f"adb push {cnn_dir}/build/examples/Pipeline/{cnn[graph]} /data/local/ARM-CO-UP/test_graph/")
+    #set fan
+    if fan_mode == "manual":
+        os.system(f'adb shell "echo 0 > /sys/class/fan/mode"')
+        os.system(f'adb shell "echo {fan_level} > /sys/class/fan/level"')
+    elif fan_mode == "auto":
+        os.system(f'adb shell "echo 1 > /sys/class/fan/mode"')
+        
+    #set gpio
+    gpio_path = f'/sys/class/gpio/gpio{gpionum}'
+    if not os.path.isdir(gpio_path):
+        print(f'pin {gpionum} is not exported. Exporting it now...')
+        os.system(f'adb shell "echo {gpionum} > /sys/class/gpio/export"')
+    print(f'setting 0 to gpio pin {gpionum} value')
+    os.system(f'adb shell "echo 0 > /sys/class/gpio/gpio{gpionum}/value"')
+    
+    # push graph
+    os.system(f"adb push {cnn_dir}/build/examples/{Example}/{cnn[graph]} /data/local/ARM-CO-UP/test_graph/")
     #os.system(f"adb push {cnn_dir}/build/examples/n-pipe-NPU/{cnn[graph].replace('pipeline','n_pipe_npu')} /data/local/ARM-CO-UP/test_graph/")
-    os.system('adb shell "echo 0 > /sys/class/gpio/gpio157/value"')
+    
+    
     time.sleep(5)
     Power_monitoring = threading.Thread(target=Arduino_read.run,args=(pwr,))
     #Power_monitoring.start()
@@ -49,8 +67,8 @@ def Profile(_ff=[[[0],[1],[2],[3,6],[4],[5],[6],[7]]],_Num_frames=Num_frames,ord
     #oo.close()
     
 #Profile(caching=False,_Num_frames=10)
-
-
+if Test==4:
+    Profile([['max']],Num_frames,'G'*11,'Google','test','test2',caching=False,_power_profie_mode="layers")
 # -
 
 ### This is common function to run a app
@@ -227,8 +245,11 @@ def Profile_Transfer_Layers(ff=["7-6-4-[3,6]-4-5-6-7"],_Num_frames=Num_frames,or
 ### It calls profile_Transfer_Layers and Parse_Transfer_Layers functions
 def Profile_Transfer_Time(graph="alex"):
     utils.ab()
-    os.system(f"adb push {cnn_dir}/build/examples/Pipeline/{cnn[graph]} /data/local/ARM-CO-UP/test_graph/")
+    os.system(f"adb push {cnn_dir}/build/examples/{Example}/{cnn[graph]} /data/local/ARM-CO-UP/test_graph/")
     os.system('adb shell "echo 0 > /sys/class/gpio/gpio157/value"')
+    
+    print("salam")
+    input()
     time.sleep(5)
     global Transfers_df
     NL=NLayers[graph]
@@ -271,28 +292,36 @@ if Test==4:
     Run_Profile_Transfer_Time()
 
 
+
+
+# +
 ### This function is for profiling time and power of tasks in real graphs
 ### In ARMCL you need to sleep between tasks 
 ### As transfer time for most cases is less than 1.4 ms (sample interval of power measurement setup)
 def Profile_Task_Time(graph):
+    just_max_freq=True
     global Layers_df
     NL=NLayers[graph]
     orders=["B","G","L"]
     for _order in orders:
         frqss=[]
-        NF=NFreqs[_order]
-        if _order=="G":
-            Nbig=NFreqs["B"]
-            for f in range(NF):
-                for fbig in range(Nbig):
-                    layer_f=[f,fbig]
+        if just_max_freq:
+            frqss=[['max']]
+        else:
+            frqss=[]
+            NF=NFreqs[_order]
+            if _order=="G":
+                Nbig=NFreqs["B"]
+                for f in range(NF):
+                    for fbig in range(Nbig):
+                        layer_f=[f,fbig]
+                        layers_f=NL*[layer_f]
+                        frqss.append(layers_f)
+            else:
+                for f in range(NF):
+                    layer_f=[f]
                     layers_f=NL*[layer_f]
                     frqss.append(layers_f)
-        else:
-            for f in range(NF):
-                layer_f=[f]
-                layers_f=NL*[layer_f]
-                frqss.append(layers_f)
         print(f'graph:{graph} order:{_order} freqs:{frqss}')
         
         
@@ -300,7 +329,7 @@ def Profile_Task_Time(graph):
         Layers_logs.mkdir(parents=True, exist_ok=True)
         pwrfile=f'{Layers_logs}/power_{graph}_'+order+'.csv'
         timefile=f'{Layers_logs}/time_{graph}_'+order+'.txt'
-        Profile(frqss,Num_frames,order,graph,pwrfile,timefile,caching=True,_power_profie_mode="layers")
+        Profile(frqss,Num_frames,order,graph,pwrfile,timefile,caching=False,_power_profie_mode="layers")
         #time.sleep(10)
         time_df=parse_perf.Parse(timefile,graph,order,frqss)
         power_df=parse_power.Parse_Power(pwrfile,graph,order,frqss)
@@ -311,7 +340,15 @@ def Profile_Task_Time(graph):
         merged_df = pd.merge(power_df, time_df, on=['Graph', 'Component', 'Freq','Freq_Host','Layer','Metric'],how='outer')
         Layers_df=pd.concat([Layers_df,merged_df], ignore_index=True)
         Layers_df.to_csv(Layers_csv,index=False)
-        time.sleep(20)
+        time.sleep(30)
+
+        
+#Yujie Parapipe collaboration
+if Test==5:
+    Profile_Task_Time('Google')
+    Profile_Task_Time('InceptionV3')
+    Profile_Task_Time('InceptionV4')
+    Profile_Task_Time('InceptionResnetV2')
 
 
 # +

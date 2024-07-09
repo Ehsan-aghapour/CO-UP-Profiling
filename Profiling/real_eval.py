@@ -83,7 +83,7 @@ def Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [0,0],[0],[0],[0],[0],[0],[
     
     
     if type(_fs[0])==list:
-        if _fs[0][0][0]!='{':
+        if _fs[0][0][0]!='{' and type(_fs[0][0])!=str:
             power_df['freq'] = power_df['freq'].apply(lambda x: str(tuple(tuple(i) for i in x)) )
             time_df['freq'] = time_df['freq'].apply(lambda x: str(tuple(tuple(i) for i in x)) )
             
@@ -178,9 +178,50 @@ def Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [0,0],[0],[0],[0],[0],[0],[
 
     
 
-if Test==3:
-    Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [4,6],[6],[6],[6],[6],[6],[6],[6] ] ])
-
+if Test==5:
+    ordd="NNNNNNNNNNNNNN"
+    fff=[[7], [7], [7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7]]
+    #Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [4,6],[6],[6],[6],[6],[6],[6],[6] ] ])
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    ordd="GGNNNNNNNNNNNN"
+    fff=[[4,7], [4,7], [7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7]]
+    #Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [4,6],[6],[6],[6],[6],[6],[6],[6] ] ])
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    ordd="BBNNNNNNNNNNNN"
+    fff=[[7], [7], [7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7]]
+    #Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [4,6],[6],[6],[6],[6],[6],[6],[6] ] ])
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    
+    ordd="GLLLLNNNNNNNNN"
+    fff=((4, 7), (5,), (5,), (5,), (5,), (7,), (2,), (3,), (2,), (3,), (2,), (5,), (7,), (7,))
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    
+    ordd="BBLLLLLNNNBNNN"
+    fff=((7,), (7,), (5,), (5,), (5,), (5,), (5,), (7,), (2,), (7,), (7,), (7,), (7,), (7,))
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    ordd="GLLLLLLNNNBNNN"
+    fff=((4, 7), (5,), (5,), (5,), (5,), (5,), (5,), (7,), (2,), (7,), (7,), (7,), (7,), (7,))
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    ordd="BBNNNNNNNNNNNN"
+    fff=((7,), (7,), (7,), (1,), (2,), (0,), (2,), (3,), (2,), (3,), (2,), (5,), (7,), (7,))
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    ordd="NNNNNNNNNNNNNN"
+    fff=((7,), (4,), (2,), (1,), (2,), (0,), (2,), (3,), (2,), (3,), (2,), (5,), (7,), (7,))
+    #Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [4,6],[6],[6],[6],[6],[6],[6],[6] ] ])
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    ordd="GGNNNNNNNNNNNN"
+    fff=[[4,7], [4,7], [7],[7],[1],[1],[1],[1],[1],[1],[1],[1],[7],[7]]
+    #Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [4,6],[6],[6],[6],[6],[6],[6],[6] ] ])
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
 #fig 2 of dac paper
 def eval_single_pe():
     for _g in graphs:
@@ -217,6 +258,36 @@ if Test==2:
     
 #Real_Evaluation(g="Alex",_ord='LLLLBBBB',_fs=[ '{{2-3-4}}' ],suffix='npipe_pipeline',gpu_host='B', npu_host='B')
 # -
+if Test==6:
+    graph_name = 'Google'
+    mappings = ['GGGGBBBBBBG', 'GGGGBBBBBBB', 'B'*11, 'G'*11] 
+    t_sum,e_sum=[],[]
+    for mapping in mappings:
+        Real_Evaluation(g=graph_name, _ord=mapping, _fs=[['{{max}}']])
+        time.sleep(60)
+        #input("continue?")
+
+    graph_name = 'InceptionResnetV2'
+    mappings = ['GGGGGGGGGGGGGGGGBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB', 'B'*50, 'G'*50, 'GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGBBG', 'GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGBBB'] 
+    for mapping in mappings:
+        Real_Evaluation(g=graph_name, _ord=mapping, _fs=[['{{max}}']])
+        time.sleep(60)
+        #input("continue?")
+
+    graph_name='InceptionV3'
+    mappings = ['GGGGGGGGBBBBBBBBG', 'GGGGGGGGBBBBBBBBB', 'B'*17, 'G'*17]
+    for mapping in mappings:
+        Real_Evaluation(g=graph_name, _ord=mapping, _fs=[['{{max}}']])
+        time.sleep(60)
+        #input("continue?")
+
+    graph_name='InceptionV4'
+    mappings = ['GGGBGBGGGGBBBBBBBBBBBBB', 'GGGGGBGGGGBBBBBBBBBBBBB', 'GGGBGGGGGGBBBBBBBBBBBBB', 'GGGGGGGGGGBBBBBBBBBBBBB', 'B'*23, 'G'*23, 'GGGGGGGGGGGGGGGGGGGGGGB']
+    for mapping in mappings:
+        Real_Evaluation(g=graph_name, _ord=mapping, _fs=[['{{max}}']])
+        time.sleep(60)
+        #input("continue?")
+
 if Test==4:
     for _g in graphs:
         _cmps=['N']
@@ -999,7 +1070,7 @@ def Run_Eval_ISLPED_test(g='YOLOv3',num_changes=10,step=10):
         list_fs=column_freq_values
         Real_Evaluation(g,_ord=value,_fs=list_fs)
         #Run_Eval_For_GA(g,_ord=value,_fs=list_fs,EvalFile=EvalFile)'''
-if Test==6:
+if Test==5:
     #Run_Eval_DAC(g='YOLOv3',step=1,num_changes=1)
     Run_Eval_ISLPED_test(g='YOLOv3',step=5,num_changes=2)
     #Run_Eval_DAC(g='MobileV1',step=1)
@@ -1031,14 +1102,8 @@ import serial
 serPort = "/dev/ttyACM0"
 baudRate = 115200
 
-ser = serial.Serial(serPort, baudRate)
-
-ser
-
-ser.flush()
-
-ser.close()
-
-57,58
+# +
+#ser = serial.Serial(serPort, baudRate)
+# -
 
 

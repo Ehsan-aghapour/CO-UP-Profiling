@@ -178,9 +178,50 @@ def Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [0,0],[0],[0],[0],[0],[0],[
 
     
 
-if Test==3:
-    Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [4,6],[6],[6],[6],[6],[6],[6],[6] ] ])
-
+if Test==6:
+    ordd="NNNNNNNNNNNNNN"
+    fff=[[7], [7], [7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7]]
+    #Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [4,6],[6],[6],[6],[6],[6],[6],[6] ] ])
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    ordd="GGNNNNNNNNNNNN"
+    fff=[[4,7], [4,7], [7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7]]
+    #Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [4,6],[6],[6],[6],[6],[6],[6],[6] ] ])
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    ordd="BBNNNNNNNNNNNN"
+    fff=[[7], [7], [7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7]]
+    #Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [4,6],[6],[6],[6],[6],[6],[6],[6] ] ])
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    
+    ordd="GLLLLNNNNNNNNN"
+    fff=((4, 7), (5,), (5,), (5,), (5,), (7,), (2,), (3,), (2,), (3,), (2,), (5,), (7,), (7,))
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    
+    ordd="BBLLLLLNNNBNNN"
+    fff=((7,), (7,), (5,), (5,), (5,), (5,), (5,), (7,), (2,), (7,), (7,), (7,), (7,), (7,))
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    ordd="GLLLLLLNNNBNNN"
+    fff=((4, 7), (5,), (5,), (5,), (5,), (5,), (5,), (7,), (2,), (7,), (7,), (7,), (7,), (7,))
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    ordd="BBNNNNNNNNNNNN"
+    fff=((7,), (7,), (7,), (1,), (2,), (0,), (2,), (3,), (2,), (3,), (2,), (5,), (7,), (7,))
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    ordd="NNNNNNNNNNNNNN"
+    fff=((7,), (4,), (2,), (1,), (2,), (0,), (2,), (3,), (2,), (3,), (2,), (5,), (7,), (7,))
+    #Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [4,6],[6],[6],[6],[6],[6],[6],[6] ] ])
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
+    ordd="GGNNNNNNNNNNNN"
+    fff=[[4,7], [4,7], [7],[7],[1],[1],[1],[1],[1],[1],[1],[1],[7],[7]]
+    #Real_Evaluation(g="alex",_ord='GBBBBBBB',_fs=[ [ [4,6],[6],[6],[6],[6],[6],[6],[6] ] ])
+    Real_Evaluation(g="MobileV1",_ord=ordd,_fs=[ fff ])
+    
 #fig 2 of dac paper
 def eval_single_pe():
     for _g in graphs:
@@ -999,7 +1040,7 @@ def Run_Eval_ISLPED_test(g='YOLOv3',num_changes=10,step=10):
         list_fs=column_freq_values
         Real_Evaluation(g,_ord=value,_fs=list_fs)
         #Run_Eval_For_GA(g,_ord=value,_fs=list_fs,EvalFile=EvalFile)'''
-if Test==6:
+if Test==5:
     #Run_Eval_DAC(g='YOLOv3',step=1,num_changes=1)
     Run_Eval_ISLPED_test(g='YOLOv3',step=5,num_changes=2)
     #Run_Eval_DAC(g='MobileV1',step=1)
@@ -1031,14 +1072,8 @@ import serial
 serPort = "/dev/ttyACM0"
 baudRate = 115200
 
-ser = serial.Serial(serPort, baudRate)
-
-ser
-
-ser.flush()
-
-ser.close()
-
-57,58
+# +
+#ser = serial.Serial(serPort, baudRate)
+# -
 
 

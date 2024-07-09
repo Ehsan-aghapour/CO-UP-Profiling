@@ -597,6 +597,32 @@ if False:
 #Value('YOLOv3', 'N', [7], 57, 'task', 'Power', True)
 #[57] in [57,58] --> this gives false in python
 #layer 59 running with NPU with min freq time is empty fill it manually
+
+dbg=False
+ordd="NNNNNNNNNNNNNN"
+fff=[[5], [5], [7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7]]
+r=Inference_Cost(_graph="MobileV1",_order=ordd,_freq=fff,_debug=dbg)
+print(r)
+
+ordd="LLNNNNNNNNNNNN"
+fff=[[5], [5], [7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7],[7]]
+r=Inference_Cost(_graph="MobileV1",_order=ordd,_freq=fff,_debug=dbg)
+print(r)
+
+ordd="GLLLLNNNNNNNNN"
+fff=[[4,7],[5],[5],[5],[5],[7],[7],[7],[7],[7],[7],[7],[7],[7]]
+r=Inference_Cost(_graph="MobileV1",_order=ordd,_freq=fff,_debug=dbg)
+print(r)
+
+ordd="GLLLLLLNNNBNNN"
+fff=[[4,7],[5],[5],[5],[5],[5],[5],[7],[7],[7],[7],[7],[7],[7]]
+r=Inference_Cost(_graph="MobileV1",_order=ordd,_freq=fff,_debug=dbg)
+print(r)
+
+ordd="LLLLLLLLLLLLLL"
+fff=[[5], [5], [5],[5],[5],[5],[5],[5],[5],[5],[5],[5],[5],[5]]
+r=Inference_Cost(_graph="MobileV1",_order=ordd,_freq=fff,_debug=dbg)
+print(r)
 # -
 
 
@@ -749,24 +775,50 @@ def Fill_prediction(_FileName, dvfs_delay):
     cases=Evals_df.shape[0]
     print(f'There are {cases}')
     
-    Regenerate_Predeiction=False
+    Regenerate_Prediction=False
     Regenerate_Errors=False
     
     def prediction(row):
         #print(row)
         graph=row['graph']
-        #freq=utils.format_to_list([row['freq']])[0]
-        freq=utils.format_freqs([row['freq']])
+        print([row['freq']])
+        freq=utils.format_to_list([row['freq']])[0]
+        #freq=utils.format_freqs([row['freq']])
         order=row['order']
         #print(graph,freq,order,dvfs_delay)
         return Inference_Cost(_graph=graph,_freq=freq,_order=order,_dvfs_delay=dvfs_delay, _debug=False)
+    
+    
+    '''
     if 'Predicted_Time' not in Evals_df:
         Evals_df[['Predicted_Time','Predicted_Power','Predicted_Energy']]=Evals_df.apply(prediction,axis=1, result_type='expand')
     if 'Predicted_Time' in Evals_df:
-        if pd.isna(Evals_df['Predicted_Time']).any() or Regenerate_Predeiction:
+        if pd.isna(Evals_df['Predicted_Time']).any() or Regenerate_Prediction:
             Evals_df[['Predicted_Time','Predicted_Power','Predicted_Energy']]=Evals_df.apply(prediction,axis=1, result_type='expand')
-    
+    '''
+    if 'Predicted_Time' not in Evals_df:
+        Evals_df['Predicted_Time']=None
+        Evals_df['Predicted_Power']=None
+        Evals_df['Predicted_Energy']=None
+    if 'Power' not in Evals_df:
+        Evals_df['Power']=None
+    try:
+        for index, row in Evals_df.iterrows():
+            try:
+                if pd.isna(row['Predicted_Time']) or Regenerate_Prediction:
+                    row[['Predicted_Time', 'Predicted_Power', 'Predicted_Energy']] = prediction(row)
+                if pd.isna(row['total_e']):
+                    row['total_e']=row['input_e']+row['task_e']+row['output_e']
+                if pd.isna(row['Power']):
+                    row['Power']=row['total_e']/row['total_time']
+                Evals_df.iloc[index]=row
+            except Exception as e:
+                print(f"Error in row {index}: {e}")
+                continue
+    except Exception as e:
+        print(f"Error: {e}")
     #display(Evals_df)
+    Evals_df['Predicted_Power']=Evals_df['Predicted_Power']/1000
     def calc_EE(row):
         Measured=1000.0/row['total_e']
         Pred=1000.0/row['Predicted_Energy']
@@ -776,7 +828,7 @@ def Fill_prediction(_FileName, dvfs_delay):
     def calc_Power(row):
         measured=row['total_e']/row['total_time']
         pred=row['Predicted_Energy']/row['Predicted_Time']
-        Err=100*(pred-measured)/measured
+        Err=100*abs(pred-measured)/measured
         return Err
     
     def calc_Power_MAE(row):
@@ -791,10 +843,14 @@ def Fill_prediction(_FileName, dvfs_delay):
         Err=100.0*(pred-measured)/measured
         return Err
     
-    '''if 'Error_Time' not in Evals_df or Regenerate_Errors:
-        Evals_df['Error_Time']=Evals_df.apply(lambda x:100*(x['Predicted_Time']-x['total_time'])/x['total_time'],axis=1)
+    Evals_df = Evals_df.loc[Evals_df['total_e'].notna()]
+    new_file=_FileName.with_name(_FileName.name.replace(".csv", "_prediction.csv"))
+    Evals_df.to_csv(new_file)
+    #display(Evals_df)
+    if 'Error_Time' not in Evals_df or Regenerate_Errors:
+        Evals_df['Error_Time']=Evals_df.apply(lambda x:abs(100*(x['Predicted_Time']-x['total_time'])/x['total_time']),axis=1)
     if 'Error_Energy' not in Evals_df or Regenerate_Errors:
-        Evals_df['Error_Energy']=Evals_df.apply(lambda x:100*(x['Predicted_Energy']-x['total_e'])/x['total_e'],axis=1)
+        Evals_df['Error_Energy']=Evals_df.apply(lambda x:abs(100*(x['Predicted_Energy']-x['total_e'])/x['total_e']),axis=1)
     if 'Error_EE' not in Evals_df or Regenerate_Errors:
         Evals_df['Error_EE']=Evals_df.apply(calc_EE,axis=1)
     #Evals_df['Error_Power']=Evals_df.apply(lambda x:100*abs( (x['Predicted_Energy']/x['Predicted_Time']) - (x['total_e']/x['total_time']) /(x['total_e']/x['total_time']) ),axis=1)
@@ -804,7 +860,7 @@ def Fill_prediction(_FileName, dvfs_delay):
         Evals_df['Error_FPS']=Evals_df.apply(calc_FPS,axis=1)
         
     Evals_df['MAE_Time']=Evals_df.apply(lambda x:abs(x['Predicted_Time']-x['total_time']),axis=1)
-    Evals_df['MAE_Power']=Evals_df.apply(calc_Power_MAE,axis=1)'''
+    Evals_df['MAE_Power']=Evals_df.apply(calc_Power_MAE,axis=1)
     
     new_file=_FileName.with_name(_FileName.name.replace(".csv", "_prediction.csv"))
     Evals_df.to_csv(new_file)
@@ -816,6 +872,10 @@ if Test==2:
 
 #Fill_prediction(Path("yolo.csv"),'variable')
 #Fill_prediction(Path("Yolov3_analyze_layers.csv"),'variable')
+if Test==3:
+    Fill_prediction(Path('Test_Model_Evaluations_YOLOv3.csv'),'variable')
+
+
 # -
 
 def produce_desing_points(g='YOLOv3'):

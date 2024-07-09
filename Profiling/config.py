@@ -5,8 +5,34 @@ import os
 
 Test=5
 
+Example="Pipeline"
+#Example="EarlyExit"
 
-cnn_dir="/home/ehsan/UvA/ARMCL/Rock-Pi/ARM-COUP/"
+board="rockpi"
+#board="khadas"
+
+gpionum=0
+Threads_big=0
+Threads_little=0
+fan_mode="none"
+fan_level=0
+cnn_dir=""
+
+if board == "rockpi":
+    gpionum=157
+    Threads_big=2
+    Threads_little=4
+    fan_mode="none"
+    cnn_dir="/home/ehsan/UvA/ARMCL/Rock-Pi/ARM-COUP/"
+
+#rockpi
+if board =="khadas":
+    gpionum=432
+    Threads_big=4
+    Threads_little=2
+    fan_mode="manual"
+    fan_level=3
+    cnn_dir="/home/ehsan/UvA/ARMCL/Rock-Pi/ARM-COUP32bit/"
 
 cnn={
     "Alex":"graph_alexnet_pipeline",
@@ -15,15 +41,20 @@ cnn={
     "ResV1_50":"graph_resnet50_pipeline",
     "SqueezeV1":"graph_squeezenet_pipeline",
     "YOLOv3":"graph_yolov3_pipeline",
+    "InceptionV3":"graph_inception_v3_pipeline",
+    "InceptionV4":"graph_inception_v4_pipeline",
+    "InceptionResnetV2":"graph_inception_resnet_v2_pipeline",
+    "Res18EE":"graph_resnet18_earlyexit",
     "test_transfer":"graph_test_transfer_pipeline"
 }
 
 
-graphs=["Alex", "Google", "MobileV1", "ResV1_50", "SqueezeV1", "YOLOv3"]
-NLayers={"Alex":8, "Google":11, "MobileV1":14, "ResV1_50":18, "SqueezeV1":10, "YOLOv3":75, "test_transfer":2}
+graphs=["Alex", "Google", "MobileV1", "ResV1_50", "SqueezeV1", "YOLOv3", "InceptionV3", "InceptionV4", "InceptionResnetV2", "Res18EE"]
+NLayers={"Alex":8, "Google":11, "MobileV1":14, "ResV1_50":18, "SqueezeV1":10, "YOLOv3":75, "InceptionV3":17, "InceptionV4":23, "InceptionResnetV2":50, "test_transfer":2,
+        "Res18EE":8}
 NFreqs={"L":6, "B":8, "G":5}
 Metrics=["in","task","out","trans"]
-Num_frames=10
+Num_frames=30
 Num_Warm_up=3
 
 

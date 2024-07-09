@@ -702,6 +702,7 @@ if run_flag_mobile==True:
     target_accuracies[-1]=68.36
     print(len(target_accuracies))
     target_accuracies.reverse()
+    target_accuracies=[67.34]
     print(target_accuracies)
     #input()
     for target in target_accuracies:
@@ -827,6 +828,14 @@ def hv_cal_ref(file_name,ref_point):
     print(f'file {file_name} hv {volume}')
     return(volume)
 
+
+
+target_graph='YOLOv3'
+target_graph='MobileV1'
+directory = '2/csvs/'
+
+directory=f'Results/{target_graph}/3_20steps_yixian/Baseline/'
+
 #hv_cal_ref(file_name='csvs/YOLOv3_64.7.csv',ref_point=[12.31,5.55])
 
 #YOLOv3
@@ -837,35 +846,38 @@ _ref_point_yolo=[20.32,7.1]
 
 #MobileV1
 #max power and time with little cpu
-_ref_point_mobile=[0.5,7] #0.49,6.96
+_ref_point_mobile=[0.55,7] #0.49,6.96
 #_ref_point=[20,10]
 
 _ref_point=[20,20]
 if target_graph=='YOLOv3':
     _ref_point=_ref_point_yolo
 if target_graph=='MobileV1':
-    _ref_point=_ref_point_yolo
-print(f'Reference point for HV Calculation is {_ref_point}')
+    _ref_point=_ref_point_mobile
+print(f'target graph {target_graph} Reference point for HV Calculation is {_ref_point}')
 
 import os
 # Specify the directory path
-directory = '2/csvs/'
+
 # Get the list of files in the directory
 files = os.listdir(directory)
-files = [file for file in files if not file.startswith(".~lock")]
+files = [file for file in files if not file.startswith(".~lock") and file.endswith(".csv")]
 hvs=[]
 #df_hv = pd.DataFrame(columns=['Filename', 'HV'])
 for f in files:
     print(f'\nCalculating hv for file {f}')
-    hv=hv_cal_ref(file_name=directory+f,ref_point=_ref_point)
-    hvs.append({'Filename':f,'HV':hv})
-    #df_hv = df_hv.append({'Filename': f, 'HV': hv}, ignore_index=True)
+    try:
+        hv=hv_cal_ref(file_name=directory+f,ref_point=_ref_point)
+        hvs.append({'Filename':f,'accuracy':f.split('_')[-1][:-4],'HV':hv})
+        #df_hv = df_hv.append({'Filename': f, 'HV': hv}, ignore_index=True)
+    except Exception as e:
+        print(f'Is not valid {e}')
 
 df_hv=pd.DataFrame(hvs)
 #display(df_hv)
 df_hv=df_hv.sort_values(by='HV',ascending=True)
 display(df_hv)
-df_hv.to_csv('hvs.csv')
+df_hv.to_csv(f'{directory}hvs_({_ref_point}).csv')
 # -
 
 if False:
@@ -888,6 +900,10 @@ if False:
     print(inference_time,avg_power)
     import math
     np.isnan(inference_time)
+
+""
+t='MobileV1_67.34.csv'
+float(t.split('_')[-1][:-4])
 
 ""
 modelyolo=models.load_model("YOLOv3.h5")
@@ -915,7 +931,7 @@ x[:]=0
 #x[34:38]=5
 #x_quantization=np.array([x])
 #x_quantization
-
+#x[:1]=8
 # +
 mask = np.isin(x, [0,1,2,3,4,5,6,7])
 

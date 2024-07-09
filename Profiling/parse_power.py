@@ -104,20 +104,28 @@ def Parse_Power(file_name,graph,order,frqss):
         input_pwrs=sum(input_pwrs)/len(input_pwrs)
         for layer,j in enumerate(range(1,2*NL,2)):
             Host_freq=-1
-            if order[layer]=="G":
-                Host_freq=freq[layer][1]
-            if order[layer]=="N":
-                Host_freq=freq[layer][0]
+            Layer_freq=-1
+            #print(freq)
+            if freq[0] in ['min','{min}','{{min}}','max','{max}','{{max}}']:
+                Host_freq=freq[0]
+                Layer_freq=freq[0]
+            else:
+                Layer_freq=freq[layer][0]
+                if order[layer]=="G":
+
+                    Host_freq=freq[layer][1]
+                if order[layer]=="N":
+                    Host_freq=freq[layer][0]
                 
             if layer==0:
-                pwr_df.loc[len(pwr_df)]={"Graph":graph, "Component":order[layer],"Freq":freq[layer][0],"Freq_Host":Host_freq, "Layer":layer,"Metric":"in","Power":input_pwrs}
-                print(f'setting power for {graph}-{order}-{layer}-{freq[layer][0]}-in-power-->{input_pwrs}')
+                pwr_df.loc[len(pwr_df)]={"Graph":graph, "Component":order[layer],"Freq":Layer_freq,"Freq_Host":Host_freq, "Layer":layer,"Metric":"in","Power":input_pwrs}
+                print(f'setting power for {graph}-{order}-{layer}-{Layer_freq}-in-power-->{input_pwrs}')
             
             task_pwrs[layer]=pwrs[j::2*NL]
             print(f'len layer power {len(task_pwrs[layer])}')
             task_pwrs[layer]=sum(task_pwrs[layer])/len(task_pwrs[layer])
-            pwr_df.loc[len(pwr_df)]={"Graph":graph, "Component":order[layer],"Freq":freq[layer][0],"Freq_Host":Host_freq, "Layer":layer,"Metric":"task","Power":task_pwrs[layer]}
-            print(f'setting power for {graph}-{order}-{layer}-{freq[layer][0]}-task-power->{task_pwrs[layer]}')
+            pwr_df.loc[len(pwr_df)]={"Graph":graph, "Component":order[layer],"Freq":Layer_freq,"Freq_Host":Host_freq, "Layer":layer,"Metric":"task","Power":task_pwrs[layer]}
+            print(f'setting power for {graph}-{order}-{layer}-{Layer_freq}-task-power->{task_pwrs[layer]}')
     return pwr_df
 
 

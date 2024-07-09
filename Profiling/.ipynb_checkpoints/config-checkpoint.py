@@ -5,6 +5,8 @@ import os
 
 Test=5
 
+Example="Pipeline"
+Example="EarlyExit"
 
 cnn_dir="/home/ehsan/UvA/ARMCL/Rock-Pi/ARM-COUP/"
 
@@ -15,12 +17,14 @@ cnn={
     "ResV1_50":"graph_resnet50_pipeline",
     "SqueezeV1":"graph_squeezenet_pipeline",
     "YOLOv3":"graph_yolov3_pipeline",
+    "Res18EE":"graph_resnet18_earlyexit",
     "test_transfer":"graph_test_transfer_pipeline"
 }
 
 
-graphs=["Alex", "Google", "MobileV1", "ResV1_50", "SqueezeV1", "YOLOv3"]
-NLayers={"Alex":8, "Google":11, "MobileV1":14, "ResV1_50":18, "SqueezeV1":10, "YOLOv3":75, "test_transfer":2}
+graphs=["Alex", "Google", "MobileV1", "ResV1_50", "SqueezeV1", "YOLOv3","Res18EE"]
+NLayers={"Alex":8, "Google":11, "MobileV1":14, "ResV1_50":18, "SqueezeV1":10, "YOLOv3":75, "test_transfer":2,
+        "Res18EE":8}
 NFreqs={"L":6, "B":8, "G":5}
 Metrics=["in","task","out","trans"]
 Num_frames=10

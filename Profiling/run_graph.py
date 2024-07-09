@@ -42,7 +42,10 @@ def Run_Graph(ALL_Freqs, prepare_command, output_filename, blocking=True,Power_m
                     break
                 if xlist:  # Exceptional condition
                     raise Exception("Exceptional condition on subprocess stdin")'''
-            p.stdin.write(f'{Freqs}\n')
+            if Freqs[0] in ['min','{min}','{{min}}','max','{max}','{{max}}']:
+                p.stdin.write(f'{Freqs[0]}\n')
+            else:
+                p.stdin.write(f'{Freqs}\n')
             p.stdin.flush()
 
             '''while p.poll() is None:

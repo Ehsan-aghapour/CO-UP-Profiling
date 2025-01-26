@@ -1,0 +1,2 @@
+graph,order,host,freq,input_time,task_time,output_time,total_time,input_power,task_power,input_e,task_e,output_e,total_e,power_efficiency,pipelinetime
+ResV1_50,GGGGGGGBBBBBBBBBBB,BB,{{max}},10.9772,270.8589,0.17009,281.8361,3436.3809523809523,4985.7037630288205,37.72184099047619,1350.4222369798472,0.5844940361904761,1388.728572006514,0.7200831178659651,185.145

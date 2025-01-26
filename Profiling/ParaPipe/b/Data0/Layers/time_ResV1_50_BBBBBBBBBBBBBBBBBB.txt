@@ -1,0 +1,1581 @@
+4 Input images are read from /data/local/ARM-CO-UP/assets/images/ppm_images_224/
+[UtilsPipeline.h] image directory is: /data/local/ARM-CO-UP/assets/images/ppm_images_224//
+Threads : 4
+Small Cores Threads : 2
+Target : Neon
+Data type : F32
+Data layout : NHWC
+Tuner enabled? : false
+Cache enabled? : false
+Tuner mode : Normal
+Tuner file : 
+MLGO file : 
+Fast math enabled? : false
+Data path : /data/local/ARM-CO-UP/assets
+Image file : /data/local/ARM-CO-UP/assets/images/ppm_images_224//
+Labels file : /data/local/ARM-CO-UP/assets/labels/labels.txt
+Partition point is : 0
+Second partition point is : 0
+Order is : BBBBBBBBBBBBBBBBBB
+freqs of layers : 
+power_profile_mode : layers
+GPU host is: B
+NPU host is: B
+Number of totla cores is : 6
+Number of little cores is : 2
+Number of big cores is : 4
+Print task names : 0
+Run network for 30 times.
+Layer timing: 0
+
+Adding Graph0 target 1 PE: B Host PE: B num threads: 4 Layers: 0-17
+
+
+**********************************
+Graphs(subgrahs) are initialized for adding layers based on mapping
+**************************************
+
+
+
+
+performance
+performance
+4
+Threads : 4
+Small Cores Threads : 2
+Target : Neon
+Data type : F32
+Data layout : NHWC
+Tuner enabled? : false
+Cache enabled? : false
+Tuner mode : Normal
+Tuner file : 
+MLGO file : 
+Fast math enabled? : false
+Data path : /data/local/ARM-CO-UP/assets
+Image file : /data/local/ARM-CO-UP/assets/images/ppm_images_224//
+Labels file : /data/local/ARM-CO-UP/assets/labels/labels.txt
+Partition point is : 0
+Second partition point is : 0
+Order is : BBBBBBBBBBBBBBBBBB
+freqs of layers : 
+power_profile_mode : layers
+GPU host is: B
+NPU host is: B
+Number of totla cores is : 6
+Number of little cores is : 2
+Number of big cores is : 4
+Print task names : 0
+Run network for 30 times.
+Layer timing: 0
+
+Pandoon opened at 3
+
+
+************
+ DVFS is initialized 
+******************
+
+
+Failed to write to export! Error: Device or resource busy
+Could not Export GPIO
+
+
+************
+ Power setup has set up 
+******************
+
+
+****************************
+GraphUtils.cpp- reading images: /data/local/ARM-CO-UP/assets/images/ppm_images_224//
+/data/local/ARM-CO-UP/assets/images/ppm_images_224//go_kart.ppm
+/data/local/ARM-CO-UP/assets/images/ppm_images_224//gold_fish.ppm
+/data/local/ARM-CO-UP/assets/images/ppm_images_224//school_bus.ppm
+/data/local/ARM-CO-UP/assets/images/ppm_images_224//gondola.ppm
+*****************************
+
+
+
+
+
+
+*******************************************************************************************
+                                   Layer Names                                                   
+*******************************************************************************************
+
+[resnetv1_50]
+
+
+----------------------------------------------------------------
+Layer 0
+----------------------------------------------------------------
+			conv1/convolution
+			conv1/BatchNorm
+			conv1/Relu
+			pool1/MaxPool
+
+----------------------------------------------------------------
+Layer 1
+----------------------------------------------------------------
+block1/unit1/bottleneck_v1/conv1/convolution
+block1/unit1/bottleneck_v1/conv1/BatchNorm
+block1/unit1/bottleneck_v1/conv1/Relu
+block1/unit1/bottleneck_v1/conv2/convolution
+block1/unit1/bottleneck_v1/conv2/BatchNorm
+block1/unit1/bottleneck_v1/conv1/Relu
+block1/unit1/bottleneck_v1/conv3/convolution
+block1/unit1/bottleneck_v1/conv2/BatchNorm
+block1/unit1/bottleneck_v1/shortcut/convolution
+block1/unit1/bottleneck_v1/shortcut/BatchNorm
+block1/unit1/bottleneck_v1/add
+block1/unit1/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 2
+----------------------------------------------------------------
+			block1/unit2/bottleneck_v1/conv1/convolution
+			block1/unit2/bottleneck_v1/conv1/BatchNorm
+			block1/unit2/bottleneck_v1/conv1/Relu
+			block1/unit2/bottleneck_v1/conv2/convolution
+			block1/unit2/bottleneck_v1/conv2/BatchNorm
+			block1/unit2/bottleneck_v1/conv1/Relu
+			block1/unit2/bottleneck_v1/conv3/convolution
+			block1/unit2/bottleneck_v1/conv2/BatchNorm
+			block1/unit2/bottleneck_v1/add
+			block1/unit2/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 3
+----------------------------------------------------------------
+block1/unit3/bottleneck_v1/conv1/convolution
+block1/unit3/bottleneck_v1/conv1/BatchNorm
+block1/unit3/bottleneck_v1/conv1/Relu
+block1/unit3/bottleneck_v1/conv2/convolution
+block1/unit3/bottleneck_v1/conv2/BatchNorm
+block1/unit3/bottleneck_v1/conv1/Relu
+block1/unit3/bottleneck_v1/conv3/convolution
+block1/unit3/bottleneck_v1/conv2/BatchNorm
+block1/unit3/bottleneck_v1/shortcut/MaxPool
+block1/unit3/bottleneck_v1/add
+block1/unit3/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 4
+----------------------------------------------------------------
+			block2/unit1/bottleneck_v1/conv1/convolution
+			block2/unit1/bottleneck_v1/conv1/BatchNorm
+			block2/unit1/bottleneck_v1/conv1/Relu
+			block2/unit1/bottleneck_v1/conv2/convolution
+			block2/unit1/bottleneck_v1/conv2/BatchNorm
+			block2/unit1/bottleneck_v1/conv1/Relu
+			block2/unit1/bottleneck_v1/conv3/convolution
+			block2/unit1/bottleneck_v1/conv2/BatchNorm
+			block2/unit1/bottleneck_v1/shortcut/convolution
+			block2/unit1/bottleneck_v1/shortcut/BatchNorm
+			block2/unit1/bottleneck_v1/add
+			block2/unit1/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 5
+----------------------------------------------------------------
+block2/unit2/bottleneck_v1/conv1/convolution
+block2/unit2/bottleneck_v1/conv1/BatchNorm
+block2/unit2/bottleneck_v1/conv1/Relu
+block2/unit2/bottleneck_v1/conv2/convolution
+block2/unit2/bottleneck_v1/conv2/BatchNorm
+block2/unit2/bottleneck_v1/conv1/Relu
+block2/unit2/bottleneck_v1/conv3/convolution
+block2/unit2/bottleneck_v1/conv2/BatchNorm
+block2/unit2/bottleneck_v1/add
+block2/unit2/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 6
+----------------------------------------------------------------
+			block2/unit3/bottleneck_v1/conv1/convolution
+			block2/unit3/bottleneck_v1/conv1/BatchNorm
+			block2/unit3/bottleneck_v1/conv1/Relu
+			block2/unit3/bottleneck_v1/conv2/convolution
+			block2/unit3/bottleneck_v1/conv2/BatchNorm
+			block2/unit3/bottleneck_v1/conv1/Relu
+			block2/unit3/bottleneck_v1/conv3/convolution
+			block2/unit3/bottleneck_v1/conv2/BatchNorm
+			block2/unit3/bottleneck_v1/add
+			block2/unit3/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 7
+----------------------------------------------------------------
+block2/unit4/bottleneck_v1/conv1/convolution
+block2/unit4/bottleneck_v1/conv1/BatchNorm
+block2/unit4/bottleneck_v1/conv1/Relu
+block2/unit4/bottleneck_v1/conv2/convolution
+block2/unit4/bottleneck_v1/conv2/BatchNorm
+block2/unit4/bottleneck_v1/conv1/Relu
+block2/unit4/bottleneck_v1/conv3/convolution
+block2/unit4/bottleneck_v1/conv2/BatchNorm
+block2/unit4/bottleneck_v1/shortcut/MaxPool
+block2/unit4/bottleneck_v1/add
+block2/unit4/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 8
+----------------------------------------------------------------
+			block3/unit1/bottleneck_v1/conv1/convolution
+			block3/unit1/bottleneck_v1/conv1/BatchNorm
+			block3/unit1/bottleneck_v1/conv1/Relu
+			block3/unit1/bottleneck_v1/conv2/convolution
+			block3/unit1/bottleneck_v1/conv2/BatchNorm
+			block3/unit1/bottleneck_v1/conv1/Relu
+			block3/unit1/bottleneck_v1/conv3/convolution
+			block3/unit1/bottleneck_v1/conv2/BatchNorm
+			block3/unit1/bottleneck_v1/shortcut/convolution
+			block3/unit1/bottleneck_v1/shortcut/BatchNorm
+			block3/unit1/bottleneck_v1/add
+			block3/unit1/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 9
+----------------------------------------------------------------
+block3/unit2/bottleneck_v1/conv1/convolution
+block3/unit2/bottleneck_v1/conv1/BatchNorm
+block3/unit2/bottleneck_v1/conv1/Relu
+block3/unit2/bottleneck_v1/conv2/convolution
+block3/unit2/bottleneck_v1/conv2/BatchNorm
+block3/unit2/bottleneck_v1/conv1/Relu
+block3/unit2/bottleneck_v1/conv3/convolution
+block3/unit2/bottleneck_v1/conv2/BatchNorm
+block3/unit2/bottleneck_v1/add
+block3/unit2/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 10
+----------------------------------------------------------------
+			block3/unit3/bottleneck_v1/conv1/convolution
+			block3/unit3/bottleneck_v1/conv1/BatchNorm
+			block3/unit3/bottleneck_v1/conv1/Relu
+			block3/unit3/bottleneck_v1/conv2/convolution
+			block3/unit3/bottleneck_v1/conv2/BatchNorm
+			block3/unit3/bottleneck_v1/conv1/Relu
+			block3/unit3/bottleneck_v1/conv3/convolution
+			block3/unit3/bottleneck_v1/conv2/BatchNorm
+			block3/unit3/bottleneck_v1/add
+			block3/unit3/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 11
+----------------------------------------------------------------
+block3/unit4/bottleneck_v1/conv1/convolution
+block3/unit4/bottleneck_v1/conv1/BatchNorm
+block3/unit4/bottleneck_v1/conv1/Relu
+block3/unit4/bottleneck_v1/conv2/convolution
+block3/unit4/bottleneck_v1/conv2/BatchNorm
+block3/unit4/bottleneck_v1/conv1/Relu
+block3/unit4/bottleneck_v1/conv3/convolution
+block3/unit4/bottleneck_v1/conv2/BatchNorm
+block3/unit4/bottleneck_v1/add
+block3/unit4/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 12
+----------------------------------------------------------------
+			block3/unit5/bottleneck_v1/conv1/convolution
+			block3/unit5/bottleneck_v1/conv1/BatchNorm
+			block3/unit5/bottleneck_v1/conv1/Relu
+			block3/unit5/bottleneck_v1/conv2/convolution
+			block3/unit5/bottleneck_v1/conv2/BatchNorm
+			block3/unit5/bottleneck_v1/conv1/Relu
+			block3/unit5/bottleneck_v1/conv3/convolution
+			block3/unit5/bottleneck_v1/conv2/BatchNorm
+			block3/unit5/bottleneck_v1/add
+			block3/unit5/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 13
+----------------------------------------------------------------
+block3/unit6/bottleneck_v1/conv1/convolution
+block3/unit6/bottleneck_v1/conv1/BatchNorm
+block3/unit6/bottleneck_v1/conv1/Relu
+block3/unit6/bottleneck_v1/conv2/convolution
+block3/unit6/bottleneck_v1/conv2/BatchNorm
+block3/unit6/bottleneck_v1/conv1/Relu
+block3/unit6/bottleneck_v1/conv3/convolution
+block3/unit6/bottleneck_v1/conv2/BatchNorm
+block3/unit6/bottleneck_v1/shortcut/MaxPool
+block3/unit6/bottleneck_v1/add
+block3/unit6/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 14
+----------------------------------------------------------------
+			block4/unit1/bottleneck_v1/conv1/convolution
+			block4/unit1/bottleneck_v1/conv1/BatchNorm
+			block4/unit1/bottleneck_v1/conv1/Relu
+			block4/unit1/bottleneck_v1/conv2/convolution
+			block4/unit1/bottleneck_v1/conv2/BatchNorm
+			block4/unit1/bottleneck_v1/conv1/Relu
+			block4/unit1/bottleneck_v1/conv3/convolution
+			block4/unit1/bottleneck_v1/conv2/BatchNorm
+			block4/unit1/bottleneck_v1/shortcut/convolution
+			block4/unit1/bottleneck_v1/shortcut/BatchNorm
+			block4/unit1/bottleneck_v1/add
+			block4/unit1/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 15
+----------------------------------------------------------------
+block4/unit2/bottleneck_v1/conv1/convolution
+block4/unit2/bottleneck_v1/conv1/BatchNorm
+block4/unit2/bottleneck_v1/conv1/Relu
+block4/unit2/bottleneck_v1/conv2/convolution
+block4/unit2/bottleneck_v1/conv2/BatchNorm
+block4/unit2/bottleneck_v1/conv1/Relu
+block4/unit2/bottleneck_v1/conv3/convolution
+block4/unit2/bottleneck_v1/conv2/BatchNorm
+block4/unit2/bottleneck_v1/add
+block4/unit2/bottleneck_v1/Relu
+
+----------------------------------------------------------------
+Layer 16
+----------------------------------------------------------------
+			block4/unit3/bottleneck_v1/conv1/convolution
+			block4/unit3/bottleneck_v1/conv1/BatchNorm
+			block4/unit3/bottleneck_v1/conv1/Relu
+			block4/unit3/bottleneck_v1/conv2/convolution
+			block4/unit3/bottleneck_v1/conv2/BatchNorm
+			block4/unit3/bottleneck_v1/conv1/Relu
+			block4/unit3/bottleneck_v1/conv3/convolution
+			block4/unit3/bottleneck_v1/conv2/BatchNorm
+			block4/unit3/bottleneck_v1/add
+			block4/unit3/bottleneck_v1/Relu
+			pool5
+
+----------------------------------------------------------------
+Layer 17
+----------------------------------------------------------------
+logits/convolution
+predictions/Reshape
+predictions/Softmax
+output accessor reading label file /data/local/ARM-CO-UP/assets/labels/labels.txt
+output
+
+
+*********************
+Start finalizing Graphs
+*******************
+
+Graph id: 0 Target is: Neon
+little cores:2	 big cores:4	 total cores:6
+cluster:1
+NEDevicebackend num_threads: 4
+Worker Thread:: worker thread created with core_pin: -1
+Worker Thread:: worker thread created with core_pin: -1
+
+
+
+************************
+set thread with affinity:
+cluster: 1
+_num_threads is: 4
+set affinity of main thread to core: 2
+Worker Thread:: worker thread created with core_pin: 3
+Worker Thread:: worker thread created with core_pin: 4
+Worker Thread:: worker thread created with core_pin: 5
+
+*******************************
+
+Graph (0) Task 0: conv1/convolution
+Graph (0) Task 1: conv1/BatchNorm
+Graph (0) Task 2: conv1/Relu
+Graph (0) Task 3: pool1/MaxPool
+Graph (0) Task 4: block1/unit1/bottleneck_v1/conv1/convolution
+Graph (0) Task 5: block1/unit1/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 6: block1/unit1/bottleneck_v1/conv1/Relu
+Graph (0) Task 7: block1/unit1/bottleneck_v1/conv2/convolution
+Graph (0) Task 8: block1/unit1/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 9: block1/unit1/bottleneck_v1/conv1/Relu
+Graph (0) Task 10: block1/unit1/bottleneck_v1/conv3/convolution
+Graph (0) Task 11: block1/unit1/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 12: block1/unit1/bottleneck_v1/shortcut/convolution
+Graph (0) Task 13: block1/unit1/bottleneck_v1/shortcut/BatchNorm
+Graph (0) Task 14: block1/unit1/bottleneck_v1/add
+Graph (0) Task 15: block1/unit1/bottleneck_v1/Relu
+Graph (0) Task 16: block1/unit2/bottleneck_v1/conv1/convolution
+Graph (0) Task 17: block1/unit2/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 18: block1/unit2/bottleneck_v1/conv1/Relu
+Graph (0) Task 19: block1/unit2/bottleneck_v1/conv2/convolution
+Graph (0) Task 20: block1/unit2/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 21: block1/unit2/bottleneck_v1/conv1/Relu
+Graph (0) Task 22: block1/unit2/bottleneck_v1/conv3/convolution
+Graph (0) Task 23: block1/unit2/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 24: block1/unit2/bottleneck_v1/add
+Graph (0) Task 25: block1/unit2/bottleneck_v1/Relu
+Graph (0) Task 26: block1/unit3/bottleneck_v1/conv1/convolution
+Graph (0) Task 27: block1/unit3/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 28: block1/unit3/bottleneck_v1/conv1/Relu
+Graph (0) Task 29: block1/unit3/bottleneck_v1/conv2/convolution
+Graph (0) Task 30: block1/unit3/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 31: block1/unit3/bottleneck_v1/conv1/Relu
+Graph (0) Task 32: block1/unit3/bottleneck_v1/conv3/convolution
+Graph (0) Task 33: block1/unit3/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 34: block1/unit3/bottleneck_v1/shortcut/MaxPool
+Graph (0) Task 35: block1/unit3/bottleneck_v1/add
+Graph (0) Task 36: block1/unit3/bottleneck_v1/Relu
+Graph (0) Task 37: block2/unit1/bottleneck_v1/conv1/convolution
+Graph (0) Task 38: block2/unit1/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 39: block2/unit1/bottleneck_v1/conv1/Relu
+Graph (0) Task 40: block2/unit1/bottleneck_v1/conv2/convolution
+Graph (0) Task 41: block2/unit1/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 42: block2/unit1/bottleneck_v1/conv1/Relu
+Graph (0) Task 43: block2/unit1/bottleneck_v1/conv3/convolution
+Graph (0) Task 44: block2/unit1/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 45: block2/unit1/bottleneck_v1/shortcut/convolution
+Graph (0) Task 46: block2/unit1/bottleneck_v1/shortcut/BatchNorm
+Graph (0) Task 47: block2/unit1/bottleneck_v1/add
+Graph (0) Task 48: block2/unit1/bottleneck_v1/Relu
+Graph (0) Task 49: block2/unit2/bottleneck_v1/conv1/convolution
+Graph (0) Task 50: block2/unit2/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 51: block2/unit2/bottleneck_v1/conv1/Relu
+Graph (0) Task 52: block2/unit2/bottleneck_v1/conv2/convolution
+Graph (0) Task 53: block2/unit2/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 54: block2/unit2/bottleneck_v1/conv1/Relu
+Graph (0) Task 55: block2/unit2/bottleneck_v1/conv3/convolution
+Graph (0) Task 56: block2/unit2/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 57: block2/unit2/bottleneck_v1/add
+Graph (0) Task 58: block2/unit2/bottleneck_v1/Relu
+Graph (0) Task 59: block2/unit3/bottleneck_v1/conv1/convolution
+Graph (0) Task 60: block2/unit3/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 61: block2/unit3/bottleneck_v1/conv1/Relu
+Graph (0) Task 62: block2/unit3/bottleneck_v1/conv2/convolution
+Graph (0) Task 63: block2/unit3/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 64: block2/unit3/bottleneck_v1/conv1/Relu
+Graph (0) Task 65: block2/unit3/bottleneck_v1/conv3/convolution
+Graph (0) Task 66: block2/unit3/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 67: block2/unit3/bottleneck_v1/add
+Graph (0) Task 68: block2/unit3/bottleneck_v1/Relu
+Graph (0) Task 69: block2/unit4/bottleneck_v1/conv1/convolution
+Graph (0) Task 70: block2/unit4/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 71: block2/unit4/bottleneck_v1/conv1/Relu
+Graph (0) Task 72: block2/unit4/bottleneck_v1/conv2/convolution
+Graph (0) Task 73: block2/unit4/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 74: block2/unit4/bottleneck_v1/conv1/Relu
+Graph (0) Task 75: block2/unit4/bottleneck_v1/conv3/convolution
+Graph (0) Task 76: block2/unit4/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 77: block2/unit4/bottleneck_v1/shortcut/MaxPool
+Graph (0) Task 78: block2/unit4/bottleneck_v1/add
+Graph (0) Task 79: block2/unit4/bottleneck_v1/Relu
+Graph (0) Task 80: block3/unit1/bottleneck_v1/conv1/convolution
+Graph (0) Task 81: block3/unit1/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 82: block3/unit1/bottleneck_v1/conv1/Relu
+Graph (0) Task 83: block3/unit1/bottleneck_v1/conv2/convolution
+Graph (0) Task 84: block3/unit1/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 85: block3/unit1/bottleneck_v1/conv1/Relu
+Graph (0) Task 86: block3/unit1/bottleneck_v1/conv3/convolution
+Graph (0) Task 87: block3/unit1/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 88: block3/unit1/bottleneck_v1/shortcut/convolution
+Graph (0) Task 89: block3/unit1/bottleneck_v1/shortcut/BatchNorm
+Graph (0) Task 90: block3/unit1/bottleneck_v1/add
+Graph (0) Task 91: block3/unit1/bottleneck_v1/Relu
+Graph (0) Task 92: block3/unit2/bottleneck_v1/conv1/convolution
+Graph (0) Task 93: block3/unit2/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 94: block3/unit2/bottleneck_v1/conv1/Relu
+Graph (0) Task 95: block3/unit2/bottleneck_v1/conv2/convolution
+Graph (0) Task 96: block3/unit2/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 97: block3/unit2/bottleneck_v1/conv1/Relu
+Graph (0) Task 98: block3/unit2/bottleneck_v1/conv3/convolution
+Graph (0) Task 99: block3/unit2/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 100: block3/unit2/bottleneck_v1/add
+Graph (0) Task 101: block3/unit2/bottleneck_v1/Relu
+Graph (0) Task 102: block3/unit3/bottleneck_v1/conv1/convolution
+Graph (0) Task 103: block3/unit3/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 104: block3/unit3/bottleneck_v1/conv1/Relu
+Graph (0) Task 105: block3/unit3/bottleneck_v1/conv2/convolution
+Graph (0) Task 106: block3/unit3/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 107: block3/unit3/bottleneck_v1/conv1/Relu
+Graph (0) Task 108: block3/unit3/bottleneck_v1/conv3/convolution
+Graph (0) Task 109: block3/unit3/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 110: block3/unit3/bottleneck_v1/add
+Graph (0) Task 111: block3/unit3/bottleneck_v1/Relu
+Graph (0) Task 112: block3/unit4/bottleneck_v1/conv1/convolution
+Graph (0) Task 113: block3/unit4/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 114: block3/unit4/bottleneck_v1/conv1/Relu
+Graph (0) Task 115: block3/unit4/bottleneck_v1/conv2/convolution
+Graph (0) Task 116: block3/unit4/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 117: block3/unit4/bottleneck_v1/conv1/Relu
+Graph (0) Task 118: block3/unit4/bottleneck_v1/conv3/convolution
+Graph (0) Task 119: block3/unit4/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 120: block3/unit4/bottleneck_v1/add
+Graph (0) Task 121: block3/unit4/bottleneck_v1/Relu
+Graph (0) Task 122: block3/unit5/bottleneck_v1/conv1/convolution
+Graph (0) Task 123: block3/unit5/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 124: block3/unit5/bottleneck_v1/conv1/Relu
+Graph (0) Task 125: block3/unit5/bottleneck_v1/conv2/convolution
+Graph (0) Task 126: block3/unit5/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 127: block3/unit5/bottleneck_v1/conv1/Relu
+Graph (0) Task 128: block3/unit5/bottleneck_v1/conv3/convolution
+Graph (0) Task 129: block3/unit5/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 130: block3/unit5/bottleneck_v1/add
+Graph (0) Task 131: block3/unit5/bottleneck_v1/Relu
+Graph (0) Task 132: block3/unit6/bottleneck_v1/conv1/convolution
+Graph (0) Task 133: block3/unit6/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 134: block3/unit6/bottleneck_v1/conv1/Relu
+Graph (0) Task 135: block3/unit6/bottleneck_v1/conv2/convolution
+Graph (0) Task 136: block3/unit6/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 137: block3/unit6/bottleneck_v1/conv1/Relu
+Graph (0) Task 138: block3/unit6/bottleneck_v1/conv3/convolution
+Graph (0) Task 139: block3/unit6/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 140: block3/unit6/bottleneck_v1/shortcut/MaxPool
+Graph (0) Task 141: block3/unit6/bottleneck_v1/add
+Graph (0) Task 142: block3/unit6/bottleneck_v1/Relu
+Graph (0) Task 143: block4/unit1/bottleneck_v1/conv1/convolution
+Graph (0) Task 144: block4/unit1/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 145: block4/unit1/bottleneck_v1/conv1/Relu
+Graph (0) Task 146: block4/unit1/bottleneck_v1/conv2/convolution
+Graph (0) Task 147: block4/unit1/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 148: block4/unit1/bottleneck_v1/conv1/Relu
+Graph (0) Task 149: block4/unit1/bottleneck_v1/conv3/convolution
+Graph (0) Task 150: block4/unit1/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 151: block4/unit1/bottleneck_v1/shortcut/convolution
+Graph (0) Task 152: block4/unit1/bottleneck_v1/shortcut/BatchNorm
+Graph (0) Task 153: block4/unit1/bottleneck_v1/add
+Graph (0) Task 154: block4/unit1/bottleneck_v1/Relu
+Graph (0) Task 155: block4/unit2/bottleneck_v1/conv1/convolution
+Graph (0) Task 156: block4/unit2/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 157: block4/unit2/bottleneck_v1/conv1/Relu
+Graph (0) Task 158: block4/unit2/bottleneck_v1/conv2/convolution
+Graph (0) Task 159: block4/unit2/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 160: block4/unit2/bottleneck_v1/conv1/Relu
+Graph (0) Task 161: block4/unit2/bottleneck_v1/conv3/convolution
+Graph (0) Task 162: block4/unit2/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 163: block4/unit2/bottleneck_v1/add
+Graph (0) Task 164: block4/unit2/bottleneck_v1/Relu
+Graph (0) Task 165: block4/unit3/bottleneck_v1/conv1/convolution
+Graph (0) Task 166: block4/unit3/bottleneck_v1/conv1/BatchNorm
+Graph (0) Task 167: block4/unit3/bottleneck_v1/conv1/Relu
+Graph (0) Task 168: block4/unit3/bottleneck_v1/conv2/convolution
+Graph (0) Task 169: block4/unit3/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 170: block4/unit3/bottleneck_v1/conv1/Relu
+Graph (0) Task 171: block4/unit3/bottleneck_v1/conv3/convolution
+Graph (0) Task 172: block4/unit3/bottleneck_v1/conv2/BatchNorm
+Graph (0) Task 173: block4/unit3/bottleneck_v1/add
+Graph (0) Task 174: block4/unit3/bottleneck_v1/Relu
+Graph (0) Task 175: pool5
+Graph (0) Task 176: logits/convolution
+Graph (0) Task 177: predictions/Reshape
+Graph (0) Task 178: predictions/Softmax
+Graph 0 input size: 1 receiver size: 0 tasks size: 179 senders size: 0 output size: 1
+
+setting ending for layer: pool1/MaxPool
+setting ending for layer: block1/unit1/bottleneck_v1/add
+setting ending for layer: block1/unit2/bottleneck_v1/add
+setting ending for layer: block1/unit3/bottleneck_v1/add
+setting ending for layer: block2/unit1/bottleneck_v1/add
+setting ending for layer: block2/unit2/bottleneck_v1/add
+setting ending for layer: block2/unit3/bottleneck_v1/add
+setting ending for layer: block2/unit4/bottleneck_v1/add
+setting ending for layer: block3/unit1/bottleneck_v1/add
+setting ending for layer: block3/unit2/bottleneck_v1/add
+setting ending for layer: block3/unit3/bottleneck_v1/add
+setting ending for layer: block3/unit4/bottleneck_v1/add
+setting ending for layer: block3/unit5/bottleneck_v1/add
+setting ending for layer: block3/unit6/bottleneck_v1/add
+setting ending for layer: block4/unit1/bottleneck_v1/add
+setting ending for layer: block4/unit2/bottleneck_v1/add
+setting ending for layer: pool5
+setting ending for layer: predictions/Softmax
+Finish finalizing graph 0
+
+
+
+setup finished
+
+Please Enter the desired Frequency settings("end" for finish): 
+
+
+0 Running Graph with max LW DVFS
+
+
+
+Number of governor tasks: 18
+
+0 gov task: pool1/MaxPool
+
+1 gov task: block1/unit1/bottleneck_v1/add
+
+2 gov task: block1/unit2/bottleneck_v1/add
+
+3 gov task: block1/unit3/bottleneck_v1/add
+
+4 gov task: block2/unit1/bottleneck_v1/add
+
+5 gov task: block2/unit2/bottleneck_v1/add
+
+6 gov task: block2/unit3/bottleneck_v1/add
+
+7 gov task: block2/unit4/bottleneck_v1/add
+
+8 gov task: block3/unit1/bottleneck_v1/add
+
+9 gov task: block3/unit2/bottleneck_v1/add
+
+10 gov task: block3/unit3/bottleneck_v1/add
+
+11 gov task: block3/unit4/bottleneck_v1/add
+
+12 gov task: block3/unit5/bottleneck_v1/add
+
+13 gov task: block3/unit6/bottleneck_v1/add
+
+14 gov task: block4/unit1/bottleneck_v1/add
+
+15 gov task: block4/unit2/bottleneck_v1/add
+
+16 gov task: pool5
+
+17 gov task: predictions/Softmax
+
+
+
+Number of governor tasks: 1
+
+0 gov task: predictions/Softmax
+governor 0 task:predictions/Softmax freqs:8,12,4
+0---- pool1/MaxPool    processor:B
+0---- block1/unit1/bottleneck_v1/add    processor:B
+0---- block1/unit2/bottleneck_v1/add    processor:B
+0---- block1/unit3/bottleneck_v1/add    processor:B
+0---- block2/unit1/bottleneck_v1/add    processor:B
+0---- block2/unit2/bottleneck_v1/add    processor:B
+0---- block2/unit3/bottleneck_v1/add    processor:B
+0---- block2/unit4/bottleneck_v1/add    processor:B
+0---- block3/unit1/bottleneck_v1/add    processor:B
+0---- block3/unit2/bottleneck_v1/add    processor:B
+0---- block3/unit3/bottleneck_v1/add    processor:B
+0---- block3/unit4/bottleneck_v1/add    processor:B
+0---- block3/unit5/bottleneck_v1/add    processor:B
+0---- block3/unit6/bottleneck_v1/add    processor:B
+0---- block4/unit1/bottleneck_v1/add    processor:B
+0---- block4/unit2/bottleneck_v1/add    processor:B
+0---- pool5    processor:B
+0---- predictions/Softmax    processor:B
+setting freq of governor task predictions/Softmax
+set_GPIOs with mode: layers
+0 task name: conv1/convolution	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+1 task name: conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+2 task name: conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+3 task name: pool1/MaxPool	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+4 task name: block1/unit1/bottleneck_v1/conv1/convolution	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+5 task name: block1/unit1/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+6 task name: block1/unit1/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+7 task name: block1/unit1/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+8 task name: block1/unit1/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+9 task name: block1/unit1/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+10 task name: block1/unit1/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+11 task name: block1/unit1/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+12 task name: block1/unit1/bottleneck_v1/shortcut/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+13 task name: block1/unit1/bottleneck_v1/shortcut/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+14 task name: block1/unit1/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+15 task name: block1/unit1/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+16 task name: block1/unit2/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+17 task name: block1/unit2/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+18 task name: block1/unit2/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+19 task name: block1/unit2/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+20 task name: block1/unit2/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+21 task name: block1/unit2/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+22 task name: block1/unit2/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+23 task name: block1/unit2/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+24 task name: block1/unit2/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+25 task name: block1/unit2/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+26 task name: block1/unit3/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+27 task name: block1/unit3/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+28 task name: block1/unit3/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+29 task name: block1/unit3/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+30 task name: block1/unit3/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+31 task name: block1/unit3/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+32 task name: block1/unit3/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+33 task name: block1/unit3/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+34 task name: block1/unit3/bottleneck_v1/shortcut/MaxPool	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+35 task name: block1/unit3/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+36 task name: block1/unit3/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+37 task name: block2/unit1/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+38 task name: block2/unit1/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+39 task name: block2/unit1/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+40 task name: block2/unit1/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+41 task name: block2/unit1/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+42 task name: block2/unit1/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+43 task name: block2/unit1/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+44 task name: block2/unit1/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+45 task name: block2/unit1/bottleneck_v1/shortcut/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+46 task name: block2/unit1/bottleneck_v1/shortcut/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+47 task name: block2/unit1/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+48 task name: block2/unit1/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+49 task name: block2/unit2/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+50 task name: block2/unit2/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+51 task name: block2/unit2/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+52 task name: block2/unit2/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+53 task name: block2/unit2/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+54 task name: block2/unit2/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+55 task name: block2/unit2/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+56 task name: block2/unit2/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+57 task name: block2/unit2/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+58 task name: block2/unit2/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+59 task name: block2/unit3/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+60 task name: block2/unit3/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+61 task name: block2/unit3/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+62 task name: block2/unit3/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+63 task name: block2/unit3/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+64 task name: block2/unit3/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+65 task name: block2/unit3/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+66 task name: block2/unit3/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+67 task name: block2/unit3/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+68 task name: block2/unit3/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+69 task name: block2/unit4/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+70 task name: block2/unit4/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+71 task name: block2/unit4/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+72 task name: block2/unit4/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+73 task name: block2/unit4/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+74 task name: block2/unit4/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+75 task name: block2/unit4/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+76 task name: block2/unit4/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+77 task name: block2/unit4/bottleneck_v1/shortcut/MaxPool	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+78 task name: block2/unit4/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+79 task name: block2/unit4/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+80 task name: block3/unit1/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+81 task name: block3/unit1/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+82 task name: block3/unit1/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+83 task name: block3/unit1/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+84 task name: block3/unit1/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+85 task name: block3/unit1/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+86 task name: block3/unit1/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+87 task name: block3/unit1/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+88 task name: block3/unit1/bottleneck_v1/shortcut/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+89 task name: block3/unit1/bottleneck_v1/shortcut/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+90 task name: block3/unit1/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+91 task name: block3/unit1/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+92 task name: block3/unit2/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+93 task name: block3/unit2/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+94 task name: block3/unit2/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+95 task name: block3/unit2/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+96 task name: block3/unit2/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+97 task name: block3/unit2/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+98 task name: block3/unit2/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+99 task name: block3/unit2/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+100 task name: block3/unit2/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+101 task name: block3/unit2/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+102 task name: block3/unit3/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+103 task name: block3/unit3/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+104 task name: block3/unit3/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+105 task name: block3/unit3/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+106 task name: block3/unit3/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+107 task name: block3/unit3/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+108 task name: block3/unit3/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+109 task name: block3/unit3/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+110 task name: block3/unit3/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+111 task name: block3/unit3/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+112 task name: block3/unit4/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+113 task name: block3/unit4/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+114 task name: block3/unit4/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+115 task name: block3/unit4/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+116 task name: block3/unit4/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+117 task name: block3/unit4/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+118 task name: block3/unit4/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+119 task name: block3/unit4/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+120 task name: block3/unit4/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+121 task name: block3/unit4/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+122 task name: block3/unit5/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+123 task name: block3/unit5/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+124 task name: block3/unit5/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+125 task name: block3/unit5/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+126 task name: block3/unit5/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+127 task name: block3/unit5/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+128 task name: block3/unit5/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+129 task name: block3/unit5/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+130 task name: block3/unit5/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+131 task name: block3/unit5/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+132 task name: block3/unit6/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+133 task name: block3/unit6/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+134 task name: block3/unit6/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+135 task name: block3/unit6/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+136 task name: block3/unit6/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+137 task name: block3/unit6/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+138 task name: block3/unit6/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+139 task name: block3/unit6/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+140 task name: block3/unit6/bottleneck_v1/shortcut/MaxPool	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+141 task name: block3/unit6/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+142 task name: block3/unit6/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+143 task name: block4/unit1/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+144 task name: block4/unit1/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+145 task name: block4/unit1/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+146 task name: block4/unit1/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+147 task name: block4/unit1/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+148 task name: block4/unit1/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+149 task name: block4/unit1/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+150 task name: block4/unit1/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+151 task name: block4/unit1/bottleneck_v1/shortcut/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+152 task name: block4/unit1/bottleneck_v1/shortcut/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+153 task name: block4/unit1/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+154 task name: block4/unit1/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+155 task name: block4/unit2/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+156 task name: block4/unit2/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+157 task name: block4/unit2/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+158 task name: block4/unit2/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+159 task name: block4/unit2/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+160 task name: block4/unit2/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+161 task name: block4/unit2/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+162 task name: block4/unit2/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+163 task name: block4/unit2/bottleneck_v1/add	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+164 task name: block4/unit2/bottleneck_v1/Relu	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+165 task name: block4/unit3/bottleneck_v1/conv1/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+166 task name: block4/unit3/bottleneck_v1/conv1/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+167 task name: block4/unit3/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+168 task name: block4/unit3/bottleneck_v1/conv2/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+169 task name: block4/unit3/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+170 task name: block4/unit3/bottleneck_v1/conv1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+171 task name: block4/unit3/bottleneck_v1/conv3/convolution	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+172 task name: block4/unit3/bottleneck_v1/conv2/BatchNorm	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+173 task name: block4/unit3/bottleneck_v1/add	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+174 task name: block4/unit3/bottleneck_v1/Relu	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+175 task name: pool5	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+176 task name: logits/convolution	starting gpio: 1	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+177 task name: predictions/Reshape	starting gpio: 0	ending gpio: 0	profiling layers: 1	profiling transfers: 0
+178 task name: predictions/Softmax	starting gpio: 0	ending gpio: 1	profiling layers: 1	profiling transfers: 0
+
+
+
+*********************************************
+start running graphs
+*************************************************
+
+
+
+
+************
+Photo_index:0	Frame Index:0
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//go_kart.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9995 - [id = 573], n03444034 go-kart
+0.0003 - [id = 751], n04037443 racer, race car, racing car
+0.0000 - [id = 408], n02704792 amphibian, amphibious vehicle
+0.0000 - [id = 621], n03649909 lawn mower, mower
+0.0000 - [id = 817], n04285008 sports car, sport car
+
+
+************
+Photo_index:1	Frame Index:1
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gold_fish.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.6029 - [id = 1], n01443537 goldfish, Carassius auratus
+0.0729 - [id = 723], n03944341 pinwheel
+0.0292 - [id = 397], n02655020 puffer, pufferfish, blowfish, globefish
+0.0256 - [id = 392], n02606052 rock beauty, Holocanthus tricolor
+0.0231 - [id = 973], n09256479 coral reef
+
+
+************
+Photo_index:2	Frame Index:2
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//school_bus.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.5280 - [id = 779], n04146614 school bus
+0.0590 - [id = 867], n04467665 trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi
+0.0401 - [id = 734], n03977966 police van, police wagon, paddy wagon, patrol wagon, wagon, black Maria
+0.0332 - [id = 654], n03769881 minibus
+0.0306 - [id = 705], n03895866 passenger car, coach, carriage
+
+
+************
+Photo_index:3	Frame Index:3
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gondola.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9999 - [id = 576], n03447447 gondola
+0.0000 - [id = 780], n04147183 schooner
+0.0000 - [id = 914], n04612504 yawl
+0.0000 - [id = 536], n03216828 dock, dockage, docking facility
+0.0000 - [id = 913], n04606251 wreck
+
+
+************
+Photo_index:0	Frame Index:4
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//go_kart.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9995 - [id = 573], n03444034 go-kart
+0.0003 - [id = 751], n04037443 racer, race car, racing car
+0.0000 - [id = 408], n02704792 amphibian, amphibious vehicle
+0.0000 - [id = 621], n03649909 lawn mower, mower
+0.0000 - [id = 817], n04285008 sports car, sport car
+
+
+************
+Photo_index:1	Frame Index:5
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gold_fish.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.6029 - [id = 1], n01443537 goldfish, Carassius auratus
+0.0729 - [id = 723], n03944341 pinwheel
+0.0292 - [id = 397], n02655020 puffer, pufferfish, blowfish, globefish
+0.0256 - [id = 392], n02606052 rock beauty, Holocanthus tricolor
+0.0231 - [id = 973], n09256479 coral reef
+
+
+************
+Photo_index:2	Frame Index:6
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//school_bus.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.5280 - [id = 779], n04146614 school bus
+0.0590 - [id = 867], n04467665 trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi
+0.0401 - [id = 734], n03977966 police van, police wagon, paddy wagon, patrol wagon, wagon, black Maria
+0.0332 - [id = 654], n03769881 minibus
+0.0306 - [id = 705], n03895866 passenger car, coach, carriage
+
+
+************
+Photo_index:3	Frame Index:7
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gondola.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9999 - [id = 576], n03447447 gondola
+0.0000 - [id = 780], n04147183 schooner
+0.0000 - [id = 914], n04612504 yawl
+0.0000 - [id = 536], n03216828 dock, dockage, docking facility
+0.0000 - [id = 913], n04606251 wreck
+
+
+************
+Photo_index:0	Frame Index:8
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//go_kart.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9995 - [id = 573], n03444034 go-kart
+0.0003 - [id = 751], n04037443 racer, race car, racing car
+0.0000 - [id = 408], n02704792 amphibian, amphibious vehicle
+0.0000 - [id = 621], n03649909 lawn mower, mower
+0.0000 - [id = 817], n04285008 sports car, sport car
+
+
+************
+Photo_index:1	Frame Index:9
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gold_fish.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.6029 - [id = 1], n01443537 goldfish, Carassius auratus
+0.0729 - [id = 723], n03944341 pinwheel
+0.0292 - [id = 397], n02655020 puffer, pufferfish, blowfish, globefish
+0.0256 - [id = 392], n02606052 rock beauty, Holocanthus tricolor
+0.0231 - [id = 973], n09256479 coral reef
+
+
+************
+Photo_index:2	Frame Index:10
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//school_bus.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.5280 - [id = 779], n04146614 school bus
+0.0590 - [id = 867], n04467665 trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi
+0.0401 - [id = 734], n03977966 police van, police wagon, paddy wagon, patrol wagon, wagon, black Maria
+0.0332 - [id = 654], n03769881 minibus
+0.0306 - [id = 705], n03895866 passenger car, coach, carriage
+
+
+************
+Photo_index:3	Frame Index:11
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gondola.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9999 - [id = 576], n03447447 gondola
+0.0000 - [id = 780], n04147183 schooner
+0.0000 - [id = 914], n04612504 yawl
+0.0000 - [id = 536], n03216828 dock, dockage, docking facility
+0.0000 - [id = 913], n04606251 wreck
+
+
+************
+Photo_index:0	Frame Index:12
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//go_kart.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9995 - [id = 573], n03444034 go-kart
+0.0003 - [id = 751], n04037443 racer, race car, racing car
+0.0000 - [id = 408], n02704792 amphibian, amphibious vehicle
+0.0000 - [id = 621], n03649909 lawn mower, mower
+0.0000 - [id = 817], n04285008 sports car, sport car
+
+
+************
+Photo_index:1	Frame Index:13
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gold_fish.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.6029 - [id = 1], n01443537 goldfish, Carassius auratus
+0.0729 - [id = 723], n03944341 pinwheel
+0.0292 - [id = 397], n02655020 puffer, pufferfish, blowfish, globefish
+0.0256 - [id = 392], n02606052 rock beauty, Holocanthus tricolor
+0.0231 - [id = 973], n09256479 coral reef
+
+
+************
+Photo_index:2	Frame Index:14
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//school_bus.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.5280 - [id = 779], n04146614 school bus
+0.0590 - [id = 867], n04467665 trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi
+0.0401 - [id = 734], n03977966 police van, police wagon, paddy wagon, patrol wagon, wagon, black Maria
+0.0332 - [id = 654], n03769881 minibus
+0.0306 - [id = 705], n03895866 passenger car, coach, carriage
+
+
+************
+Photo_index:3	Frame Index:15
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gondola.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9999 - [id = 576], n03447447 gondola
+0.0000 - [id = 780], n04147183 schooner
+0.0000 - [id = 914], n04612504 yawl
+0.0000 - [id = 536], n03216828 dock, dockage, docking facility
+0.0000 - [id = 913], n04606251 wreck
+
+
+************
+Photo_index:0	Frame Index:16
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//go_kart.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9995 - [id = 573], n03444034 go-kart
+0.0003 - [id = 751], n04037443 racer, race car, racing car
+0.0000 - [id = 408], n02704792 amphibian, amphibious vehicle
+0.0000 - [id = 621], n03649909 lawn mower, mower
+0.0000 - [id = 817], n04285008 sports car, sport car
+
+
+************
+Photo_index:1	Frame Index:17
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gold_fish.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.6029 - [id = 1], n01443537 goldfish, Carassius auratus
+0.0729 - [id = 723], n03944341 pinwheel
+0.0292 - [id = 397], n02655020 puffer, pufferfish, blowfish, globefish
+0.0256 - [id = 392], n02606052 rock beauty, Holocanthus tricolor
+0.0231 - [id = 973], n09256479 coral reef
+
+
+************
+Photo_index:2	Frame Index:18
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//school_bus.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.5280 - [id = 779], n04146614 school bus
+0.0590 - [id = 867], n04467665 trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi
+0.0401 - [id = 734], n03977966 police van, police wagon, paddy wagon, patrol wagon, wagon, black Maria
+0.0332 - [id = 654], n03769881 minibus
+0.0306 - [id = 705], n03895866 passenger car, coach, carriage
+
+
+************
+Photo_index:3	Frame Index:19
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gondola.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9999 - [id = 576], n03447447 gondola
+0.0000 - [id = 780], n04147183 schooner
+0.0000 - [id = 914], n04612504 yawl
+0.0000 - [id = 536], n03216828 dock, dockage, docking facility
+0.0000 - [id = 913], n04606251 wreck
+
+
+************
+Photo_index:0	Frame Index:20
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//go_kart.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9995 - [id = 573], n03444034 go-kart
+0.0003 - [id = 751], n04037443 racer, race car, racing car
+0.0000 - [id = 408], n02704792 amphibian, amphibious vehicle
+0.0000 - [id = 621], n03649909 lawn mower, mower
+0.0000 - [id = 817], n04285008 sports car, sport car
+
+
+************
+Photo_index:1	Frame Index:21
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gold_fish.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.6029 - [id = 1], n01443537 goldfish, Carassius auratus
+0.0729 - [id = 723], n03944341 pinwheel
+0.0292 - [id = 397], n02655020 puffer, pufferfish, blowfish, globefish
+0.0256 - [id = 392], n02606052 rock beauty, Holocanthus tricolor
+0.0231 - [id = 973], n09256479 coral reef
+
+
+************
+Photo_index:2	Frame Index:22
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//school_bus.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.5280 - [id = 779], n04146614 school bus
+0.0590 - [id = 867], n04467665 trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi
+0.0401 - [id = 734], n03977966 police van, police wagon, paddy wagon, patrol wagon, wagon, black Maria
+0.0332 - [id = 654], n03769881 minibus
+0.0306 - [id = 705], n03895866 passenger car, coach, carriage
+
+
+************
+Photo_index:3	Frame Index:23
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gondola.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9999 - [id = 576], n03447447 gondola
+0.0000 - [id = 780], n04147183 schooner
+0.0000 - [id = 914], n04612504 yawl
+0.0000 - [id = 536], n03216828 dock, dockage, docking facility
+0.0000 - [id = 913], n04606251 wreck
+
+
+************
+Photo_index:0	Frame Index:24
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//go_kart.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9995 - [id = 573], n03444034 go-kart
+0.0003 - [id = 751], n04037443 racer, race car, racing car
+0.0000 - [id = 408], n02704792 amphibian, amphibious vehicle
+0.0000 - [id = 621], n03649909 lawn mower, mower
+0.0000 - [id = 817], n04285008 sports car, sport car
+
+
+************
+Photo_index:1	Frame Index:25
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gold_fish.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.6029 - [id = 1], n01443537 goldfish, Carassius auratus
+0.0729 - [id = 723], n03944341 pinwheel
+0.0292 - [id = 397], n02655020 puffer, pufferfish, blowfish, globefish
+0.0256 - [id = 392], n02606052 rock beauty, Holocanthus tricolor
+0.0231 - [id = 973], n09256479 coral reef
+
+
+************
+Photo_index:2	Frame Index:26
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//school_bus.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.5280 - [id = 779], n04146614 school bus
+0.0590 - [id = 867], n04467665 trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi
+0.0401 - [id = 734], n03977966 police van, police wagon, paddy wagon, patrol wagon, wagon, black Maria
+0.0332 - [id = 654], n03769881 minibus
+0.0306 - [id = 705], n03895866 passenger car, coach, carriage
+
+
+************
+Photo_index:3	Frame Index:27
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gondola.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9999 - [id = 576], n03447447 gondola
+0.0000 - [id = 780], n04147183 schooner
+0.0000 - [id = 914], n04612504 yawl
+0.0000 - [id = 536], n03216828 dock, dockage, docking facility
+0.0000 - [id = 913], n04606251 wreck
+
+
+************
+Photo_index:0	Frame Index:28
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//go_kart.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9995 - [id = 573], n03444034 go-kart
+0.0003 - [id = 751], n04037443 racer, race car, racing car
+0.0000 - [id = 408], n02704792 amphibian, amphibious vehicle
+0.0000 - [id = 621], n03649909 lawn mower, mower
+0.0000 - [id = 817], n04285008 sports car, sport car
+
+
+************
+Photo_index:1	Frame Index:29
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gold_fish.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.6029 - [id = 1], n01443537 goldfish, Carassius auratus
+0.0729 - [id = 723], n03944341 pinwheel
+0.0292 - [id = 397], n02655020 puffer, pufferfish, blowfish, globefish
+0.0256 - [id = 392], n02606052 rock beauty, Holocanthus tricolor
+0.0231 - [id = 973], n09256479 coral reef
+
+
+************
+Photo_index:2	Frame Index:30
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//school_bus.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.5280 - [id = 779], n04146614 school bus
+0.0590 - [id = 867], n04467665 trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi
+0.0401 - [id = 734], n03977966 police van, police wagon, paddy wagon, patrol wagon, wagon, black Maria
+0.0332 - [id = 654], n03769881 minibus
+0.0306 - [id = 705], n03895866 passenger car, coach, carriage
+
+
+************
+Photo_index:3	Frame Index:31
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//gondola.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9999 - [id = 576], n03447447 gondola
+0.0000 - [id = 780], n04147183 schooner
+0.0000 - [id = 914], n04612504 yawl
+0.0000 - [id = 536], n03216828 dock, dockage, docking facility
+0.0000 - [id = 913], n04606251 wreck
+
+
+************
+Photo_index:0	Frame Index:32
+Reading image: /data/local/ARM-CO-UP/assets/images/ppm_images_224//go_kart.ppm
+*************
+
+
+---------- Top 5 predictions ----------
+
+0.9995 - [id = 573], n03444034 go-kart
+0.0003 - [id = 751], n04037443 racer, race car, racing car
+0.0000 - [id = 408], n02704792 amphibian, amphibious vehicle
+0.0000 - [id = 621], n03649909 lawn mower, mower
+0.0000 - [id = 817], n04285008 sports car, sport car
+0	Layer Name: conv1/convolution 	 Layer time: 10.7431 	 number of inputs: 3 	 input shape: 3x224x224 	 output shape: 64x112x112
+1	Layer Name: conv1/BatchNorm 	 Layer time: 1.0983 	 number of inputs: 5 	 input shape: 64x112x112 	 output shape: 64x112x112
+2	Layer Name: conv1/Relu 	 Layer time: 1.1541 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x112x112
+3	Layer Name: pool1/MaxPool 	 Layer time: 2.6343 	 number of inputs: 1 	 input shape: 64x112x112 	 output shape: 64x56x56
+Layer Number: 0 	 time: 15.6298
+----------------------------
+4	Layer Name: block1/unit1/bottleneck_v1/conv1/convolution 	 Layer time: 1.0438 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 64x56x56
+5	Layer Name: block1/unit1/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.5330 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
+6	Layer Name: block1/unit1/bottleneck_v1/conv1/Relu 	 Layer time: 0.2894 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
+7	Layer Name: block1/unit1/bottleneck_v1/conv2/convolution 	 Layer time: 4.0769 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 64x56x56
+8	Layer Name: block1/unit1/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.2599 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
+9	Layer Name: block1/unit1/bottleneck_v1/conv1/Relu 	 Layer time: 0.2499 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
+10	Layer Name: block1/unit1/bottleneck_v1/conv3/convolution 	 Layer time: 3.4197 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 256x56x56
+11	Layer Name: block1/unit1/bottleneck_v1/conv2/BatchNorm 	 Layer time: 1.1871 	 number of inputs: 5 	 input shape: 256x56x56 	 output shape: 256x56x56
+12	Layer Name: block1/unit1/bottleneck_v1/shortcut/convolution 	 Layer time: 3.2857 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 256x56x56
+13	Layer Name: block1/unit1/bottleneck_v1/shortcut/BatchNorm 	 Layer time: 1.1068 	 number of inputs: 5 	 input shape: 256x56x56 	 output shape: 256x56x56
+14	Layer Name: block1/unit1/bottleneck_v1/add 	 Layer time: 1.5805 	 number of inputs: 2 	 input shape: 256x56x56 	 output shape: 256x56x56
+Layer Number: 1 	 time: 17.0328
+----------------------------
+15	Layer Name: block1/unit1/bottleneck_v1/Relu 	 Layer time: 0.9016 	 number of inputs: 1 	 input shape: 256x56x56 	 output shape: 256x56x56
+16	Layer Name: block1/unit2/bottleneck_v1/conv1/convolution 	 Layer time: 3.2269 	 number of inputs: 3 	 input shape: 256x56x56 	 output shape: 64x56x56
+17	Layer Name: block1/unit2/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.3950 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
+18	Layer Name: block1/unit2/bottleneck_v1/conv1/Relu 	 Layer time: 0.2630 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
+19	Layer Name: block1/unit2/bottleneck_v1/conv2/convolution 	 Layer time: 4.0771 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 64x56x56
+20	Layer Name: block1/unit2/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.2511 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
+21	Layer Name: block1/unit2/bottleneck_v1/conv1/Relu 	 Layer time: 0.2494 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
+22	Layer Name: block1/unit2/bottleneck_v1/conv3/convolution 	 Layer time: 3.3350 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 256x56x56
+23	Layer Name: block1/unit2/bottleneck_v1/conv2/BatchNorm 	 Layer time: 1.1452 	 number of inputs: 5 	 input shape: 256x56x56 	 output shape: 256x56x56
+24	Layer Name: block1/unit2/bottleneck_v1/add 	 Layer time: 1.5919 	 number of inputs: 2 	 input shape: 256x56x56 	 output shape: 256x56x56
+Layer Number: 2 	 time: 15.4360
+----------------------------
+25	Layer Name: block1/unit2/bottleneck_v1/Relu 	 Layer time: 0.9007 	 number of inputs: 1 	 input shape: 256x56x56 	 output shape: 256x56x56
+26	Layer Name: block1/unit3/bottleneck_v1/conv1/convolution 	 Layer time: 3.2487 	 number of inputs: 3 	 input shape: 256x56x56 	 output shape: 64x56x56
+27	Layer Name: block1/unit3/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.3082 	 number of inputs: 5 	 input shape: 64x56x56 	 output shape: 64x56x56
+28	Layer Name: block1/unit3/bottleneck_v1/conv1/Relu 	 Layer time: 0.2589 	 number of inputs: 1 	 input shape: 64x56x56 	 output shape: 64x56x56
+29	Layer Name: block1/unit3/bottleneck_v1/conv2/convolution 	 Layer time: 1.7721 	 number of inputs: 3 	 input shape: 64x56x56 	 output shape: 64x28x28
+30	Layer Name: block1/unit3/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.0880 	 number of inputs: 5 	 input shape: 64x28x28 	 output shape: 64x28x28
+31	Layer Name: block1/unit3/bottleneck_v1/conv1/Relu 	 Layer time: 0.0459 	 number of inputs: 1 	 input shape: 64x28x28 	 output shape: 64x28x28
+32	Layer Name: block1/unit3/bottleneck_v1/conv3/convolution 	 Layer time: 0.9427 	 number of inputs: 3 	 input shape: 64x28x28 	 output shape: 256x28x28
+33	Layer Name: block1/unit3/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.3447 	 number of inputs: 5 	 input shape: 256x28x28 	 output shape: 256x28x28
+34	Layer Name: block1/unit3/bottleneck_v1/shortcut/MaxPool 	 Layer time: 0.5603 	 number of inputs: 1 	 input shape: 256x56x56 	 output shape: 256x28x28
+35	Layer Name: block1/unit3/bottleneck_v1/add 	 Layer time: 0.4458 	 number of inputs: 2 	 input shape: 256x28x28 	 output shape: 256x28x28
+Layer Number: 3 	 time: 8.9159
+----------------------------
+36	Layer Name: block1/unit3/bottleneck_v1/Relu 	 Layer time: 0.2306 	 number of inputs: 1 	 input shape: 256x28x28 	 output shape: 256x28x28
+37	Layer Name: block2/unit1/bottleneck_v1/conv1/convolution 	 Layer time: 1.5810 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 128x28x28
+38	Layer Name: block2/unit1/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.1683 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+39	Layer Name: block2/unit1/bottleneck_v1/conv1/Relu 	 Layer time: 0.1050 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+40	Layer Name: block2/unit1/bottleneck_v1/conv2/convolution 	 Layer time: 3.3419 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 128x28x28
+41	Layer Name: block2/unit1/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.1321 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+42	Layer Name: block2/unit1/bottleneck_v1/conv1/Relu 	 Layer time: 0.0774 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+43	Layer Name: block2/unit1/bottleneck_v1/conv3/convolution 	 Layer time: 2.8433 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 512x28x28
+44	Layer Name: block2/unit1/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.6076 	 number of inputs: 5 	 input shape: 512x28x28 	 output shape: 512x28x28
+45	Layer Name: block2/unit1/bottleneck_v1/shortcut/convolution 	 Layer time: 5.1957 	 number of inputs: 3 	 input shape: 256x28x28 	 output shape: 512x28x28
+46	Layer Name: block2/unit1/bottleneck_v1/shortcut/BatchNorm 	 Layer time: 0.4950 	 number of inputs: 5 	 input shape: 512x28x28 	 output shape: 512x28x28
+47	Layer Name: block2/unit1/bottleneck_v1/add 	 Layer time: 0.8011 	 number of inputs: 2 	 input shape: 512x28x28 	 output shape: 512x28x28
+Layer Number: 4 	 time: 15.5791
+----------------------------
+48	Layer Name: block2/unit1/bottleneck_v1/Relu 	 Layer time: 0.4426 	 number of inputs: 1 	 input shape: 512x28x28 	 output shape: 512x28x28
+49	Layer Name: block2/unit2/bottleneck_v1/conv1/convolution 	 Layer time: 2.7977 	 number of inputs: 3 	 input shape: 512x28x28 	 output shape: 128x28x28
+50	Layer Name: block2/unit2/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.1698 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+51	Layer Name: block2/unit2/bottleneck_v1/conv1/Relu 	 Layer time: 0.0951 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+52	Layer Name: block2/unit2/bottleneck_v1/conv2/convolution 	 Layer time: 3.3852 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 128x28x28
+53	Layer Name: block2/unit2/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.1372 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+54	Layer Name: block2/unit2/bottleneck_v1/conv1/Relu 	 Layer time: 0.0750 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+55	Layer Name: block2/unit2/bottleneck_v1/conv3/convolution 	 Layer time: 2.9272 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 512x28x28
+56	Layer Name: block2/unit2/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.5823 	 number of inputs: 5 	 input shape: 512x28x28 	 output shape: 512x28x28
+57	Layer Name: block2/unit2/bottleneck_v1/add 	 Layer time: 0.7614 	 number of inputs: 2 	 input shape: 512x28x28 	 output shape: 512x28x28
+Layer Number: 5 	 time: 11.3736
+----------------------------
+58	Layer Name: block2/unit2/bottleneck_v1/Relu 	 Layer time: 0.4473 	 number of inputs: 1 	 input shape: 512x28x28 	 output shape: 512x28x28
+59	Layer Name: block2/unit3/bottleneck_v1/conv1/convolution 	 Layer time: 2.8278 	 number of inputs: 3 	 input shape: 512x28x28 	 output shape: 128x28x28
+60	Layer Name: block2/unit3/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.1536 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+61	Layer Name: block2/unit3/bottleneck_v1/conv1/Relu 	 Layer time: 0.0926 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+62	Layer Name: block2/unit3/bottleneck_v1/conv2/convolution 	 Layer time: 3.4950 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 128x28x28
+63	Layer Name: block2/unit3/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.1263 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+64	Layer Name: block2/unit3/bottleneck_v1/conv1/Relu 	 Layer time: 0.0755 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+65	Layer Name: block2/unit3/bottleneck_v1/conv3/convolution 	 Layer time: 2.8322 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 512x28x28
+66	Layer Name: block2/unit3/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.5959 	 number of inputs: 5 	 input shape: 512x28x28 	 output shape: 512x28x28
+67	Layer Name: block2/unit3/bottleneck_v1/add 	 Layer time: 0.7746 	 number of inputs: 2 	 input shape: 512x28x28 	 output shape: 512x28x28
+Layer Number: 6 	 time: 11.4207
+----------------------------
+68	Layer Name: block2/unit3/bottleneck_v1/Relu 	 Layer time: 0.4880 	 number of inputs: 1 	 input shape: 512x28x28 	 output shape: 512x28x28
+69	Layer Name: block2/unit4/bottleneck_v1/conv1/convolution 	 Layer time: 2.8470 	 number of inputs: 3 	 input shape: 512x28x28 	 output shape: 128x28x28
+70	Layer Name: block2/unit4/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.1609 	 number of inputs: 5 	 input shape: 128x28x28 	 output shape: 128x28x28
+71	Layer Name: block2/unit4/bottleneck_v1/conv1/Relu 	 Layer time: 0.0969 	 number of inputs: 1 	 input shape: 128x28x28 	 output shape: 128x28x28
+72	Layer Name: block2/unit4/bottleneck_v1/conv2/convolution 	 Layer time: 1.5650 	 number of inputs: 3 	 input shape: 128x28x28 	 output shape: 128x14x14
+73	Layer Name: block2/unit4/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.0711 	 number of inputs: 5 	 input shape: 128x14x14 	 output shape: 128x14x14
+74	Layer Name: block2/unit4/bottleneck_v1/conv1/Relu 	 Layer time: 0.0298 	 number of inputs: 1 	 input shape: 128x14x14 	 output shape: 128x14x14
+75	Layer Name: block2/unit4/bottleneck_v1/conv3/convolution 	 Layer time: 0.7903 	 number of inputs: 3 	 input shape: 128x14x14 	 output shape: 512x14x14
+76	Layer Name: block2/unit4/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.1439 	 number of inputs: 5 	 input shape: 512x14x14 	 output shape: 512x14x14
+77	Layer Name: block2/unit4/bottleneck_v1/shortcut/MaxPool 	 Layer time: 0.2248 	 number of inputs: 1 	 input shape: 512x28x28 	 output shape: 512x14x14
+78	Layer Name: block2/unit4/bottleneck_v1/add 	 Layer time: 0.1710 	 number of inputs: 2 	 input shape: 512x14x14 	 output shape: 512x14x14
+Layer Number: 7 	 time: 6.5886
+----------------------------
+79	Layer Name: block2/unit4/bottleneck_v1/Relu 	 Layer time: 0.1774 	 number of inputs: 1 	 input shape: 512x14x14 	 output shape: 512x14x14
+80	Layer Name: block3/unit1/bottleneck_v1/conv1/convolution 	 Layer time: 1.4379 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 256x14x14
+81	Layer Name: block3/unit1/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.1127 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+82	Layer Name: block3/unit1/bottleneck_v1/conv1/Relu 	 Layer time: 0.0475 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+83	Layer Name: block3/unit1/bottleneck_v1/conv2/convolution 	 Layer time: 3.8418 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 256x14x14
+84	Layer Name: block3/unit1/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.0944 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+85	Layer Name: block3/unit1/bottleneck_v1/conv1/Relu 	 Layer time: 0.0458 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+86	Layer Name: block3/unit1/bottleneck_v1/conv3/convolution 	 Layer time: 2.9614 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 1024x14x14
+87	Layer Name: block3/unit1/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.2717 	 number of inputs: 5 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+88	Layer Name: block3/unit1/bottleneck_v1/shortcut/convolution 	 Layer time: 5.4187 	 number of inputs: 3 	 input shape: 512x14x14 	 output shape: 1024x14x14
+89	Layer Name: block3/unit1/bottleneck_v1/shortcut/BatchNorm 	 Layer time: 0.2756 	 number of inputs: 5 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+90	Layer Name: block3/unit1/bottleneck_v1/add 	 Layer time: 0.3851 	 number of inputs: 2 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+Layer Number: 8 	 time: 15.0701
+----------------------------
+91	Layer Name: block3/unit1/bottleneck_v1/Relu 	 Layer time: 0.2398 	 number of inputs: 1 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+92	Layer Name: block3/unit2/bottleneck_v1/conv1/convolution 	 Layer time: 2.8453 	 number of inputs: 3 	 input shape: 1024x14x14 	 output shape: 256x14x14
+93	Layer Name: block3/unit2/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.1005 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+94	Layer Name: block3/unit2/bottleneck_v1/conv1/Relu 	 Layer time: 0.0432 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+95	Layer Name: block3/unit2/bottleneck_v1/conv2/convolution 	 Layer time: 3.8480 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 256x14x14
+96	Layer Name: block3/unit2/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.0991 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+97	Layer Name: block3/unit2/bottleneck_v1/conv1/Relu 	 Layer time: 0.0471 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+98	Layer Name: block3/unit2/bottleneck_v1/conv3/convolution 	 Layer time: 2.9439 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 1024x14x14
+99	Layer Name: block3/unit2/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.3299 	 number of inputs: 5 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+100	Layer Name: block3/unit2/bottleneck_v1/add 	 Layer time: 0.3932 	 number of inputs: 2 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+Layer Number: 9 	 time: 10.8900
+----------------------------
+101	Layer Name: block3/unit2/bottleneck_v1/Relu 	 Layer time: 0.2381 	 number of inputs: 1 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+102	Layer Name: block3/unit3/bottleneck_v1/conv1/convolution 	 Layer time: 2.9751 	 number of inputs: 3 	 input shape: 1024x14x14 	 output shape: 256x14x14
+103	Layer Name: block3/unit3/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.1175 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+104	Layer Name: block3/unit3/bottleneck_v1/conv1/Relu 	 Layer time: 0.0447 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+105	Layer Name: block3/unit3/bottleneck_v1/conv2/convolution 	 Layer time: 4.0141 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 256x14x14
+106	Layer Name: block3/unit3/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.0951 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+107	Layer Name: block3/unit3/bottleneck_v1/conv1/Relu 	 Layer time: 0.0476 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+108	Layer Name: block3/unit3/bottleneck_v1/conv3/convolution 	 Layer time: 2.9569 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 1024x14x14
+109	Layer Name: block3/unit3/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.2765 	 number of inputs: 5 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+110	Layer Name: block3/unit3/bottleneck_v1/add 	 Layer time: 0.3876 	 number of inputs: 2 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+Layer Number: 10 	 time: 11.1532
+----------------------------
+111	Layer Name: block3/unit3/bottleneck_v1/Relu 	 Layer time: 0.2376 	 number of inputs: 1 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+112	Layer Name: block3/unit4/bottleneck_v1/conv1/convolution 	 Layer time: 2.8890 	 number of inputs: 3 	 input shape: 1024x14x14 	 output shape: 256x14x14
+113	Layer Name: block3/unit4/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.1588 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+114	Layer Name: block3/unit4/bottleneck_v1/conv1/Relu 	 Layer time: 0.0460 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+115	Layer Name: block3/unit4/bottleneck_v1/conv2/convolution 	 Layer time: 3.9533 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 256x14x14
+116	Layer Name: block3/unit4/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.0968 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+117	Layer Name: block3/unit4/bottleneck_v1/conv1/Relu 	 Layer time: 0.0489 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+118	Layer Name: block3/unit4/bottleneck_v1/conv3/convolution 	 Layer time: 2.9906 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 1024x14x14
+119	Layer Name: block3/unit4/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.3295 	 number of inputs: 5 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+120	Layer Name: block3/unit4/bottleneck_v1/add 	 Layer time: 0.4857 	 number of inputs: 2 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+Layer Number: 11 	 time: 11.2362
+----------------------------
+121	Layer Name: block3/unit4/bottleneck_v1/Relu 	 Layer time: 0.2555 	 number of inputs: 1 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+122	Layer Name: block3/unit5/bottleneck_v1/conv1/convolution 	 Layer time: 3.0217 	 number of inputs: 3 	 input shape: 1024x14x14 	 output shape: 256x14x14
+123	Layer Name: block3/unit5/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.1469 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+124	Layer Name: block3/unit5/bottleneck_v1/conv1/Relu 	 Layer time: 0.0472 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+125	Layer Name: block3/unit5/bottleneck_v1/conv2/convolution 	 Layer time: 4.1142 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 256x14x14
+126	Layer Name: block3/unit5/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.0971 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+127	Layer Name: block3/unit5/bottleneck_v1/conv1/Relu 	 Layer time: 0.0480 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+128	Layer Name: block3/unit5/bottleneck_v1/conv3/convolution 	 Layer time: 2.9537 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 1024x14x14
+129	Layer Name: block3/unit5/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.2654 	 number of inputs: 5 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+130	Layer Name: block3/unit5/bottleneck_v1/add 	 Layer time: 0.3862 	 number of inputs: 2 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+Layer Number: 12 	 time: 11.3360
+----------------------------
+131	Layer Name: block3/unit5/bottleneck_v1/Relu 	 Layer time: 0.2671 	 number of inputs: 1 	 input shape: 1024x14x14 	 output shape: 1024x14x14
+132	Layer Name: block3/unit6/bottleneck_v1/conv1/convolution 	 Layer time: 2.9568 	 number of inputs: 3 	 input shape: 1024x14x14 	 output shape: 256x14x14
+133	Layer Name: block3/unit6/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.1161 	 number of inputs: 5 	 input shape: 256x14x14 	 output shape: 256x14x14
+134	Layer Name: block3/unit6/bottleneck_v1/conv1/Relu 	 Layer time: 0.0471 	 number of inputs: 1 	 input shape: 256x14x14 	 output shape: 256x14x14
+135	Layer Name: block3/unit6/bottleneck_v1/conv2/convolution 	 Layer time: 2.0564 	 number of inputs: 3 	 input shape: 256x14x14 	 output shape: 256x7x7
+136	Layer Name: block3/unit6/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.0614 	 number of inputs: 5 	 input shape: 256x7x7 	 output shape: 256x7x7
+137	Layer Name: block3/unit6/bottleneck_v1/conv1/Relu 	 Layer time: 0.0318 	 number of inputs: 1 	 input shape: 256x7x7 	 output shape: 256x7x7
+138	Layer Name: block3/unit6/bottleneck_v1/conv3/convolution 	 Layer time: 0.9698 	 number of inputs: 3 	 input shape: 256x7x7 	 output shape: 1024x7x7
+139	Layer Name: block3/unit6/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.0938 	 number of inputs: 5 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+140	Layer Name: block3/unit6/bottleneck_v1/shortcut/MaxPool 	 Layer time: 0.1193 	 number of inputs: 1 	 input shape: 1024x14x14 	 output shape: 1024x7x7
+141	Layer Name: block3/unit6/bottleneck_v1/add 	 Layer time: 0.1092 	 number of inputs: 2 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+Layer Number: 13 	 time: 6.8289
+----------------------------
+142	Layer Name: block3/unit6/bottleneck_v1/Relu 	 Layer time: 0.0618 	 number of inputs: 1 	 input shape: 1024x7x7 	 output shape: 1024x7x7
+143	Layer Name: block4/unit1/bottleneck_v1/conv1/convolution 	 Layer time: 1.8716 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 512x7x7
+144	Layer Name: block4/unit1/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.0704 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
+145	Layer Name: block4/unit1/bottleneck_v1/conv1/Relu 	 Layer time: 0.0344 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
+146	Layer Name: block4/unit1/bottleneck_v1/conv2/convolution 	 Layer time: 10.2823 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 512x7x7
+147	Layer Name: block4/unit1/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.0647 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
+148	Layer Name: block4/unit1/bottleneck_v1/conv1/Relu 	 Layer time: 0.0398 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
+149	Layer Name: block4/unit1/bottleneck_v1/conv3/convolution 	 Layer time: 3.4700 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 2048x7x7
+150	Layer Name: block4/unit1/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.1705 	 number of inputs: 5 	 input shape: 2048x7x7 	 output shape: 2048x7x7
+151	Layer Name: block4/unit1/bottleneck_v1/shortcut/convolution 	 Layer time: 7.0838 	 number of inputs: 3 	 input shape: 1024x7x7 	 output shape: 2048x7x7
+152	Layer Name: block4/unit1/bottleneck_v1/shortcut/BatchNorm 	 Layer time: 0.2251 	 number of inputs: 5 	 input shape: 2048x7x7 	 output shape: 2048x7x7
+153	Layer Name: block4/unit1/bottleneck_v1/add 	 Layer time: 0.1615 	 number of inputs: 2 	 input shape: 2048x7x7 	 output shape: 2048x7x7
+Layer Number: 14 	 time: 23.5359
+----------------------------
+154	Layer Name: block4/unit1/bottleneck_v1/Relu 	 Layer time: 0.1127 	 number of inputs: 1 	 input shape: 2048x7x7 	 output shape: 2048x7x7
+155	Layer Name: block4/unit2/bottleneck_v1/conv1/convolution 	 Layer time: 3.5812 	 number of inputs: 3 	 input shape: 2048x7x7 	 output shape: 512x7x7
+156	Layer Name: block4/unit2/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.1625 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
+157	Layer Name: block4/unit2/bottleneck_v1/conv1/Relu 	 Layer time: 0.0893 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
+158	Layer Name: block4/unit2/bottleneck_v1/conv2/convolution 	 Layer time: 10.2097 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 512x7x7
+159	Layer Name: block4/unit2/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.0684 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
+160	Layer Name: block4/unit2/bottleneck_v1/conv1/Relu 	 Layer time: 0.0367 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
+161	Layer Name: block4/unit2/bottleneck_v1/conv3/convolution 	 Layer time: 3.5999 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 2048x7x7
+162	Layer Name: block4/unit2/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.2869 	 number of inputs: 5 	 input shape: 2048x7x7 	 output shape: 2048x7x7
+163	Layer Name: block4/unit2/bottleneck_v1/add 	 Layer time: 0.1645 	 number of inputs: 2 	 input shape: 2048x7x7 	 output shape: 2048x7x7
+Layer Number: 15 	 time: 18.3119
+----------------------------
+164	Layer Name: block4/unit2/bottleneck_v1/Relu 	 Layer time: 0.1494 	 number of inputs: 1 	 input shape: 2048x7x7 	 output shape: 2048x7x7
+165	Layer Name: block4/unit3/bottleneck_v1/conv1/convolution 	 Layer time: 3.5619 	 number of inputs: 3 	 input shape: 2048x7x7 	 output shape: 512x7x7
+166	Layer Name: block4/unit3/bottleneck_v1/conv1/BatchNorm 	 Layer time: 0.1985 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
+167	Layer Name: block4/unit3/bottleneck_v1/conv1/Relu 	 Layer time: 0.0385 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
+168	Layer Name: block4/unit3/bottleneck_v1/conv2/convolution 	 Layer time: 10.3317 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 512x7x7
+169	Layer Name: block4/unit3/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.0648 	 number of inputs: 5 	 input shape: 512x7x7 	 output shape: 512x7x7
+170	Layer Name: block4/unit3/bottleneck_v1/conv1/Relu 	 Layer time: 0.0360 	 number of inputs: 1 	 input shape: 512x7x7 	 output shape: 512x7x7
+171	Layer Name: block4/unit3/bottleneck_v1/conv3/convolution 	 Layer time: 3.6372 	 number of inputs: 3 	 input shape: 512x7x7 	 output shape: 2048x7x7
+172	Layer Name: block4/unit3/bottleneck_v1/conv2/BatchNorm 	 Layer time: 0.1866 	 number of inputs: 5 	 input shape: 2048x7x7 	 output shape: 2048x7x7
+173	Layer Name: block4/unit3/bottleneck_v1/add 	 Layer time: 0.1611 	 number of inputs: 2 	 input shape: 2048x7x7 	 output shape: 2048x7x7
+174	Layer Name: block4/unit3/bottleneck_v1/Relu 	 Layer time: 0.1287 	 number of inputs: 1 	 input shape: 2048x7x7 	 output shape: 2048x7x7
+175	Layer Name: pool5 	 Layer time: 0.1504 	 number of inputs: 1 	 input shape: 2048x7x7 	 output shape: 2048
+Layer Number: 16 	 time: 18.6449
+----------------------------
+176	Layer Name: logits/convolution 	 Layer time: 2.1018 	 number of inputs: 3 	 input shape: 2048 	 output shape: 1000
+177	Layer Name: predictions/Reshape 	 Layer time: 0.0618 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+178	Layer Name: predictions/Softmax 	 Layer time: 0.0440 	 number of inputs: 1 	 input shape: 1000 	 output shape: 1000
+Layer Number: 17 	 time: 2.2075
+----------------------------
+
+ Sum of Layers time: 231.1910
+
+
+Graph0   Input: 10.6985   Task: 378.881   send: 0.000338833   Out: 1.58875   Process: 391.168
+
+
+
+********
+
+Profiling these DVFS settings finished
+
+
+
+
+AVG Latency: 391.172
+
+Please Enter the desired Frequency settings("end" for finish): 
+
+
+
+Test passed

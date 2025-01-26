@@ -1,0 +1,56 @@
+List of devices attached
+10.42.0.208:5555	device
+
+already connected to 10.42.0.208:5555
+remount succeeded
+/home/ehsan/UvA/ARMCL/Rock-Pi/ARM-COUP32bit/Layers.conf: 1 file pushed, 0 skipped. 650.2 MB/s (70658 bytes in 0.000s)
+
+*********************************************
+Layers config pushed
+**********************************************
+
+
+
+
+
+/home/ehsan/UvA/ARMCL/Rock-Pi/ARM-COUP32bit/utils/DVFS/governor_pandoon_Khadas.ko: 1 file pushed, 0 skipped. 1000.0 MB/s (145068 bytes in 0.000s)
+
+*********************************************
+governor module pushed
+**********************************************
+
+
+
+
+
+Module is already inserted, removing and reinserting...
+
+*********************************************
+governor module inserted
+**********************************************
+
+
+
+
+
+
+
+*********************************************
+binary graph file pushed
+**********************************************
+
+
+
+
+
+
+*********************************************
+run command in run_command.sh ready to run
+**********************************************
+
+
+
+
+
+#!/bin/bash
+adb shell "cd /data/local/ARM-CO-UP/test_graph/; export LD_LIBRARY_PATH=/data/local/ARM-CO-UP/; ./graph_alexnet_pipeline --data=/data/local/ARM-CO-UP/assets --image=/data/local/ARM-CO-UP/assets/images/ppm_images_227/ --labels=/data/local/ARM-CO-UP/assets/labels/labels.txt --little_cores=2 --threads2=2 --big_cores=4 --threads=4 --npu_host=B --threads2=2 --threads=4 --order=GGGGGGGG --kernel_c=96 --power_profile_mode=layers --gpu_host=B --n=30"

@@ -1,0 +1,479 @@
+2 Input images are read from /data/local/ARM-CO-UP/assets/images/jpg_images_224/
+[UtilsPipeline.h] image directory is: /data/local/ARM-CO-UP/assets/images/jpg_images_224//
+Threads : 4
+Small Cores Threads : 2
+Target : Neon
+Data type : F32
+Data layout : NHWC
+Tuner enabled? : false
+Cache enabled? : false
+Tuner mode : Normal
+Tuner file : 
+MLGO file : 
+Fast math enabled? : false
+Data path : /data/local/ARM-CO-UP/assets
+Image file : /data/local/ARM-CO-UP/assets/images/jpg_images_224//
+Labels file : /data/local/ARM-CO-UP/assets/labels/labels.txt
+Partition point is : 0
+Second partition point is : 0
+Order is : BBBBBBBBBBB
+freqs of layers : 
+power_profile_mode : layers
+GPU host is: B
+NPU host is: B
+Number of totla cores is : 6
+Number of little cores is : 2
+Number of big cores is : 4
+Print task names : 0
+Run network for 30 times.
+Layer timing: 0
+
+Adding Graph0 target 1 PE: B Host PE: B num threads: 4 Layers: 0-10
+
+
+**********************************
+Graphs(subgrahs) are initialized for adding layers based on mapping
+**************************************
+
+
+
+
+performance
+performance
+4
+Threads : 4
+Small Cores Threads : 2
+Target : Neon
+Data type : F32
+Data layout : NHWC
+Tuner enabled? : false
+Cache enabled? : false
+Tuner mode : Normal
+Tuner file : 
+MLGO file : 
+Fast math enabled? : false
+Data path : /data/local/ARM-CO-UP/assets
+Image file : /data/local/ARM-CO-UP/assets/images/jpg_images_224//
+Labels file : /data/local/ARM-CO-UP/assets/labels/labels.txt
+Partition point is : 0
+Second partition point is : 0
+Order is : BBBBBBBBBBB
+freqs of layers : 
+power_profile_mode : layers
+GPU host is: B
+NPU host is: B
+Number of totla cores is : 6
+Number of little cores is : 2
+Number of big cores is : 4
+Print task names : 0
+Run network for 30 times.
+Layer timing: 0
+
+Pandoon opened at 3
+
+
+************
+ DVFS is initialized 
+******************
+
+
+Failed to write to export! Error: Device or resource busy
+Could not Export GPIO
+
+
+************
+ Power setup has set up 
+******************
+
+
+****************************
+GraphUtils.cpp- reading images: /data/local/ARM-CO-UP/assets/images/jpg_images_224//
+/data/local/ARM-CO-UP/assets/images/jpg_images_224//goldfish_224.jpg
+/data/local/ARM-CO-UP/assets/images/jpg_images_224//dog_224.jpg
+*****************************
+
+
+
+
+
+
+*******************************************************************************************
+                                   Layer Names                                                   
+*******************************************************************************************
+
+[googlenet]
+
+
+----------------------------------------------------------------
+Layer 0
+----------------------------------------------------------------
+			conv1/7x7_s2
+			conv1/relu_7x7
+			pool1/3x3_s2
+			pool1/norm1
+
+----------------------------------------------------------------
+Layer 1
+----------------------------------------------------------------
+conv2/3x3_reduce
+conv2/relu_3x3_reduce
+conv2/3x3
+conv2/relu_3x3
+conv2/norm2
+pool2/3x3_s2
+
+----------------------------------------------------------------
+Layer 2
+----------------------------------------------------------------
+			inception_3a/1x1
+			inception_3a/relu_1x1
+			inception_3a/3x3_reduce
+			inception_3a/relu_3x3_reduce
+			inception_3a/3x3
+			inception_3a/relu_3x3
+			inception_3a/5x5_reduce
+			inception_3a/relu_5x5_reduce
+			inception_3a/5x5
+			inception_3a/relu_5x5
+			inception_3a/pool
+			inception_3a/pool_proj
+			inception_3a/relu_pool_proj
+			inception_3a/concat
+
+----------------------------------------------------------------
+Layer 3
+----------------------------------------------------------------
+inception_3b/1x1
+inception_3b/relu_1x1
+inception_3b/3x3_reduce
+inception_3b/relu_3x3_reduce
+inception_3b/3x3
+inception_3b/relu_3x3
+inception_3b/5x5_reduce
+inception_3b/relu_5x5_reduce
+inception_3b/5x5
+inception_3b/relu_5x5
+inception_3b/pool
+inception_3b/pool_proj
+inception_3b/relu_pool_proj
+inception_3b/concat
+pool3/3x3_s2
+
+----------------------------------------------------------------
+Layer 4
+----------------------------------------------------------------
+			inception_4a/1x1
+			inception_4a/relu_1x1
+			inception_4a/3x3_reduce
+			inception_4a/relu_3x3_reduce
+			inception_4a/3x3
+			inception_4a/relu_3x3
+			inception_4a/5x5_reduce
+			inception_4a/relu_5x5_reduce
+			inception_4a/5x5
+			inception_4a/relu_5x5
+			inception_4a/pool
+			inception_4a/pool_proj
+			inception_4a/relu_pool_proj
+			inception_4a/concat
+
+----------------------------------------------------------------
+Layer 5
+----------------------------------------------------------------
+inception_4b/1x1
+inception_4b/relu_1x1
+inception_4b/3x3_reduce
+inception_4b/relu_3x3_reduce
+inception_4b/3x3
+inception_4b/relu_3x3
+inception_4b/5x5_reduce
+inception_4b/relu_5x5_reduce
+inception_4b/5x5
+inception_4b/relu_5x5
+inception_4b/pool
+inception_4b/pool_proj
+inception_4b/relu_pool_proj
+inception_4b/concat
+
+----------------------------------------------------------------
+Layer 6
+----------------------------------------------------------------
+			inception_4c/1x1
+			inception_4c/relu_1x1
+			inception_4c/3x3_reduce
+			inception_4c/relu_3x3_reduce
+			inception_4c/3x3
+			inception_4c/relu_3x3
+			inception_4c/5x5_reduce
+			inception_4c/relu_5x5_reduce
+			inception_4c/5x5
+			inception_4c/relu_5x5
+			inception_4c/pool
+			inception_4c/pool_proj
+			inception_4c/relu_pool_proj
+			inception_4c/concat
+
+----------------------------------------------------------------
+Layer 7
+----------------------------------------------------------------
+inception_4d/1x1
+inception_4d/relu_1x1
+inception_4d/3x3_reduce
+inception_4d/relu_3x3_reduce
+inception_4d/3x3
+inception_4d/relu_3x3
+inception_4d/5x5_reduce
+inception_4d/relu_5x5_reduce
+inception_4d/5x5
+inception_4d/relu_5x5
+inception_4d/pool
+inception_4d/pool_proj
+inception_4d/relu_pool_proj
+inception_4d/concat
+
+----------------------------------------------------------------
+Layer 8
+----------------------------------------------------------------
+			inception_4e/1x1
+			inception_4e/relu_1x1
+			inception_4e/3x3_reduce
+			inception_4e/relu_3x3_reduce
+			inception_4e/3x3
+			inception_4e/relu_3x3
+			inception_4e/5x5_reduce
+			inception_4e/relu_5x5_reduce
+			inception_4e/5x5
+			inception_4e/relu_5x5
+			inception_4e/pool
+			inception_4e/pool_proj
+			inception_4e/relu_pool_proj
+			inception_4e/concat
+			pool4/3x3_s2
+
+----------------------------------------------------------------
+Layer 9
+----------------------------------------------------------------
+inception_5a/1x1
+inception_5a/relu_1x1
+inception_5a/3x3_reduce
+inception_5a/relu_3x3_reduce
+inception_5a/3x3
+inception_5a/relu_3x3
+inception_5a/5x5_reduce
+inception_5a/relu_5x5_reduce
+inception_5a/5x5
+inception_5a/relu_5x5
+inception_5a/pool
+inception_5a/pool_proj
+inception_5a/relu_pool_proj
+inception_5a/concat
+
+----------------------------------------------------------------
+Layer 10
+----------------------------------------------------------------
+			inception_5b/1x1
+			inception_5b/relu_1x1
+			inception_5b/3x3_reduce
+			inception_5b/relu_3x3_reduce
+			inception_5b/3x3
+			inception_5b/relu_3x3
+			inception_5b/5x5_reduce
+			inception_5b/relu_5x5_reduce
+			inception_5b/5x5
+			inception_5b/relu_5x5
+			inception_5b/pool
+			inception_5b/pool_proj
+			inception_5b/relu_pool_proj
+			inception_5b/concat
+			pool5/7x7_s1
+			loss3/classifier
+			prob
+output accessor reading label file /data/local/ARM-CO-UP/assets/labels/labels.txt
+			output
+
+
+*********************
+Start finalizing Graphs
+*******************
+
+Graph id: 0 Target is: Neon
+little cores:2	 big cores:4	 total cores:6
+cluster:1
+NEDevicebackend num_threads: 4
+Worker Thread:: worker thread created with core_pin: -1
+Worker Thread:: worker thread created with core_pin: -1
+
+
+
+************************
+set thread with affinity:
+cluster: 1
+_num_threads is: 4
+set affinity of main thread to core: 2
+Worker Thread:: worker thread created with core_pin: 3
+Worker Thread:: worker thread created with core_pin: 4
+Worker Thread:: worker thread created with core_pin: 5
+
+*******************************
+
+Graph (0) Task 0: conv1/7x7_s2
+Graph (0) Task 1: conv1/relu_7x7
+Graph (0) Task 2: pool1/3x3_s2
+Graph (0) Task 3: pool1/norm1
+Graph (0) Task 4: conv2/3x3_reduce
+Graph (0) Task 5: conv2/relu_3x3_reduce
+Graph (0) Task 6: conv2/3x3
+Graph (0) Task 7: conv2/relu_3x3
+Graph (0) Task 8: conv2/norm2
+Graph (0) Task 9: pool2/3x3_s2
+Graph (0) Task 10: inception_3a/1x1
+Graph (0) Task 11: inception_3a/relu_1x1
+Graph (0) Task 12: inception_3a/3x3_reduce
+Graph (0) Task 13: inception_3a/relu_3x3_reduce
+Graph (0) Task 14: inception_3a/3x3
+Graph (0) Task 15: inception_3a/relu_3x3
+Graph (0) Task 16: inception_3a/5x5_reduce
+Graph (0) Task 17: inception_3a/relu_5x5_reduce
+Graph (0) Task 18: inception_3a/5x5
+Graph (0) Task 19: inception_3a/relu_5x5
+Graph (0) Task 20: inception_3a/pool
+Graph (0) Task 21: inception_3a/pool_proj
+Graph (0) Task 22: inception_3a/relu_pool_proj
+Graph (0) Task 23: inception_3a/concat
+Graph (0) Task 24: inception_3b/1x1
+Graph (0) Task 25: inception_3b/relu_1x1
+Graph (0) Task 26: inception_3b/3x3_reduce
+Graph (0) Task 27: inception_3b/relu_3x3_reduce
+Graph (0) Task 28: inception_3b/3x3
+Graph (0) Task 29: inception_3b/relu_3x3
+Graph (0) Task 30: inception_3b/5x5_reduce
+Graph (0) Task 31: inception_3b/relu_5x5_reduce
+Graph (0) Task 32: inception_3b/5x5
+Graph (0) Task 33: inception_3b/relu_5x5
+Graph (0) Task 34: inception_3b/pool
+Graph (0) Task 35: inception_3b/pool_proj
+Graph (0) Task 36: inception_3b/relu_pool_proj
+Graph (0) Task 37: inception_3b/concat
+Graph (0) Task 38: pool3/3x3_s2
+Graph (0) Task 39: inception_4a/1x1
+Graph (0) Task 40: inception_4a/relu_1x1
+Graph (0) Task 41: inception_4a/3x3_reduce
+Graph (0) Task 42: inception_4a/relu_3x3_reduce
+Graph (0) Task 43: inception_4a/3x3
+Graph (0) Task 44: inception_4a/relu_3x3
+Graph (0) Task 45: inception_4a/5x5_reduce
+Graph (0) Task 46: inception_4a/relu_5x5_reduce
+Graph (0) Task 47: inception_4a/5x5
+Graph (0) Task 48: inception_4a/relu_5x5
+Graph (0) Task 49: inception_4a/pool
+Graph (0) Task 50: inception_4a/pool_proj
+Graph (0) Task 51: inception_4a/relu_pool_proj
+Graph (0) Task 52: inception_4a/concat
+Graph (0) Task 53: inception_4b/1x1
+Graph (0) Task 54: inception_4b/relu_1x1
+Graph (0) Task 55: inception_4b/3x3_reduce
+Graph (0) Task 56: inception_4b/relu_3x3_reduce
+Graph (0) Task 57: inception_4b/3x3
+Graph (0) Task 58: inception_4b/relu_3x3
+Graph (0) Task 59: inception_4b/5x5_reduce
+Graph (0) Task 60: inception_4b/relu_5x5_reduce
+Graph (0) Task 61: inception_4b/5x5
+Graph (0) Task 62: inception_4b/relu_5x5
+Graph (0) Task 63: inception_4b/pool
+Graph (0) Task 64: inception_4b/pool_proj
+Graph (0) Task 65: inception_4b/relu_pool_proj
+Graph (0) Task 66: inception_4b/concat
+Graph (0) Task 67: inception_4c/1x1
+Graph (0) Task 68: inception_4c/relu_1x1
+Graph (0) Task 69: inception_4c/3x3_reduce
+Graph (0) Task 70: inception_4c/relu_3x3_reduce
+Graph (0) Task 71: inception_4c/3x3
+Graph (0) Task 72: inception_4c/relu_3x3
+Graph (0) Task 73: inception_4c/5x5_reduce
+Graph (0) Task 74: inception_4c/relu_5x5_reduce
+Graph (0) Task 75: inception_4c/5x5
+Graph (0) Task 76: inception_4c/relu_5x5
+Graph (0) Task 77: inception_4c/pool
+Graph (0) Task 78: inception_4c/pool_proj
+Graph (0) Task 79: inception_4c/relu_pool_proj
+Graph (0) Task 80: inception_4c/concat
+Graph (0) Task 81: inception_4d/1x1
+Graph (0) Task 82: inception_4d/relu_1x1
+Graph (0) Task 83: inception_4d/3x3_reduce
+Graph (0) Task 84: inception_4d/relu_3x3_reduce
+Graph (0) Task 85: inception_4d/3x3
+Graph (0) Task 86: inception_4d/relu_3x3
+Graph (0) Task 87: inception_4d/5x5_reduce
+Graph (0) Task 88: inception_4d/relu_5x5_reduce
+Graph (0) Task 89: inception_4d/5x5
+Graph (0) Task 90: inception_4d/relu_5x5
+Graph (0) Task 91: inception_4d/pool
+Graph (0) Task 92: inception_4d/pool_proj
+Graph (0) Task 93: inception_4d/relu_pool_proj
+Graph (0) Task 94: inception_4d/concat
+Graph (0) Task 95: inception_4e/1x1
+Graph (0) Task 96: inception_4e/relu_1x1
+Graph (0) Task 97: inception_4e/3x3_reduce
+Graph (0) Task 98: inception_4e/relu_3x3_reduce
+Graph (0) Task 99: inception_4e/3x3
+Graph (0) Task 100: inception_4e/relu_3x3
+Graph (0) Task 101: inception_4e/5x5_reduce
+Graph (0) Task 102: inception_4e/relu_5x5_reduce
+Graph (0) Task 103: inception_4e/5x5
+Graph (0) Task 104: inception_4e/relu_5x5
+Graph (0) Task 105: inception_4e/pool
+Graph (0) Task 106: inception_4e/pool_proj
+Graph (0) Task 107: inception_4e/relu_pool_proj
+Graph (0) Task 108: inception_4e/concat
+Graph (0) Task 109: pool4/3x3_s2
+Graph (0) Task 110: inception_5a/1x1
+Graph (0) Task 111: inception_5a/relu_1x1
+Graph (0) Task 112: inception_5a/3x3_reduce
+Graph (0) Task 113: inception_5a/relu_3x3_reduce
+Graph (0) Task 114: inception_5a/3x3
+Graph (0) Task 115: inception_5a/relu_3x3
+Graph (0) Task 116: inception_5a/5x5_reduce
+Graph (0) Task 117: inception_5a/relu_5x5_reduce
+Graph (0) Task 118: inception_5a/5x5
+Graph (0) Task 119: inception_5a/relu_5x5
+Graph (0) Task 120: inception_5a/pool
+Graph (0) Task 121: inception_5a/pool_proj
+Graph (0) Task 122: inception_5a/relu_pool_proj
+Graph (0) Task 123: inception_5a/concat
+Graph (0) Task 124: inception_5b/1x1
+Graph (0) Task 125: inception_5b/relu_1x1
+Graph (0) Task 126: inception_5b/3x3_reduce
+Graph (0) Task 127: inception_5b/relu_3x3_reduce
+Graph (0) Task 128: inception_5b/3x3
+Graph (0) Task 129: inception_5b/relu_3x3
+Graph (0) Task 130: inception_5b/5x5_reduce
+Graph (0) Task 131: inception_5b/relu_5x5_reduce
+Graph (0) Task 132: inception_5b/5x5
+Graph (0) Task 133: inception_5b/relu_5x5
+Graph (0) Task 134: inception_5b/pool
+Graph (0) Task 135: inception_5b/pool_proj
+Graph (0) Task 136: inception_5b/relu_pool_proj
+Graph (0) Task 137: inception_5b/concat
+Graph (0) Task 138: pool5/7x7_s1
+Graph (0) Task 139: loss3/classifier
+Graph (0) Task 140: prob
+Graph 0 input size: 1 receiver size: 0 tasks size: 141 senders size: 0 output size: 1
+
+setting ending for layer: pool1/norm1
+setting ending for layer: pool2/3x3_s2
+setting ending for layer: inception_3a/concat
+setting ending for layer: pool3/3x3_s2
+setting ending for layer: inception_4a/concat
+setting ending for layer: inception_4b/concat
+setting ending for layer: inception_4c/concat
+setting ending for layer: inception_4d/concat
+setting ending for layer: pool4/3x3_s2
+setting ending for layer: inception_5a/concat
+setting ending for layer: prob
+Finish finalizing graph 0
+
+
+
+setup finished
+
+Please Enter the desired Frequency settings("end" for finish): 

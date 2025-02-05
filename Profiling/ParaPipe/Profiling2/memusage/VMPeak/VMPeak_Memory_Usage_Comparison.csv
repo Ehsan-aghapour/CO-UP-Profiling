@@ -1,0 +1,5 @@
+Graph,B Cluster (MB),G Cluster (MB),Switching (MB)
+GoogleNet,214,333,295
+InceptionResnetV2,851,782,889
+InceptionV3,446,513,529
+InceptionV4,717,655,779
